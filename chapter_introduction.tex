@@ -1,0 +1,74 @@
+\documentclass[class=NCU_thesis, crop=false]{standalone}
+\begin{document}
+
+\chapter{緒論}
+\section{研究動機}
+根據台灣衛生福利部統計處統計~\cite{weishengfulibutongjichuSiYinTongJi2017}，
+心臟疾病長年位居台灣前三大死因，
+而中老年人又以高血壓性心臟病以及冠狀動脈心臟病較為常見~\cite{weishengfulibuguominjiankangshuRenShiGuanXinBing2016}，
+因此對於冠狀動脈心臟病相關的研究將顯得至關重要。
+
+此外，隨著醫學影像檢查技術的發展，電腦斷層掃描(Computed Tomography)~\cite{nadrljanskiComputedTomographyRadiology,mckavanaghEssentialsCardiacComputerized2015}
+已被大量運用於醫學診斷，
+由於電腦斷層掃描對於軟組織對比度較差，
+使用於心臟攝影時通常會搭配顯影劑(Contrast Agent)的使用以增加血液流經處與其他組織之對比度，
+電腦斷層掃描使用的顯影劑的成分包含碘，會在進行攝影前透過靜脈注射至受檢者的血液中，
+使得能夠在電腦斷層掃描影像中強化血液流經處的對比度。
+然而，少部分對於碘成分過敏或是腎臟功能有問題受檢者，可能會對顯影劑產生不良反應，
+因此如何善加利用無顯影劑增強之低對比度電腦斷層掃描影像於診斷之中，是值得研究的目標。
+
+電腦斷層掃描在冠狀動脈心臟病的診斷中通常分為兩部分：1. 心臟鈣化分數評估(Cardiac Calcium Scoring) 2. 冠狀動脈血管擷取(Coronary Artery Segmentation)。
+心臟鈣化分數評估會使用未注射顯影劑之電腦斷層掃描影像，標記並計算影像中鈣化的沉積物質，藉以評估受檢者冠狀動脈疾病的嚴重程度。
+% ，常見的計算方式有Agatston Score, Coronary Artery Calcium (CAC)以及Lesion-specific calcium score。
+冠狀動脈血管擷取則主要會使用注射顯影劑之電腦斷層影像，
+此影像對血管有較高的對比度，相較於無顯影劑影像能夠較容易地找到血管的位置以進行標註，
+然而以人工方式進行血管標註是一個重複性高且耗時的工作內容，
+需要具有專業知識的人員耗費大量時間才能完成，
+因此近期有許多半自動、全自動的冠狀動脈血管分割研究被提出
+~\cite{moeskopsDeepLearningMultitask2016, huangCoronaryArterySegmentation2018, chenCoronaryArterySegmentation2019}，
+期望能降低花費在這個任務上的成本。
+
+近年隨著深度學習研究的蓬勃發展，
+深度學習技術也被大量地應用於醫學影像處理的領域
+~\cite{moeskopsDeepLearningMultitask2016, huangCoronaryArterySegmentation2018, chenCoronaryArterySegmentation2019, leiMedicalImageSegmentation2020,litjensSurveyDeepLearning2017,minaeeImageSegmentationUsing2021}，
+本研究將深度學習技術應用於冠狀動脈醫學影像分割任務，
+利用有顯影劑增強之電腦斷層影像進行自動冠狀動脈分割，產生立體的冠狀動脈模型，
+使得我們可以在3D的冠狀動脈模型中標示出病灶位置，
+並且藉由對分割後之血管進行鈣化位置以及狹窄度分析，提供心臟冠狀動脈疾病診斷的輔助資訊。
+此外本研究也進行無顯影劑增強之電腦斷層影像的分割實驗，期望能提高無顯影劑影像於診斷中的用途，
+由於無顯影劑增強之影像對於血管的對比度較低，相較於有顯影劑增強之影像更難以進行血管分割，
+因此本研究也利用CycleGAN進行無顯影劑電腦斷層影像資料擴增，
+以加強無顯影劑冠狀動脈分割模型的效果。
+
+
+\section{研究目的}
+本研究以3D U-Net進行冠狀動脈分割，
+並利用CycleGAN做為無顯影劑增強之電腦斷層影像分割任務的資料擴增，
+以提高冠狀動脈分割模型效果。
+
+本研究預計達成以下目標：
+\begin{itemize}
+    \item 以顯影劑增強之電腦斷層掃描影像進行冠狀動脈分割，並利用分割結果計算鈣化位置、血管管徑等輔助診斷之數據。
+    \item 以無顯影劑之電腦斷層掃瞄影像進行冠狀動脈分割，並探討以既有資料提升分割結果的方法。
+\end{itemize}
+
+\section{論文架構}
+本論文分為五個章節，其架構如下：
+
+第一章、緒論，敘述本論文之研究目的、動機以及架構。
+
+第二章、背景知識以及文獻回顧，
+敘述本研究之背景知識如電腦斷層掃描、Hounsfield Units、以及利用之深度學習模型架構，
+並探討目前已有的相關研究。
+
+第三章、研究方法，
+說明本研究細節，如資料前處理方式以及深度學習模型架構。
+
+第四章、實驗設計與結果，
+說明實驗使用的資料集、實驗設計內容以及評估方法，並對於實驗結果進行探討。
+
+第五章、總結，
+對於研究結果進行總結，並討論研究的未來展望。
+
+\end{document}
+
