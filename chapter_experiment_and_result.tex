@@ -4,31 +4,74 @@
 \chapter{實驗設計與結果}
 
 \section{臉部辨識實驗}
+\subsection{模型訓練結果}
+準確率達98\%，
+詳細訓練結果請見\cref{fig:fig-result-face}。
+\fig[0.6][fig:fig-result-face][!hbt]{fig-result-face.png}[臉部辨識訓練結果][臉部辨識訓練結果]
+
 \subsection{實驗評估方式}
 臉部辨識實驗評估方式 臉部辨識實驗評估方式
 
 \subsection{實驗結果分析}
 臉部辨識實驗結果分析 臉部辨識實驗結果分析
 
-\section{臉部遮擋分類實驗}
+\section{奶嘴辨識實驗}
+\subsection{模型訓練結果}
+準確率達98\%，
+詳細訓練結果請見\cref{fig:fig-result-pacifier}。
+\fig[0.6][fig:fig-result-pacifier][!hbt]{fig-result-pacifier.png}[奶嘴辨識訓練結果][奶嘴辨識訓練結果]
+
 \subsection{實驗設計}
-臉部遮擋分類實驗 臉部遮擋分類實驗
+奶嘴辨識實驗實驗設計 奶嘴辨識實驗實驗設計
 
 \subsection{實驗評估方式}
-臉部遮擋分類實驗 臉部遮擋分類實驗
+奶嘴辨識實驗實驗評估方式 奶嘴辨識實驗實驗評估方式
 
 \subsection{實驗結果分析}
-臉部遮擋分類實驗 臉部遮擋分類實驗
+奶嘴辨識實驗實驗結果分析 奶嘴辨識實驗實驗結果分析
+
+\section{臉部遮擋辨識實驗}
+\subsection{實驗設計}
+奶嘴辨識實驗實驗設計 奶嘴辨識實驗實驗設計
+
+\subsection{實驗評估方式}
+奶嘴辨識實驗實驗評估方式 奶嘴辨識實驗實驗評估方式
+
+\subsection{實驗結果分析}
+首先，使用503張影像測試臉部遮擋辨識，
+其中僅一張影像（
+\cref{fig:fig-face-pacifier-error}。
+\fig[0.6][fig:fig-face-pacifier-error][!hbt]{fig-face-pacifier-error.jpg}[誤判影像：真實類別為安全，但預測為警示][誤判影像：真實類別為安全，但預測為警示]
+）類別判斷錯誤，
+誤將安全狀態辨識為警示狀態。
+推測原因為該張影像畫質較差，面部影像不清而導致誤判。
+
+再者，我們使用232張影像測試奶嘴辨識，
+所有測試集皆辨識正確。
+
+由於此二模型測試正確率高，故本文中不放入其混淆矩陣。
 
 \section{姿勢分類實驗}
+\subsection{模型訓練結果}
+準確率達99\%，
+詳細訓練結果請見\cref{fig:fig-result-four-classes}。
+\fig[0.6][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
+
 \subsection{實驗設計}
-姿勢分類實驗 姿勢分類實驗
+姿勢分類實驗設計 姿勢分類實驗設計
 
 \subsection{實驗評估方式}
-姿勢分類實驗 姿勢分類實驗
+姿勢分類實驗評估方式 姿勢分類實驗評估方式
 
 \subsection{實驗結果分析}
-姿勢分類實驗 姿勢分類實驗
+我們使用744張影像針對此模型進行測試，
+包含了五張類別辨識錯誤的影像，
+其中有三張將坐姿誤判為趴躺姿勢，
+推測原因為嬰兒雖呈現坐姿，
+但上半身貼近其腿部，而導致誤判。
+
+此模型之混淆矩陣，請見\cref{fig:fig-confusion-matrix-four-classes}。
+\fig[0.6][fig:fig-confusion-matrix-four-classes][!hbt]{fig-confusion-matrix-four-classes.png}[嬰兒姿勢辨識之混淆矩陣][嬰兒姿勢辨識之混淆矩陣]
 
 \section{影片危險偵測實驗}
 \subsection{實驗設計}
