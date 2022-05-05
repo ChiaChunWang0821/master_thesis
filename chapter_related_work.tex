@@ -57,13 +57,16 @@
 分別量測嬰兒之呼吸頻率、出汗狀況、體溫、心率、身體位置或方向、睡眠姿勢、嬰兒周圍的一氧化碳濃度、呼出的二氧化碳濃度的變化等，
 且多會透過物聯網技術開發出可穿戴式裝置之系統。
 
-如：Linti等人~\cite{lintiSensoryBabyVestForTheMonitoringOfInfants2006}所開發的嬰兒感測背心，
+如：Linti等人~\cite{lintiSensoryBabyVestForTheMonitoringOfInfants2006}
+所開發的嬰兒感測背心，
 其將多個感官元件融入紡織品中以用來量測嬰兒之呼吸、心率、溫度及濕度；
-Ferreira等人~\cite{ferreiraASmartWearableSystemForSuddenInfantDeathSyndromeMonitoring2016}開發了將感測器裝設於胸帶中，
+Ferreira等人~\cite{ferreiraASmartWearableSystemForSuddenInfantDeathSyndromeMonitoring2016}
+開發了將感測器裝設於胸帶中，
 而得以量測嬰兒之體溫、心率、呼吸頻率及身體位置，
 並透過ZigBee技術將收集到的數據傳送至伺服器，
 用戶則可透過醫療網頁介面進行查看及收到緊急訊息；
-Ziganshin等人~\cite{ziganshinUWBBabyMonitor2010}基於超寬頻技術開發出可監測嬰兒呼吸及心率之系統，
+Ziganshin等人~\cite{ziganshinUWBBabyMonitor2010}
+基於超寬頻技術開發出可監測嬰兒呼吸及心率之系統，
 其可檢測嬰兒之睡眠、清醒及警示狀態。
 
 此種利用感測器監測嬰兒的方法，
@@ -92,6 +95,19 @@ Ziganshin等人~\cite{ziganshinUWBBabyMonitor2010}基於超寬頻技術開發出
 % 再透過Wifi模組將感測器收取到的資訊傳輸至伺服器。
 
 \subsection{影像式偵測}
+此種方式利用電腦視覺技術對於嬰兒影像畫面進行偵測，
+現有研究中包含了計算嬰兒之呼吸頻率、關注於嬰兒之面部特徵及嬰兒趴睡姿勢偵測。
+
+Fang等人~\cite{fangAVisionBasedInfantRespiratoryFrequencyDetectionSystem2015}
+開發了一基於視覺之非接觸式呼吸頻率偵測系統，
+先判斷嬰兒是否正在運動（包含頭部、四肢及身體運動，但不包含因呼吸引起的輕微運動），
+若未偵測到嬰兒運動，
+則系統開始進行呼吸頻率偵測：
+首先，透過空間特徵擷取呼吸之候選點；
+接著，利用模糊積分技術選擇呼吸點；
+最終，得以計算嬰兒的呼吸頻率，進而可判斷嬰兒是否發生呼吸異常之情形。
+
+
 1. 計算呼吸頻率
 
 2. 面部(眼睛)特徵(OpenCV - Haar-Like Features)
