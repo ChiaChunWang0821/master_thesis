@@ -137,10 +137,16 @@ Wang等人~\cite{WangAMultiTaskBayesianDeepNeuralNetForDetectingLifeThreateningI
 （3）眼睛睜開與否，
 及（4）五個臉部座標之位置。
 
-% 1. 計算呼吸頻率
-% 2. 面部(眼睛)特徵(OpenCV - Haar-Like Features)
-% 3. 面部被遮擋(multitask Bayesian deep learning)(1. facial occlusion, 2. facial cover, 3. eye openness, and 4. five-point facial landmark detection)
-% 4. 嬰兒面朝下趴著睡(CNN)(1. back sleeping, 2. changing from one position to another, and 3. sleeping in a stomach)
+Bharati等人~\cite{bharatiAnEfficientEdgeDeepLearningComputerVisionSystemToPreventSuddenInfantDeathSyndrome2021}
+提出一個基於卷積神經網絡的電腦視覺系統，
+可用來評估嬰兒三種睡眠姿勢：
+仰臥（正常狀態）、從仰臥轉換到趴臥（警示狀態）、趴臥（危險狀態），
+並於嬰兒呈現趴臥姿勢時，
+透過手機提醒照護人員。
+而此系統亦提供了驗證反饋機制，
+供照護人員對於系統警報是否誤報之回饋。
+另外，由於目前未有公開之嬰兒姿勢資料集，
+此文透過拍攝和真實嬰兒相同比例之娃娃進行資料收集。
 
 % 面部特徵: https://ieeexplore.ieee.org/document/8730261
 % 面部被遮擋: https://ieeexplore.ieee.org/document/8803332
@@ -149,8 +155,6 @@ Wang等人~\cite{WangAMultiTaskBayesianDeepNeuralNetForDetectingLifeThreateningI
 % 該方法利用結構光相機可取得距離資訊，
 % 使用平面分割偵測嬰兒之胸部區域，
 % 再根據胸部的運動計算呼吸頻率。
-
-% \subsubsection{基於視覺計算呼吸頻率}
 
 \section{殘差網路}
 ResNet50 ResNet50
