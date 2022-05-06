@@ -107,14 +107,19 @@ Fang等人~\cite{fangAVisionBasedInfantRespiratoryFrequencyDetectionSystem2015}
 接著，利用模糊積分技術選擇呼吸點；
 最終，得以計算嬰兒的呼吸頻率，進而可判斷嬰兒是否發生呼吸異常之情形。
 
+Liu等人~\cite{liuVideoBasedIoTBabyMonitorForSIDSPrevention2017}
+利用夜視攝影機拍攝在嬰兒床內的嬰兒，
+並使用MIT所提出之Eulerian Magnification技術，
+放大影片中的細微運動以監測拍攝對象之胸部運動，
+若經正規化之像素差異值低於設定閥值，
+則判斷其呼吸頻率異常，
+進而透過手機裝置發出警報。
 
-1. 計算呼吸頻率
 
-2. 面部(眼睛)特徵(OpenCV - Haar-Like Features)
-
-3. 面部被遮擋(multitask Bayesian deep learning)(1. facial occlusion, 2. facial cover, 3. eye openness, and 4. five-point facial landmark detection)
-
-4. 嬰兒面朝下趴著睡(CNN)(1. back sleeping, 2. changing from one position to another, and 3. sleeping in a stomach)
+% 1. 計算呼吸頻率
+% 2. 面部(眼睛)特徵(OpenCV - Haar-Like Features)
+% 3. 面部被遮擋(multitask Bayesian deep learning)(1. facial occlusion, 2. facial cover, 3. eye openness, and 4. five-point facial landmark detection)
+% 4. 嬰兒面朝下趴著睡(CNN)(1. back sleeping, 2. changing from one position to another, and 3. sleeping in a stomach)
 
 % 面部特徵: https://ieeexplore.ieee.org/document/8730261
 % 面部被遮擋: https://ieeexplore.ieee.org/document/8803332
