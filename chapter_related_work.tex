@@ -5,7 +5,7 @@
 
 \section{嬰兒猝死症}
 嬰兒猝死症（The Sudden Infant Death Syndrome, 簡稱SIDS）
-~\cite{kinneyTheSuddenInfantDeathSyndrome2009}
+~\cite{kinney_sudden_2009}
 之特徵為一位看似健康的嬰兒在睡眠期間突然死亡，
 其真正致死之原因尚不明確且非單一。
 
@@ -57,18 +57,18 @@
 分別量測嬰兒之呼吸頻率、出汗狀況、體溫、心率、身體位置或方向、睡眠姿勢、嬰兒周圍的一氧化碳濃度、呼出的二氧化碳濃度的變化等，
 且多會透過物聯網技術開發出可穿戴式裝置之系統。
 
-如：Linti等人~\cite{lintiSensoryBabyVestForTheMonitoringOfInfants2006}
+如：Linti等人~\cite{linti_sensory_2006}
 所開發的嬰兒感測背心，
 其將多個感官元件融入紡織品中以用來量測嬰兒之呼吸、心率、溫度及濕度；
-Ferreira等人~\cite{ferreiraASmartWearableSystemForSuddenInfantDeathSyndromeMonitoring2016}
+Ferreira等人~\cite{ferreira_smart_2016}
 開發了將感測器裝設於胸帶中，
 而得以量測嬰兒之體溫、心率、呼吸頻率及身體位置，
 並透過ZigBee技術將收集到的數據傳送至伺服器，
 用戶則可透過醫療網頁介面進行查看及收到緊急訊息；
-Ziganshin等人~\cite{ziganshinUWBBabyMonitor2010}
+Ziganshin等人~\cite{ziganshin_uwb_2010}
 基於超寬頻技術開發出可監測嬰兒呼吸及心率之系統，
 其可檢測嬰兒之睡眠、清醒及警示狀態；
-Lin等人~\cite{linWirelessInfantMonitoringDeviceForThePreventionOfSuddenInfantDeathSyndrome2014}
+Lin等人~\cite{lin_wireless_2014}
 開發出一套在嬰兒胸帶上嵌入了三種不同感測器的系統，
 透過三軸加速度計可確定嬰兒睡姿（面朝上、下、左或右）與計算z軸資訊得出呼吸頻率、
 利用溫度感測器量測體溫以及使用一氧化碳感測器偵測嬰兒周圍之一氧化碳濃度，
@@ -86,7 +86,7 @@ Lin等人~\cite{linWirelessInfantMonitoringDeviceForThePreventionOfSuddenInfantD
 此種方式利用電腦視覺技術對於嬰兒影像畫面進行偵測，
 現有研究中包含了計算嬰兒之呼吸頻率、關注於嬰兒之面部特徵及嬰兒趴睡姿勢偵測。
 
-Fang等人~\cite{fangAVisionBasedInfantRespiratoryFrequencyDetectionSystem2015}
+Fang等人~\cite{fang_vision-based_2015}
 開發了一基於視覺之非接觸式呼吸頻率偵測系統，
 先判斷嬰兒是否正在運動（包含頭部、四肢及身體運動，但不包含因呼吸引起的輕微運動），
 若未偵測到嬰兒運動，
@@ -95,7 +95,7 @@ Fang等人~\cite{fangAVisionBasedInfantRespiratoryFrequencyDetectionSystem2015}
 接著，利用模糊積分技術選擇呼吸點；
 最終，得以計算嬰兒的呼吸頻率，進而可判斷嬰兒是否發生呼吸異常之情形。
 
-Liu等人~\cite{liuVideoBasedIoTBabyMonitorForSIDSPrevention2017}
+Liu等人~\cite{liu_video-based_2017}
 利用夜視攝影機拍攝在嬰兒床內的嬰兒，
 並使用MIT所提出之Eulerian Magnification技術，
 放大影片中的細微運動以監測拍攝對象之胸部運動，
@@ -103,7 +103,7 @@ Liu等人~\cite{liuVideoBasedIoTBabyMonitorForSIDSPrevention2017}
 則判斷其呼吸頻率異常，
 進而透過手機裝置發出警報。
 
-Gallo等人~\cite{galloMARRSIDS2019}
+Gallo等人~\cite{gallo_marrsids_2019}
 提出一名為MARRSIDS的模型，
 其利用OpenCV之Haar-Like Features偵測嬰兒之面部特徵。
 系統透過嬰兒臉部辨識與否及睜眼狀態，
@@ -115,7 +115,7 @@ Gallo等人~\cite{galloMARRSIDS2019}
 則代表嬰兒處於清醒狀態，
 並非處於風險中。
 
-Wang等人~\cite{WangAMultiTaskBayesianDeepNeuralNetForDetectingLifeThreateningInfantIncidentsFromHeadImages2019}
+Wang等人~\cite{wang_multi-task_2019}
 提出了一個多任務貝氏深度神經架構，
 其使用MobileNetV2網路，
 針對自行收集之YunInfants資料集進行嬰兒頭部影像分析，
@@ -125,7 +125,7 @@ Wang等人~\cite{WangAMultiTaskBayesianDeepNeuralNetForDetectingLifeThreateningI
 （3）眼睛睜開與否，
 及（4）五個臉部座標之位置。
 
-Bharati等人~\cite{bharatiAnEfficientEdgeDeepLearningComputerVisionSystemToPreventSuddenInfantDeathSyndrome2021}
+Bharati等人~\cite{bharati_efficient_2021}
 提出一個基於卷積神經網絡的電腦視覺系統，
 可用來評估嬰兒三種睡眠姿勢：
 仰臥（正常狀態）、從仰臥轉換到趴臥（警示狀態）、趴臥（危險狀態），
@@ -147,8 +147,10 @@ ResNet50 ResNet50
 \section{面部偵測}
 \subsection{MTCNN}
 MTCNN MTCNN
+~\cite{xiang_joint_2017}
 
 \subsection{RetinaFace}
 RetinaFace RetinaFace
+~\cite{deng_retinaface_2020}
 
 \end{document}
