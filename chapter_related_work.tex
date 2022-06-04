@@ -141,8 +141,25 @@ Bharati等人~\cite{bharati_efficient_2021}
 而尚未有對於嬰兒常見動作之辨識模型，
 故我們提出一可偵測嬰兒基礎姿勢及面部遮擋之危險監測系統。
 
-\section{殘差網路}
-ResNet50 ResNet50
+\section{ResNet}
+過往神經網路訓練中，
+更深層的網路會有模型退化的問題，
+亦即隨著網路深度的增加，準確率達飽和後，反而迅速下降，
+而這樣的結果並非因過度擬合所致，
+如\cref{fig:fig-training-error}
+\fig[0.9][fig:fig-training-error][!hbt]{fig-plain-network.png}[網路深度與訓練誤差關係][網路深度與訓練誤差關係]
+可看到兩個不同層數的網路其訓練誤差值。
+
+因此，He等人~\cite{he_deep_2016}
+提出了一個深度殘差學習(
+\cref{fig:fig-residual-learning}
+\fig[0.6][fig:fig-residual-learning][!hbt]{fig-residual-learning.png}[殘差學習][殘差學習]
+)的架構，
+利用shortcut connection執行identity mapping，
+如此並不需要增加額外的參數，
+亦即不增加計算複雜度。最終，本研究以152層的殘差網路在ILSVRC 2015中獲得第一名，
+此網路比VGG網路深八倍，
+卻仍擁有較低的複雜度。
 
 \section{面部偵測}
 \subsection{MTCNN}
