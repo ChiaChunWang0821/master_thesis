@@ -161,13 +161,30 @@ Bharati等人~\cite{bharati_efficient_2021}
 此網路比VGG網路深八倍，
 卻仍擁有較低的複雜度。
 
-\section{面部偵測}
+\section{臉部偵測}
 \subsection{MTCNN}
 MTCNN MTCNN
 ~\cite{xiang_joint_2017}
 
 \subsection{RetinaFace}
-RetinaFace RetinaFace
+RetinaFace
 ~\cite{deng_retinaface_2020}
+是由Deng等人於2020年提出的single-shot、multi-level人臉定位方法，
+其基於影像平面之點回歸整合了人臉框預測、2D人臉標示定位及3D頂點回歸。
+此模型主要由三個部分組成（
+\cref{fig:fig-retinaface-framework}
+\fig[0.9][fig:fig-retinaface-framework][!hbt]{fig-retinaface-framework.PNG}[RetinaFace架構][RetinaFace架構]
+）：
+（1）feature pyramid network、（2）context head module及（3）cascade multi-task loss。
+首先，feature pyramid network獲得輸入影像，並輸出五個不同比例的特徵圖；
+接著，context head module獲得這些特徵圖以計算多任務的損失：
+亦即第一個模組會從一般的anchor預測範圍框，
+而後第二個模組利用第一個模組迴歸出的anchor以預測更精準的範圍框。
+而
+\cref{fig:fig-retinaface-ap}
+\fig[0.7][fig:fig-retinaface-ap][!hbt]{fig-retinaface-ap.PNG}[RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線][RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線]
+展示了RetinaFace和其他29種人臉偵測演算法之平均準確度（Average Precision，AP）數據，
+本方法擁有91.7\%的良好結果。
+
 
 \end{document}
