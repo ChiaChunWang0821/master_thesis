@@ -3,34 +3,97 @@
 
 \chapter{實驗設計與結果}
 
-\section{臉部辨識實驗}
+\section{嬰兒臉部偵測實驗}
+\subsection{實驗目的與設計}
+在收集嬰兒臉部資料集時，
+需針對嬰兒影像擷取出臉部範圍，
+進而後續之臉部遮擋辨識階段。
+
+因此，本實驗使用3.3節之嬰兒姿勢資料集，
+分別以精確度較低但執行時間較短之
+OpenCV~\cite{goyal_face_2017}
+與SSD~\cite{ye_face_2021}
+以及精確度較高但需較長偵測時間之
+MTCNN~\cite{xiang_joint_2017}
+與RetinaFace~\cite{deng_retinaface_2020}
+等臉部偵測演算法，
+根據其臉部擷取效果及執行速度進行比較，
+以驗證適合本系統之演算法。
+
+\subsection{實驗評估方式}
+本實驗為驗證嬰兒臉部偵測演算法之實際可行性，
+將針對執行時間及準確度分別進行比較，
+透過計算演算法偵測整個資料集共15416張影像所花費之時間，
+得以算出各演算法平均每張需花費之時間；
+而準確度則將嬰兒臉部偵測之影像結果進行標示，
+分別計算出各演算法之accuracy、precision及recall。
+
+\subsection{實驗結果與分析}
+在本實驗中，
+第一部分針對演算法之執行時間，
+以OpenCV及SSD兩演算法進行比較：
+使用OpenCV演算法偵測15416張影像共花費xx，
+亦即平均每張影像需花xx秒；
+而使用SSD演算法偵測15416張影像則共花費xx，
+即平均每張影像需花xx秒。
+但又因OpenCV在準確度及召回率皆過低，
+無法使用於系統中，
+故我們使用SSD進行初步之嬰兒臉部偵測。
+
+而本實驗之第二部分則就精確度進行MTCNN與RetinaFace兩演算法進行比較：
+使用MTCNN演算法進行嬰兒臉部偵測時，
+偵測結果如\cref{table:table-mtcnn}，
+其accuracy為90.20\%、precision為94.76\%以及recall為90.93\%；
+而使用RetinaFace演算法進行嬰兒臉部偵測時，
+影像偵測結果如\cref{table:table-retinaface}，
+其accuracy為99.78\%、precision為99.75\%以及recall為99.91\%。
+因此，
+本系統為達到能更高的正確率及召回率，
+在SSD找不到臉部時，
+將接續使用了RetinaFace演算法進行嬰兒臉部偵測。
+
+\begin{table}[h]
+    \centering
+    \caption{MTCNN演算法偵測嬰兒臉部結果}
+    \label{table:table-mtcnn}
+    \begin{tabular}{ccc}
+    \hline
+     & True（預測有臉）　& False（預測無臉） \\
+    \hline
+    True & \multirow{2}{*}{9361} & \multirow{2}{*}{994} \\
+    （偵測正確或實際有臉）　 & & \\
+    False & \multirow{2}{*}{517} & \multirow{2}{*}{4544} \\
+    （偵測錯誤或實際無臉） &  & \\
+    \hline
+    Total & \textbf{9878} & \textbf{5538} \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \caption{RetinaFace演算法偵測嬰兒臉部結果}
+    \label{table:table-retinaface}
+    \begin{tabular}{ccc}
+    \hline
+     & True（預測有臉）　& False（預測無臉） \\
+    \hline
+    True & \multirow{2}{*}{12925} & \multirow{2}{*}{11} \\
+    （偵測正確或實際有臉）　 & & \\
+    False & \multirow{2}{*}{33} & \multirow{2}{*}{2447} \\
+    （偵測錯誤或實際無臉） &  & \\
+    \hline
+    Total & \textbf{12958} & \textbf{2458} \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\section{臉部遮擋辨識實驗}
 \subsection{模型訓練結果}
 準確率達98\%，
 詳細訓練結果請見\cref{fig:fig-result-face}。
 \fig[0.8][fig:fig-result-face][!hbt]{fig-result-face.png}[臉部辨識訓練結果][臉部辨識訓練結果]
 
-\subsection{實驗評估方式}
-臉部辨識實驗評估方式 臉部辨識實驗評估方式
-
-\subsection{實驗結果分析}
-臉部辨識實驗結果分析 臉部辨識實驗結果分析
-
-\section{奶嘴辨識實驗}
-\subsection{模型訓練結果}
-準確率達98\%，
-詳細訓練結果請見\cref{fig:fig-result-pacifier}。
-\fig[0.8][fig:fig-result-pacifier][!hbt]{fig-result-pacifier.png}[奶嘴辨識訓練結果][奶嘴辨識訓練結果]
-
-\subsection{實驗設計}
-奶嘴辨識實驗實驗設計 奶嘴辨識實驗實驗設計
-
-\subsection{實驗評估方式}
-奶嘴辨識實驗實驗評估方式 奶嘴辨識實驗實驗評估方式
-
-\subsection{實驗結果分析}
-奶嘴辨識實驗實驗結果分析 奶嘴辨識實驗實驗結果分析
-
-\section{臉部遮擋辨識實驗}
 \subsection{實驗設計}
 奶嘴辨識實驗實驗設計 奶嘴辨識實驗實驗設計
 
