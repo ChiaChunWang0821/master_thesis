@@ -149,32 +149,29 @@
 \end{table}
 
 \section{臉部遮擋辨識實驗}
-\subsection{模型訓練結果}
-準確率達98\%，
+\subsection{實驗目的與設計}
+本系統為偵測嬰兒臉部是否遭非奶嘴之異物遮擋，
+使用3.2節之資料集以ResNet50~\cite{he_deep_2016}
+訓練模型，
+並透過預測集進行模型驗證。
+
+程式實作中，
+網路訓練回合數為20，
+設定影像資料大小為224x224，
+包含三個類別（臉部無遮擋之安全狀態、臉部遭奶嘴遮擋及臉部遭異物遮擋之危險狀態），
+且透過data augmentation技術生成訓練及測試資料，
+輸出層使用softmax作為激發函數，
+並使用Adam作為優化器且將學習率設為0.000001以進行微調。
+
+\subsection{實驗結果分析}
+本實驗訓練之模型其準確率達98\%，
 詳細訓練結果請見\cref{fig:fig-result-face}。
 \fig[0.8][fig:fig-result-face][!hbt]{fig-result-face.png}[臉部辨識訓練結果][臉部辨識訓練結果]
 
-\subsection{實驗設計}
-使用ResNet50~\cite{he_deep_2016}
-訓練臉部遮擋模型與奶嘴辨識模型，
-訓練回合數皆為20。
-
-\subsection{實驗評估方式}
-奶嘴辨識實驗實驗評估方式 奶嘴辨識實驗實驗評估方式
-
-\subsection{實驗結果分析}
-首先，使用503張影像測試臉部遮擋辨識，
-其中僅一張影像（
-\cref{fig:fig-face-pacifier-error}。
-\fig[0.4][fig:fig-face-pacifier-error][!hbt]{fig-face-pacifier-error.jpg}[誤判影像：真實類別為安全，但預測為警示][誤判影像：真實類別為安全，但預測為警示]
-）類別判斷錯誤，
-誤將安全狀態辨識為警示狀態。
-推測原因為該張影像畫質較差，面部影像不清而導致誤判。
-
-再者，我們使用232張影像測試奶嘴辨識，
-所有測試集皆辨識正確。
-
-由於此二模型測試正確率高，故本文中不放入其混淆矩陣。
+接著，再使用342張之預測集影像進行模型驗證，
+所有影像皆辨識正確，
+其混淆矩陣如\cref{fig:fig-confusion-matrix-face-occlusion}。
+\fig[0.6][fig:fig-confusion-matrix-face-occlusion][!hbt]{fig-confusion-matrix-face-occlusion.png}[臉部遮擋辨識模型之混淆矩陣]
 
 \section{姿勢分類實驗}
 \subsection{模型訓練結果}
