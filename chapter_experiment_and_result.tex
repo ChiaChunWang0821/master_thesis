@@ -153,7 +153,7 @@
 本系統為偵測嬰兒臉部是否遭非奶嘴之異物遮擋，
 使用3.2節之資料集以ResNet50~\cite{he_deep_2016}
 訓練模型，
-並透過預測集進行模型驗證。
+並透過驗證集進行模型驗證。
 
 程式實作中，
 網路訓練回合數為20，
@@ -169,7 +169,7 @@
 詳細訓練結果請見\cref{fig:fig-result-face-occlusion}。
 \fig[1][fig:fig-result-face-occlusion][!hbt]{fig-result-face-occlusion.png}[臉部辨識訓練結果][臉部辨識訓練結果]
 
-接著，再使用342張之預測集影像進行模型驗證，
+接著，再使用342張之驗證集影像進行模型驗證，
 所有影像皆辨識正確，
 其混淆矩陣如\cref{fig:fig-confusion-matrix-face-occlusion}。
 \fig[0.6][fig:fig-confusion-matrix-face-occlusion][!hbt]{fig-confusion-matrix-face-occlusion.png}[臉部遮擋辨識模型之混淆矩陣]
