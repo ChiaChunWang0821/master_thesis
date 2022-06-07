@@ -17,7 +17,7 @@
 遺傳因素（如：家族性之嬰兒猝死症）、
 性別（男性比例為女性的兩倍）或種族等。
 除此之外，嬰兒也可能因其他外在環境條件，
-如：產前或產後暴露於不良物質中（香菸煙霧、酒精或非法藥物等），
+如：產前或產後暴露於不良物質中（如：香菸煙霧、酒精或非法藥物等），
 而弱化嬰兒之內在條件。
 
 在嬰兒猝死症研究中，
@@ -146,45 +146,47 @@ Bharati等人~\cite{bharati_efficient_2021}
 更深層的網路會有模型退化的問題，
 亦即隨著網路深度的增加，準確率達飽和後，反而迅速下降，
 而這樣的結果並非因過度擬合所致，
-如\cref{fig:fig-training-error}
+如\cref{fig:fig-training-error}可看到兩個不同層數的網路其訓練誤差值。
 \fig[0.9][fig:fig-training-error][!hbt]{fig-plain-network.png}[網路深度與訓練誤差關係][網路深度與訓練誤差關係]
-可看到兩個不同層數的網路其訓練誤差值。
 
 因此，He等人~\cite{he_deep_2016}
-提出了一個深度殘差學習(
-\cref{fig:fig-residual-learning}
-\fig[0.6][fig:fig-residual-learning][!hbt]{fig-residual-learning.png}[殘差學習][殘差學習]
-)的架構，
+提出了一個深度殘差學習(\cref{fig:fig-residual-learning})的架構，
 利用shortcut connection執行identity mapping，
 如此並不需要增加額外的參數，
 亦即不增加計算複雜度。最終，本研究以152層的殘差網路在ILSVRC 2015中獲得第一名，
 此網路比VGG網路深八倍，
 卻仍擁有較低的複雜度。
+\fig[0.6][fig:fig-residual-learning][!hbt]{fig-residual-learning.png}[殘差學習][殘差學習]
 
-\section{RetinaFace}
-% \subsection{MTCNN}
-% MTCNN MTCNN
-% ~\cite{xiang_joint_2017}
+\section{人臉偵測演算法}
+\subsection{OpenCV}
+OpenCV
+~\cite{goyal_face_2017}
 
-% \subsection{RetinaFace}
-RetinaFace
-~\cite{deng_retinaface_2020}
+\subsection{SSD}
+SSD
+~\cite{ye_face_2021}
+
+\subsection{MTCNN}
+MTCNN
+~\cite{xiang_joint_2017}
+
+\subsection{RetinaFace}
+RetinaFace~\cite{deng_retinaface_2020}
 是由Deng等人於2020年提出的single-shot、multi-level人臉定位方法，
 其基於影像平面之點回歸整合了人臉框預測、2D人臉標示定位及3D頂點回歸。
-此模型主要由三個部分組成（
-\cref{fig:fig-retinaface-framework}
-\fig[0.9][fig:fig-retinaface-framework][!hbt]{fig-retinaface-framework.PNG}[RetinaFace架構][RetinaFace架構]
-）：
+
+此模型架構（見\cref{fig:fig-retinaface-framework}）中，主要由三個部分組成：
 （1）feature pyramid network、（2）context head module及（3）cascade multi-task loss。
 首先，feature pyramid network獲得輸入影像，並輸出五個不同比例的特徵圖；
 接著，context head module獲得這些特徵圖以計算多任務的損失：
 亦即第一個模組會從一般的anchor預測範圍框，
 而後第二個模組利用第一個模組迴歸出的anchor以預測更精準的範圍框。
-而
-\cref{fig:fig-retinaface-ap}
-\fig[0.7][fig:fig-retinaface-ap][!hbt]{fig-retinaface-ap.PNG}[RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線][RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線]
-展示了RetinaFace和其他29種人臉偵測演算法之平均準確度（Average Precision，AP）數據，
-本方法擁有91.7\%的良好結果。
+\fig[0.9][fig:fig-retinaface-framework][!hbt]{fig-retinaface-framework.PNG}[RetinaFace架構][RetinaFace架構]
 
+本篇論文展示了RetinaFace和其他29種人臉偵測演算法之平均準確度（Average Precision）比較，
+如\cref{fig:fig-retinaface-ap}所示，
+此演算法擁有91.7\%的良好結果。
+\fig[0.7][fig:fig-retinaface-ap][!hbt]{fig-retinaface-ap.PNG}[RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線][RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線]
 
 \end{document}
