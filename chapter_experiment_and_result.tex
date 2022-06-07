@@ -174,29 +174,37 @@
 其混淆矩陣如\cref{fig:fig-confusion-matrix-face-occlusion}。
 \fig[0.6][fig:fig-confusion-matrix-face-occlusion][!hbt]{fig-confusion-matrix-face-occlusion.png}[臉部遮擋辨識模型之混淆矩陣]
 
-\section{姿勢分類實驗}
-\subsection{模型訓練結果}
-準確率達99\%，
-詳細訓練結果請見\cref{fig:fig-result-four-classes}。
-\fig[0.8][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
+\section{姿勢辨識實驗}
+\subsection{實驗目的與設計}
+本系統為辨識嬰兒姿勢是否處於危險狀態，
+使用3.3節之資料集以ResNet50~\cite{he_deep_2016}
+訓練模型，
+並透過驗證集進行模型驗證。
 
-\subsection{實驗設計}
-使用ResNet50~\cite{he_deep_2016}
-訓練臉部遮擋模型與奶嘴辨識模型，
-訓練回合數皆為20。
-
-\subsection{實驗評估方式}
-姿勢分類實驗評估方式 姿勢分類實驗評估方式
+程式實作中，
+網路訓練回合數為20，
+設定影像資料大小為224x224，
+包含四個類別（正躺、趴躺、坐姿及站立），
+且透過data augmentation技術生成訓練及測試資料，
+輸出層使用softmax作為激發函數，
+並使用Adam作為優化器且將學習率設為0.000001以進行微調。
 
 \subsection{實驗結果分析}
-我們使用744張影像針對此模型進行測試，
-包含了五張類別辨識錯誤的影像，
-其中有三張將坐姿誤判為趴躺姿勢，
-推測原因為嬰兒雖呈現坐姿，
-但上半身貼近其腿部，而導致誤判。
+本實驗訓練之模型其最終訓練準確率達99.45\%，
+而測試準確率達99.71\%，
+詳細訓練結果請見\cref{fig:fig-result-four-classes}。
+\fig[1][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
 
-此模型之混淆矩陣，請見\cref{fig:fig-confusion-matrix-four-classes}。
-\fig[1.1][fig:fig-confusion-matrix-four-classes][!hbt]{fig-confusion-matrix-four-classes.png}[嬰兒姿勢辨識之混淆矩陣][嬰兒姿勢辨識之混淆矩陣]
+接著，再使用744張之驗證集影像進行模型驗證，
+包含了五張類別辨識錯誤的影像，
+其混淆矩陣如\cref{fig:fig-confusion-matrix-four-classes}。
+辨識錯誤之五張影像中，
+有三張將坐姿誤判為趴躺姿勢，
+推測原因為嬰兒雖呈現坐姿，
+但上半身貼近其腿部（如\cref{fig:fig-error-four-classes}
+），而導致誤判。
+\fig[0.8][fig:fig-confusion-matrix-four-classes][!hbt]{fig-confusion-matrix-four-classes.png}[姿勢辨識模型之混淆矩陣]
+\fig[0.6][fig:fig-error-four-classes][!hbt]{fig-error-four-classes.jpg}[姿勢辨識錯誤之影像：坐姿誤判為趴躺]
 
 \section{影片危險偵測實驗}
 \subsection{實驗設計}
