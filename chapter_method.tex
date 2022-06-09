@@ -21,8 +21,8 @@
 則再經後續步驟判斷是否提醒照護者；
 而若分析為安全狀態，
 則可接續下一幀之影像進行偵測。
-詳細之系統流程圖，請見\cref{fig:fig-system-flow-chart}。
-\fig[1][fig:fig-system-flow-chart][!hbt]{fig-system-flow-chart.png}[系統流程圖][系統流程圖]
+詳細之系統流程圖，請見\cref{fig:fig-flow-chart-system}。
+\fig[1][fig:fig-flow-chart-system][!hbt]{fig-flow-chart-system.png}[系統流程圖][系統流程圖]
 
 而本系統中，包含兩項危險辨識模型：
 (1) 嬰兒臉部遮擋辨識：
@@ -68,6 +68,9 @@
 （2）嬰兒正在使用奶嘴，亦為安全狀態、及
 （3）嬰兒面部遭嘔吐物或毛巾等外物遮蔽，為危險狀態，而需警示照護者。
 
+本部分之流程圖，請見\cref{fig:fig-flow-chart-face}。
+\fig[1][fig:fig-flow-chart-face][!hbt]{fig-flow-chart-face.png}[臉部遮擋辨識流程圖][臉部遮擋辨識流程圖]
+
 \subsection{嬰兒臉部偵測}
 嬰兒臉部遮擋辨識僅需關注嬰兒臉部畫面，
 故我們會先透過人臉偵測演算法進行前處理，
@@ -111,6 +114,9 @@
 或者當嬰兒自行站立，
 而有可能爬落嬰兒床等，
 亦可能使嬰兒處於危險情境中。
+
+本部分之流程圖，請見\cref{fig:fig-flow-chart-posture}。
+\fig[1][fig:fig-flow-chart-posture][!hbt]{fig-flow-chart-posture.png}[危險動作辨識流程圖][危險動作辨識流程圖]
 
 \subsection{嬰兒姿勢資料集}
 % 在實際情況下，
