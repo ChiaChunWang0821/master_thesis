@@ -57,23 +57,31 @@
 分別量測嬰兒之呼吸頻率、出汗狀況、體溫、心率、身體位置或方向、睡眠姿勢、嬰兒周圍的一氧化碳濃度、呼出的二氧化碳濃度的變化等，
 且多會透過物聯網技術開發出可穿戴式裝置之系統。
 
-如：Linti等人~\cite{linti_sensory_2006}
-所開發的嬰兒感測背心，
+如：
+Linti等人~\cite{linti_sensory_2006}
+所開發的嬰兒感測背心（\cref{fig:fig-linti_sensory_2006-01}），
 其將多個感官元件融入紡織品中以用來量測嬰兒之呼吸、心率、溫度及濕度；
+\fig[0.8][fig:fig-linti_sensory_2006-01][!hbt]{fig-linti_sensory_2006-01.png}[嬰兒多感測器背心之穿脫示意圖~\cite{linti_sensory_2006}][嬰兒多感測器背心之穿脫示意圖]
 Ferreira等人~\cite{ferreira_smart_2016}
-開發了將感測器裝設於胸帶中，
+開發了將感測器裝設於胸帶中（\cref{fig:fig-ferreira_smart_2016-01}），
 而得以量測嬰兒之體溫、心率、呼吸頻率及身體位置，
 並透過ZigBee技術將收集到的數據傳送至伺服器，
 用戶則可透過醫療網頁介面進行查看及收到緊急訊息；
+\fig[0.8][fig:fig-ferreira_smart_2016-01][!hbt]{fig-ferreira_smart_2016-01.png}[嬰兒穿戴式感測器裝置圖~\cite{ferreira_smart_2016}][嬰兒穿戴式感測器裝置圖]
 Ziganshin等人~\cite{ziganshin_uwb_2010}
 基於超寬頻技術開發出可監測嬰兒呼吸及心率之系統，
-其可檢測嬰兒之睡眠、清醒及警示狀態；
+其可檢測嬰兒之睡眠狀態（\cref{fig:fig-ziganshin_uwb_2010-01}）、
+清醒狀態及警示狀態（\cref{fig:fig-ziganshin_uwb_2010-02}）；
+\fig[0.8][fig:fig-ziganshin_uwb_2010-01][!hbt]{fig-ziganshin_uwb_2010-01.png}[嬰兒正常狀態之呼吸及心跳圖~\cite{ziganshin_uwb_2010}][嬰兒正常狀態之呼吸及心跳圖]
+\fig[0.8][fig:fig-ziganshin_uwb_2010-02][!hbt]{fig-ziganshin_uwb_2010-02.png}[嬰兒呼吸暫停狀態之呼吸及心跳圖~\cite{ziganshin_uwb_2010}][嬰兒呼吸暫停狀態之呼吸及心跳圖]
 Lin等人~\cite{lin_wireless_2014}
-開發出一套在嬰兒胸帶上嵌入了三種不同感測器的系統，
-透過三軸加速度計可確定嬰兒睡姿（面朝上、下、左或右）與計算z軸資訊得出呼吸頻率、
+開發出一套在嬰兒胸帶上嵌入了三種不同感測器的系統（\cref{fig:fig-lin_wireless_2014-01}），
+透過三軸加速度計可確定嬰兒睡姿（面朝上、下、左或右）與計算z軸資訊得出呼吸頻率（\cref{fig:fig-lin_wireless_2014-02}）、
 利用溫度感測器量測體溫以及使用一氧化碳感測器偵測嬰兒周圍之一氧化碳濃度，
 再藉由WiFi模組傳送收集之生理資料至伺服器，
 而其驗證所計算之呼吸頻率準確率達100\%。
+\fig[0.8][fig:fig-lin_wireless_2014-01][!hbt]{fig-lin_wireless_2014-01.png}[嬰兒監測系統架構圖~\cite{lin_wireless_2014}][嬰兒監測系統架構圖]
+\fig[0.8][fig:fig-lin_wireless_2014-02][!hbt]{fig-lin_wireless_2014-02.png}[z軸顯示吸氣及呼氣脈衝~\cite{lin_wireless_2014}][z軸顯示吸氣及呼氣脈衝]
 
 此種利用感測器監測嬰兒的方法，
 雖然可直接量測嬰兒之生理訊號以判斷狀態正常與否，
@@ -88,12 +96,15 @@ Lin等人~\cite{lin_wireless_2014}
 
 Fang等人~\cite{fang_vision-based_2015}
 開發了一基於視覺之非接觸式呼吸頻率偵測系統，
-先判斷嬰兒是否正在運動（包含頭部、四肢及身體運動，但不包含因呼吸引起的輕微運動），
+其系統流程為（見\cref{fig:fig-fang_vision-based_2015-01}）：
+先判斷嬰兒是否正在運動（包含頭部、四肢及身體運動，但不包含因呼吸引起的輕微運動，其判斷流程圖見\cref{fig:fig-fang_vision-based_2015-02}），
 若未偵測到嬰兒運動，
 則系統開始進行呼吸頻率偵測：
 首先，透過空間特徵擷取呼吸之候選點；
 接著，利用模糊積分技術選擇呼吸點；
 最終，得以計算嬰兒的呼吸頻率，進而可判斷嬰兒是否發生呼吸異常之情形。
+\fig[0.8][fig:fig-fang_vision-based_2015-01][!hbt]{fig-fang_vision-based_2015-01.png}[嬰兒呼吸頻率偵測系統流程圖~\cite{fang_vision-based_2015}][嬰兒呼吸頻率偵測系統流程圖]
+\fig[0.8][fig:fig-fang_vision-based_2015-02][!hbt]{fig-fang_vision-based_2015-02.png}[嬰兒運動偵測流程圖~\cite{fang_vision-based_2015}][嬰兒運動偵測流程圖]
 
 Liu等人~\cite{liu_video-based_2017}
 利用夜視攝影機拍攝在嬰兒床內的嬰兒，
@@ -102,6 +113,8 @@ Liu等人~\cite{liu_video-based_2017}
 若經正規化之像素差異值低於設定閥值，
 則判斷其呼吸頻率異常，
 進而透過手機裝置發出警報。
+系統整體設計圖見\cref{fig:fig-liu_video-based_2017-01}。
+\fig[0.8][fig:fig-liu_video-based_2017-01][!hbt]{fig-liu_video-based_2017-01.png}[系統設計圖~\cite{liu_video-based_2017}][系統設計圖]
 
 Gallo等人~\cite{gallo_marrsids_2019}
 提出一名為MARRSIDS的模型，
@@ -114,9 +127,13 @@ Gallo等人~\cite{gallo_marrsids_2019}
 而若嬰兒為睜眼狀態，
 則代表嬰兒處於清醒狀態，
 並非處於風險中。
+系統之硬體架構圖見\cref{fig:fig-gallo_marrsids_2019-01}，
+人工視覺模型架構見\cref{fig:fig-gallo_marrsids_2019-02}。
+\fig[0.8][fig:fig-gallo_marrsids_2019-01][!hbt]{fig-gallo_marrsids_2019-01.png}[硬體架構圖~\cite{gallo_marrsids_2019}][硬體架構圖]
+\fig[0.8][fig:fig-gallo_marrsids_2019-02][!hbt]{fig-gallo_marrsids_2019-02.png}[人工視覺模型架構圖~\cite{gallo_marrsids_2019}][人工視覺模型架構圖]
 
 Wang等人~\cite{wang_multi-task_2019}
-提出了一個多任務貝氏深度神經架構，
+提出了一個多任務貝氏深度神經架構（\cref{fig:fig-wang_multi-task_2019-01}），
 其使用MobileNetV2網路，
 針對自行收集之YunInfants資料集進行嬰兒頭部影像分析，
 包含了四項子任務以達成嬰兒面部遮擋之監測：
@@ -124,10 +141,11 @@ Wang等人~\cite{wang_multi-task_2019}
 （2）不可見的原因是否為被外物（如：枕頭）遮擋，
 （3）眼睛睜開與否，
 及（4）五個臉部座標之位置。
+\fig[0.8][fig:fig-wang_multi-task_2019-01][!hbt]{fig-wang_multi-task_2019-01.png}[網路架構~\cite{wang_multi-task_2019}][網路架構]
 
 Bharati等人~\cite{bharati_efficient_2021}
 提出一個基於卷積神經網絡的電腦視覺系統，
-可用來評估嬰兒三種睡眠姿勢：
+可用來評估嬰兒三種睡眠姿勢（\cref{fig:fig-bharati_efficient_2021-01}）：
 仰臥（正常狀態）、從仰臥轉換到趴臥（警示狀態）、趴臥（危險狀態），
 並於嬰兒呈現趴臥姿勢時，
 透過手機提醒照護人員。
@@ -135,6 +153,11 @@ Bharati等人~\cite{bharati_efficient_2021}
 供照護人員對於系統警報是否誤報之回饋。
 另外，由於目前未有公開之嬰兒姿勢資料集，
 此文透過拍攝和真實嬰兒相同比例之娃娃進行資料收集。
+此研究之CNN架構見\cref{fig:fig-bharati_efficient_2021-02}，
+而系統完整架構見\cref{fig:fig-bharati_efficient_2021-03}。
+\fig[0.8][fig:fig-bharati_efficient_2021-01][!hbt]{fig-bharati_efficient_2021-01.png}[睡姿分類~\cite{bharati_efficient_2021}][睡姿分類]
+\fig[0.8][fig:fig-bharati_efficient_2021-02][!hbt]{fig-bharati_efficient_2021-02.png}[CNN架構~\cite{bharati_efficient_2021}][CNN架構]
+\fig[0.8][fig:fig-bharati_efficient_2021-03][!hbt]{fig-bharati_efficient_2021-03.png}[系統架構~\cite{bharati_efficient_2021}][系統架構]
 
 現有研究中，
 多關注於嬰兒呼吸運動、面部特徵或單一姿勢偵測，
@@ -147,7 +170,7 @@ Bharati等人~\cite{bharati_efficient_2021}
 亦即隨著網路深度的增加，準確率達飽和後，反而迅速下降，
 而這樣的結果並非因過度擬合所致，
 如\cref{fig:fig-training-error}可看到兩個不同層數的網路其訓練誤差值。
-\fig[0.9][fig:fig-training-error][!hbt]{fig-plain-network.png}[網路深度與訓練誤差關係][網路深度與訓練誤差關係]
+\fig[1][fig:fig-training-error][!hbt]{fig-plain-network.png}[網路深度與訓練誤差關係][網路深度與訓練誤差關係]
 
 因此，He等人~\cite{he_deep_2016}
 提出了一個深度殘差學習(\cref{fig:fig-residual-learning})的架構，
@@ -156,29 +179,21 @@ Bharati等人~\cite{bharati_efficient_2021}
 亦即不增加計算複雜度。最終，本研究以152層的殘差網路在ILSVRC 2015中獲得第一名，
 此網路比VGG網路深八倍，
 卻仍擁有較低的複雜度。
-\fig[0.6][fig:fig-residual-learning][!hbt]{fig-residual-learning.png}[殘差學習][殘差學習]
+\fig[0.8][fig:fig-residual-learning][!hbt]{fig-residual-learning.png}[殘差學習~\cite{he_deep_2016}][殘差學習]
 
 \section{人臉偵測演算法}
-\subsection{OpenCV}
-OpenCV
-~\cite{goyal_face_2017}
-
-\subsection{SSD}
-SSD
-~\cite{ye_face_2021}
-
 \subsection{MTCNN}
 MTCNN~\cite{zhang_joint_2016}
 是由Zhang等人於2016年提出的一種多任務級聯卷積神經網路，
 可以同時處理人臉偵測及對齊任務；
 並提出可提升效能的online hard sample mining策略，
 其是否使用之效能差距如\cref{fig:fig-mtcnn-online-hard-sample-mining}。
-\fig[0.7][fig:fig-mtcnn-online-hard-sample-mining][!hbt]{fig-mtcnn-online-hard-sample-mining.PNG}[使用online hard sample mining策略效能比較][使用online hard sample mining策略效能比較]
+\fig[0.8][fig:fig-mtcnn-online-hard-sample-mining][!hbt]{fig-mtcnn-online-hard-sample-mining.PNG}[使用online hard sample mining策略效能比較~\cite{zhang_joint_2016}][使用online hard sample mining策略效能比較]
 
 此網路包含三階段級聯架構的深度卷積網路，
 以粗到細的方式預測人臉及座標位置，
 其方法流程見\cref{fig:fig-mtcnn-pipeline}：
-\fig[0.7][fig:fig-mtcnn-pipeline][!hbt]{fig-mtcnn-pipeline.PNG}[MTCNN pipline][MTCNN pipline]
+\fig[0.8][fig:fig-mtcnn-pipeline][!hbt]{fig-mtcnn-pipeline.PNG}[MTCNN pipline~\cite{zhang_joint_2016}][MTCNN pipline]
 第一階段，
 由全卷積網路構成之proposal network（P-Net）獲得人臉區域的候選窗口及其邊界框回歸向量，
 並根據此估計回歸向量校準候選者，
@@ -194,7 +209,7 @@ MTCNN~\cite{zhang_joint_2016}
 此三階段網路的架構見\cref{fig:fig-mtcnn-framework}，
 圖中"MP"為max pooling、"Conv"為convolution，
 而pooling及convolution的步長分別為2及1。
-\fig[0.7][fig:fig-mtcnn-framework][!hbt]{fig-mtcnn-framework.PNG}[MTCNN framework][MTCNN pipline]
+\fig[1][fig:fig-mtcnn-framework][!hbt]{fig-mtcnn-framework.PNG}[MTCNN framework~\cite{zhang_joint_2016}][MTCNN pipline]
 
 \subsection{RetinaFace}
 RetinaFace~\cite{deng_retinaface_2020}
@@ -207,11 +222,11 @@ RetinaFace~\cite{deng_retinaface_2020}
 接著，context head module獲得這些特徵圖以計算多任務的損失：
 亦即第一個模組會從一般的anchor預測範圍框，
 而後第二個模組利用第一個模組迴歸出的anchor以預測更精準的範圍框。
-\fig[0.9][fig:fig-retinaface-framework][!hbt]{fig-retinaface-framework.PNG}[RetinaFace架構][RetinaFace架構]
+\fig[1][fig:fig-retinaface-framework][!hbt]{fig-retinaface-framework.PNG}[RetinaFace架構~\cite{deng_retinaface_2020}][RetinaFace架構]
 
 本篇論文展示了RetinaFace和其他29種人臉偵測演算法之平均準確度（Average Precision）比較，
 如\cref{fig:fig-retinaface-ap}所示，
 此演算法擁有91.7\%的良好結果。
-\fig[0.7][fig:fig-retinaface-ap][!hbt]{fig-retinaface-ap.PNG}[RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線][RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線]
+\fig[0.8][fig:fig-retinaface-ap][!hbt]{fig-retinaface-ap.PNG}[RetinaFace (ResNet-152)在WIDER FACE測試集之Precision-Recall曲線~\cite{deng_retinaface_2020}][RetinaFace(ResNet-152)在WIDER FACE測試集之Precision-Recall曲線]
 
 \end{document}
