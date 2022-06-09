@@ -168,8 +168,33 @@ SSD
 ~\cite{ye_face_2021}
 
 \subsection{MTCNN}
-MTCNN
-~\cite{xiang_joint_2017}
+MTCNN~\cite{zhang_joint_2016}
+是由Zhang等人於2016年提出的一種多任務級聯卷積神經網路，
+可以同時處理人臉偵測及對齊任務；
+並提出可提升效能的online hard sample mining策略，
+其是否使用之效能差距如\cref{fig:fig-mtcnn-online-hard-sample-mining}。
+\fig[0.7][fig:fig-mtcnn-online-hard-sample-mining][!hbt]{fig-mtcnn-online-hard-sample-mining.PNG}[使用online hard sample mining策略效能比較][使用online hard sample mining策略效能比較]
+
+此網路包含三階段級聯架構的深度卷積網路，
+以粗到細的方式預測人臉及座標位置，
+其方法流程見\cref{fig:fig-mtcnn-pipeline}：
+\fig[0.7][fig:fig-mtcnn-pipeline][!hbt]{fig-mtcnn-pipeline.PNG}[MTCNN pipline][MTCNN pipline]
+第一階段，
+由全卷積網路構成之proposal network（P-Net）獲得人臉區域的候選窗口及其邊界框回歸向量，
+並根據此估計回歸向量校準候選者，
+再以nonmaximum suppression（NMS）合併高度重疊的候選者；
+第二階段，
+所有候選者皆饋送至另一個稱為refine network（R-Net）的CNN，
+其進一步拒絕大量錯誤候選者，
+並使用邊界框回歸進行校準及NMS；
+第三階段，
+則利用output network（O-Net）輸出五個臉部的座標位置，
+其類似於第二階段，
+但不同處是為識別具有更多監督的人臉區域。
+此三階段網路的架構見\cref{fig:fig-mtcnn-framework}，
+圖中"MP"為max pooling、"Conv"為convolution，
+而pooling及convolution的步長分別為2及1。
+\fig[0.7][fig:fig-mtcnn-framework][!hbt]{fig-mtcnn-framework.PNG}[MTCNN framework][MTCNN pipline]
 
 \subsection{RetinaFace}
 RetinaFace~\cite{deng_retinaface_2020}
