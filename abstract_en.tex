@@ -3,24 +3,42 @@
 
 \chapter{Abstract}
 When taking care of the infant, the baby caregiver may not be able to pay attention to the status of the baby at any time, 
-which may cause the infant to suffer from unpleasant breathing due to overflowing milk, turning over, sleeping on the stomach, etc.
+which may cause the infant to suffer from unpleasant breathing due to overflowing milk, turning over, sleeping on the stomach, etc. 
+In addition, the existing products use multiple sensors to detect the state of the infant, which has a single function and many restrictions on use, 
+resulting in poor convenience.
 
-In addition, the existing products use multiple sensors to detect the state of the infant, 
-which has a single function and many restrictions on use, resulting in poor convenience.
+Therefore, this paper proposes a danger detection system based on deep learning technology, focusing on baby images: 
+First, the SSD algorithm and the RetinaFace algorithm is uesd to detect infant's face.
+Then, the ResNet50 is used to train the model to analyze whether the infant's face is obscured by foreign objects other than pacifiers, and identify the four basic postures: lying on the back, lying on the stomach, sitting and standing.
+Therefore, when the system inputs an infant video, the model can recognize that the infant's posture may be in a dangerous state or it's face is covered by a foreign object, , and the caregiver can be immediately alerted. 
 
-Therefore, this paper proposes a danger detection system based on deep learning technology, 
-focusing on face occlusion and gesture recognition of baby images:
-The ResNet50 network is used to train the model to analyze whether the infant's face is obscured by foreign objects 
-and recognize four basic postures: lying, lying on the stomach, sitting and standing. 
+In this paper, we exploit the time advantage of SSD algorithm detection. 
+On average, it takes only 0.04 seconds to detect each infant image with 99\% accuracy.
+Although it takes a long time to detect an infant's face using the RetinaFace algorithm, its accuracy, precision, and recall rate are all as high as 99\%. 
+The face occlusion recognition model and the posture recognition model for danger monitoring also have an accuracy of 99\%.
 
-The recognition accuracy of both parts is 98\%.
+Additionally, since there are currently no publicly available infant datasets, the infant data used in this research are all captured and preprocessed from online pictures and videos of real infants.
 
-Therefore, when the system inputs a infant video, 
-the model can recognize that the infant's posture may be in a dangerous state or the face is covered by a foreign object, 
-and the caregiver can be immediately alerted.
 
-Since there is currently no public infant data set, 
-the infant photos used in this article are all captured and pre-processed from online pictures and videos.
+% When taking care of the infant, the baby caregiver may not be able to pay attention to the status of the baby at any time, 
+% which may cause the infant to suffer from unpleasant breathing due to overflowing milk, turning over, sleeping on the stomach, etc.
+
+% In addition, the existing products use multiple sensors to detect the state of the infant, 
+% which has a single function and many restrictions on use, resulting in poor convenience.
+
+% Therefore, this paper proposes a danger detection system based on deep learning technology, 
+% focusing on face occlusion and gesture recognition of baby images:
+% The ResNet50 network is used to train the model to analyze whether the infant's face is obscured by foreign objects 
+% and recognize four basic postures: lying, lying on the stomach, sitting and standing. 
+
+% The recognition accuracy of both parts is 98\%.
+
+% Therefore, when the system inputs a infant video, 
+% the model can recognize that the infant's posture may be in a dangerous state or the face is covered by a foreign object, 
+% and the caregiver can be immediately alerted.
+
+% Since there is currently no public infant data set, 
+% the infant photos used in this article are all captured and pre-processed from online pictures and videos.
 
 \vspace{2em}
 \noindent \textbf{Keywords:} \keywordsEn{} % Set keywords in config.tex
