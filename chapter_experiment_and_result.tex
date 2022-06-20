@@ -207,13 +207,44 @@
 \fig[0.6][fig:fig-error-four-classes][!hbt]{fig-error-four-classes.jpg}[姿勢辨識錯誤之影像：坐姿誤判為趴躺]
 
 \section{影片危險偵測實驗}
-\subsection{實驗設計}
-影片危險偵測實驗 影片危險偵測實驗
+\subsection{實驗目的與設計}
+本實驗為驗證此系統能基於嬰兒影像進行危險監測，
+利用網路之真實嬰兒影片，
+包含不同之拍攝視角、嬰兒樣貌及狀態等，
+實驗臉部遮擋辨識模型與姿勢辨識模型之準確性。
 
 \subsection{實驗評估方式}
-影片危險偵測實驗 影片危險偵測實驗
+本實驗透過輸出每幀影像之臉部遮擋及姿勢辨識結果，
+計算其accuracy、precision及recall，
+以驗證此二模型得以應用在監測嬰兒危險情境。
 
 \subsection{實驗結果分析}
-影片危險偵測實驗 影片危險偵測實驗
+本實驗影片為嬰兒正躺於畫面中，
+並包含使用奶嘴及未使用奶嘴之情境，
+共切成3374幀影像，
+將未拍攝到嬰兒畫面之影像刪除後，
+剩餘3307張嬰兒影像進行辨識。
+
+首先，
+姿勢辨識的部分，
+包含了278張誤判為趴躺姿勢的影像，
+推測原因為嬰兒身體遭棉被遮擋（如\cref{fig:fig-error-video-posture}），
+而只拍攝到露出的嬰兒臉部，
+故造成姿勢辨識錯誤，
+其混淆矩陣如\cref{fig:fig-confusion-matrix-video-posture}。
+\fig[0.6][fig:fig-error-video-posture][!hbt]{fig-error-video-posture.jpg}[姿勢辨識錯誤之影像：正躺誤判為趴躺]
+\fig[0.8][fig:fig-confusion-matrix-video-posture][!hbt]{fig-confusion-matrix-video-posture.png}[實驗影片之姿勢辨識混淆矩陣]
+
+其次，
+臉部遮擋辨識的部分，
+包含36張嬰兒臉部未被偵測之影像（如\cref{fig:fig-error-video-no-face}），
+其中多張影像類別應為嬰兒正在使用奶嘴或安全狀態，
+但誤判為遭異物遮蔽之警示狀態，
+推測原因為影像中之奶嘴或嬰兒臉部遭手部等遮擋（如\cref{fig:fig-error-video-face}），
+而誤判為類別，
+其混淆矩陣如\cref{fig:fig-confusion-matrix-video-face}。
+\fig[0.6][fig:fig-error-video-no-face][!hbt]{fig-error-video-no-face.jpg}[未偵測嬰兒臉部之影像]
+\fig[0.4][fig:fig-error-video-face][!hbt]{fig-error-video-face.jpg}[臉部遮擋誤判之為警示狀態]
+\fig[0.8][fig:fig-confusion-matrix-video-face][!hbt]{fig-confusion-matrix-video-face.png}[實驗影片之臉部遮擋辨識混淆矩陣]
 
 \end{document}
