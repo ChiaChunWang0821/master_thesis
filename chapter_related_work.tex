@@ -207,21 +207,43 @@ Bharati等人~\cite{bharati_efficient_2021}
 故我們提出一可偵測嬰兒基礎姿勢及面部遮擋之危險監測系統。
 
 \section{ResNet}
-過往神經網路訓練中，
-更深層的網路會有模型退化的問題，
-亦即隨著網路深度的增加，準確率達飽和後，反而迅速下降，
-而這樣的結果並非因過度擬合所致，
+既有的研究中，
+可知卷積神經網路其深度至關重要~\cite{simonyan_very_2015, szegedy_going_2015}，
+在ImageNet資料集中結果表現良好的網路，
+皆利用了深度十六層~\cite{simonyan_very_2015}至三十層~\cite{ioffe_batch_2015}之深層網路。
+
+然而，
+當訓練更深層的神經網路時，
+卻會出現退化問題，
+亦即隨著網路深度的增加，
+準確率達飽和後，
+反而迅速下降，
+而這樣的結果並非因過度擬合所致~\cite{he_convolutional_2015, srivastava_highway_2015}，
 如\cref{fig:fig-training-error}可看到兩個不同層數的網路其訓練誤差值。
 \fig[1][fig:fig-training-error][!hbt]{fig-plain-network.png}[網路深度與訓練誤差關係][網路深度與訓練誤差關係]
 
 因此，He等人~\cite{he_deep_2016}
-提出了一個深度殘差學習(\cref{fig:fig-residual-learning})的架構，
-利用shortcut connection執行identity mapping，
-如此並不需要增加額外的參數，
-亦即不增加計算複雜度。最終，本研究以152層的殘差網路在ILSVRC 2015中獲得第一名，
+提出使用深度殘差學習(\cref{fig:fig-residual-learning-1})的網路架構，
+其利用shortcut connection執行identity mapping，
+且不需要增加額外的參數，
+即不增加計算複雜度。
+在此研究中，
+通過訓練ImageNet評估18層及34層之普通網路與殘差網路，
+由\cref{fig:fig-residual-learning-2}（左）可觀察到普通網路中34層卻比18層有更高的驗證誤差，
+而\cref{fig:fig-residual-learning-2}（右）則可看出殘差網路中34層相對於18層有較低的訓練誤差，
+此結果說明退化問題獲得了解決。
+而文中亦透過訓練CIFAK-10進行更多的比較，
+\cref{fig:fig-residual-learning-3}（左）為不同層數之普通網路其誤差曲線圖，
+\cref{fig:fig-residual-learning-3}（中）為使用殘差網路之不同層數其誤差曲線圖，
+\cref{fig:fig-residual-learning-3}（右）則為使用110層及1202層殘差網路之誤差曲線圖。
+\fig[0.8][fig:fig-residual-learning-1][!hbt]{fig-residual-learning-1.png}[殘差學習~\cite{he_deep_2016}][殘差學習]
+\fig[1][fig:fig-residual-learning-2][!hbt]{fig-residual-learning-2.png}[訓練ImageNet之訓練及驗證誤差曲線圖~\cite{he_deep_2016}][訓練ImageNet之訓練及驗證誤差曲線圖]
+\fig[1][fig:fig-residual-learning-3][!hbt]{fig-residual-learning-3.png}[訓練CIFAK-10之訓練及驗證誤差曲線圖~\cite{he_deep_2016}][訓練CIFAK-10之訓練及驗證誤差曲線圖]
+
+最終，
+本研究以152層之殘差網路在ILSVRC 2015中獲得第一名，
 此網路比VGG網路深八倍，
 卻仍擁有較低的複雜度。
-\fig[0.8][fig:fig-residual-learning][!hbt]{fig-residual-learning.png}[殘差學習~\cite{he_deep_2016}][殘差學習]
 
 \section{人臉偵測演算法}
 \subsection{MTCNN}
