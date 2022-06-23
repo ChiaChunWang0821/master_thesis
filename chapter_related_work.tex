@@ -93,7 +93,6 @@ Ziganshin等人~\cite{ziganshin_uwb_2010}
 基於超寬頻技術~\cite{staderini_uwb_2002}開發出可監測呼吸及心率之系統（如\cref{fig:fig-ziganshin_uwb_2010}），
 以檢測嬰兒三種狀態：睡眠（無運動）、清醒（長期大幅度運動）及警示（偵測到呼吸頻率異常低或暫停）。
 \begin{figure}[!hbt]
-    %\captionsetup[subfigure]{labelformat=empty} % 完全隱藏圖號
     \centering
     \subcaptionbox
         {正常狀態
@@ -124,96 +123,110 @@ Ziganshin等人~\cite{ziganshin_uwb_2010}
 又多關注於呼吸頻率、面部特徵及趴睡姿勢等，
 以下介紹幾項基於影像式偵測嬰兒之研究。
 
-Fang等人~\cite{fang_vision-based_2015}
-開發了基於視覺之非接觸式呼吸頻率偵測系統，
-其有別於過往接觸式呼吸頻率偵測系統，
-如利用呼吸電感體積描記法~\cite{mack_development_2009}及心電圖~\cite{berset_robust_2012}等；
-或使用非視覺技術之非接觸式系統，
-如透過二氧化碳感測器~\cite{cao_non-invasive_2007}或雷射都卜勒測振計~\cite{scalise_measurement_2011}等進行偵測。
-此系統完整流程為（見\cref{fig:fig-fang_vision-based_2015-01}）：
-先判斷嬰兒是否正在運動，
-即包含頭部、四肢及身體運動，
-但不包含因呼吸引起的輕微運動，
-此部分判斷流程圖見\cref{fig:fig-fang_vision-based_2015-02}；
-若系統未偵測到嬰兒運動，
-則開始計算嬰兒之呼吸頻率：
-首先，透過空間特徵擷取呼吸之候選點；
-接著，利用模糊積分技術選擇呼吸點；
-最終，得以計算嬰兒的呼吸頻率，進而判斷是否發生呼吸異常之情形。
-\fig[0.8][fig:fig-fang_vision-based_2015-01][!hbt]{fig-fang_vision-based_2015-01.png}[嬰兒呼吸頻率偵測系統流程圖~\cite{fang_vision-based_2015}][嬰兒呼吸頻率偵測系統流程圖]
-\fig[0.8][fig:fig-fang_vision-based_2015-02][!hbt]{fig-fang_vision-based_2015-02.png}[嬰兒運動偵測流程圖~\cite{fang_vision-based_2015}][嬰兒運動偵測流程圖]
+有別於往的接觸式或非視覺技術之呼吸頻率偵測系統
+~\cite{mack_development_2009, berset_robust_2012, cao_non-invasive_2007, scalise_measurement_2011}，
+Fang等人~\cite{fang_vision-based_2015}基於視覺技術進行非接觸式之呼吸頻率偵測。
+此系統完整流程如\cref{fig:fig-fang_vision-based_2015-01}：
+先進行嬰兒運動偵測，
+其判斷流程見\cref{fig:fig-fang_vision-based_2015-02}，
+包含頭部、四肢及身體運動，
+但不包含因呼吸引起的輕微運動；
+若系統未偵測到運動情形，
+則透過空間特徵擷取候選呼吸點，
+再利用模糊積分技術選擇呼吸點，
+即可計算呼吸頻率，
+進而判斷嬰兒呼吸是否異常。
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {嬰兒呼吸頻率偵測
+        \label{fig:fig-fang_vision-based_2015-01}}
+        {\includegraphics[width=0.45\linewidth]{fig-fang_vision-based_2015-01}}
+    ~
+    \subcaptionbox
+        {嬰兒運動偵測
+        \label{fig:fig-fang_vision-based_2015-02}}
+        {\includegraphics[width=0.45\linewidth]{fig-fang_vision-based_2015-02}}
+    \caption{Fang系統流程圖~\cite{fang_vision-based_2015}}
+    \label{fig:fig-fang_vision-based_2015}
+\end{figure}
 
 Liu等人~\cite{liu_video-based_2017}
 利用夜視攝影機拍攝在嬰兒床內的嬰兒，
-以判斷其呼吸頻率異常與否。
-此系統設計圖見\cref{fig:fig-liu_video-based_2017-01}，
-主要包含了三個部分：
+判斷其呼吸頻率異常與否。
+此系統主要包含三個部分：
 （1）影片收集：
 為\cref{fig:fig-liu_video-based_2017-01}中的前兩項，
 透過夜視攝影機連接到Artik板以收集嬰兒影片；
 （2）呼吸偵測演算法：
 為\cref{fig:fig-liu_video-based_2017-01}中的第三及四項，
-包含了使用MIT所提出之Eulerian Magnification技術，
-用來放大影片中的細微運動以監測拍攝對象之胸部運動，
+包含了使用Eulerian Magnification技術放大影片中的細微運動，
+以監測拍攝對象之胸部運動，
 而若經正規化之像素差異值低於設定閥值，
 則判斷為呼吸頻率異常；
 （3）警示：
 為\cref{fig:fig-liu_video-based_2017-01}中的最後兩項，
 透過Twilio在演算法偵測到緊急狀況時，
 向父母手機發出警報。
-\fig[0.8][fig:fig-liu_video-based_2017-01][!hbt]{fig-liu_video-based_2017-01.png}[系統設計圖~\cite{liu_video-based_2017}][系統設計圖]
+\fig[0.8][fig:fig-liu_video-based_2017-01][!hbt]{fig-liu_video-based_2017-01.png}[Liu系統設計圖~\cite{liu_video-based_2017}][Liu系統設計圖~\cite{liu_video-based_2017}]
 
-Gallo等人~\cite{gallo_marrsids_2019}
-提出一名為MARRSIDS的模型，
-其利用OpenCV之Haar-Like Features偵測嬰兒之面部特徵。
-系統透過嬰兒臉部辨識與否及睜眼狀態，
-判斷其是否處於危險情境中，
-而需發出聲音警示：
-若臉部未被偵測，
-則認為嬰兒可能位於不良姿勢需發出警示；
-而若嬰兒為睜眼狀態，
-則代表嬰兒處於清醒狀態，
+Gallo等人~\cite{gallo_marrsids_2019}提出名為MARRSIDS的模型（架構如\cref{fig:fig-gallo_marrsids_2019}），
+其利用OpenCV之Haar-Like Features偵測嬰兒面部特徵，
+若未偵測到其臉部，
+則認為嬰兒可能位於不良姿勢，
+需發出警示；
+而若偵測到嬰兒臉部且為睜眼狀態，
+則代表其處於清醒狀態，
 並非處於風險中。
-系統之硬體架構圖見\cref{fig:fig-gallo_marrsids_2019-01}，
-人工視覺模型架構見\cref{fig:fig-gallo_marrsids_2019-02}。
-\fig[0.8][fig:fig-gallo_marrsids_2019-01][!hbt]{fig-gallo_marrsids_2019-01.png}[硬體架構圖~\cite{gallo_marrsids_2019}][硬體架構圖]
-\fig[0.8][fig:fig-gallo_marrsids_2019-02][!hbt]{fig-gallo_marrsids_2019-02.png}[人工視覺模型架構圖~\cite{gallo_marrsids_2019}][人工視覺模型架構圖]
+\fig[0.8][fig:fig-gallo_marrsids_2019][!hbt]{fig-gallo_marrsids_2019.png}[MARRSIDS模型架構圖~\cite{gallo_marrsids_2019}][MARRSIDS模型架構圖~\cite{gallo_marrsids_2019}]
 
 Wang等人~\cite{wang_multi-task_2019}
-提出用以偵測嬰兒臉部遮擋的貝氏深度神經架構（\cref{fig:fig-wang_multi-task_2019-01}），
-其包含四項子任務：
+提出用以偵測嬰兒臉部遮擋的貝氏深度神經網路架構（\cref{fig:fig-wang_multi-task_2019-01}），
+共包含四項子任務：
 （1）眼睛、鼻子或嘴巴是否可見，
 （2）不可見的原因是否為被外物（如：枕頭）遮擋，
 （3）眼睛睜開與否，
 及（4）五個臉部座標之位置。
 此框架使用了損失函數進行訓練，
-並考慮了不同偵測任務間的不確定性~\cite{kendall_what_2017}，
+並考慮不同偵測任務間的不確定性~\cite{kendall_what_2017}，
 且有別於現有不專注於嬰兒影像的研究
 ~\cite{viitaniemi_detecting_2013, ge_detecting_2017, ghiasi_using_2015}，
-其使用MobileNetV2針對自行收集之YunInfants資料集進行嬰兒頭部影像分析。
-\fig[0.8][fig:fig-wang_multi-task_2019-01][!hbt]{fig-wang_multi-task_2019-01.png}[網路架構~\cite{wang_multi-task_2019}][網路架構]
+此方法使用MobileNetV2針對自行收集之YunInfants資料集進行嬰兒頭部影像分析。
+\fig[0.8][fig:fig-wang_multi-task_2019-01][!hbt]{fig-wang_multi-task_2019-01.png}[Wang系統之網路架構~\cite{wang_multi-task_2019}][Wang系統之網路架構~\cite{wang_multi-task_2019}]
 
 Bharati等人~\cite{bharati_efficient_2021}
-提出基於卷積神經網絡之嬰兒睡眠姿勢電腦視覺系統，
-其可評估仰臥（正常狀態）、從仰臥轉換到趴臥（警示狀態）及趴臥（危險狀態）三種睡姿
+開發基於卷積神經網絡之嬰兒睡眠姿勢電腦視覺系統，
+以評估仰臥（正常狀態）、從仰臥轉換到趴臥（警示狀態）及趴臥（危險狀態）三種姿勢
 （如\cref{fig:fig-bharati_efficient_2021-01}），
-並於嬰兒呈現趴臥姿勢時，
-透過手機提醒照護人員，
-此系統架構圖見\cref{fig:fig-bharati_efficient_2021-03}。
-其中的CNN架構（\cref{fig:fig-bharati_efficient_2021-02}）為：
+並於嬰兒呈現趴臥時，
+透過手機提醒照護人員。
+此系統完整架構見\cref{fig:fig-bharati_efficient_2021-02}，
+其中卷積神經網路部分之架構如\cref{fig:fig-bharati_efficient_2021-03}：
 首先，輸入經轉換的2D嬰兒灰階影像；
 接著，經過多次的卷積層及最大池化層；
 再傳入全連接層後，
-最終輸出嬰兒的三個睡眠姿勢機率值。
+最終輸出嬰兒的三種睡眠姿勢機率值。
 由於目前未有公開之嬰兒姿勢資料集，
-故本文所使用的影像資料為和真實嬰兒相同比例之娃娃。
-\fig[0.8][fig:fig-bharati_efficient_2021-01][!hbt]{fig-bharati_efficient_2021-01.png}[睡姿分類~\cite{bharati_efficient_2021}][睡姿分類]
-\fig[0.8][fig:fig-bharati_efficient_2021-02][!hbt]{fig-bharati_efficient_2021-02.png}[CNN架構圖~\cite{bharati_efficient_2021}][CNN架構圖]
-\fig[0.8][fig:fig-bharati_efficient_2021-03][!hbt]{fig-bharati_efficient_2021-03.png}[系統架構圖~\cite{bharati_efficient_2021}][系統架構圖]
+故此研究所使用的影像資料為和真實嬰兒相同比例之娃娃。
+\fig[0.8][fig:fig-bharati_efficient_2021-01][!hbt]{fig-bharati_efficient_2021-01.png}[Bharati系統之嬰兒睡眠姿勢分類~\cite{bharati_efficient_2021}][Bharati系統之嬰兒睡眠姿勢分類~\cite{bharati_efficient_2021}]
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {完整系統
+        \label{fig:fig-bharati_efficient_2021-02}}
+        {\includegraphics[width=0.8\linewidth]{fig-bharati_efficient_2021-02}}
+    ~
+    \subcaptionbox
+        {卷積神經網路
+        \label{fig:fig-bharati_efficient_2021-03}}
+        {\includegraphics[width=0.8\linewidth]{fig-bharati_efficient_2021-03}}
+    \caption{Bharati系統架構圖~\cite{bharati_efficient_2021}}
+    \label{fig:fig-bharati_efficient_2021}
+\end{figure}
 
 現有研究中，
 視覺化之嬰兒監測系統多關注其呼吸運動、面部特徵或單一姿勢，
-而尚未有對於嬰兒常見動作之辨識模型，
+而未有辨識嬰兒常見動作之研究，
 故我們提出一可偵測嬰兒基礎姿勢及面部遮擋之危險監測系統。
 
 \section{ResNet}
