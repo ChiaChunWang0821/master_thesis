@@ -243,14 +243,14 @@ Bharati等人~\cite{bharati_efficient_2021}
 準確率達飽和後，
 反而迅速下降，
 而這樣的結果並非因過度擬合所致~\cite{he_convolutional_2015, srivastava_highway_2015}，
-如\cref{fig:fig-training-error}可看到兩個不同層數的網路其訓練誤差值。
-\fig[1][fig:fig-training-error][!hbt]{fig-plain-network.png}[網路深度與訓練誤差關係][網路深度與訓練誤差關係]
+如\cref{fig:fig-residual-learning-0}可看到兩個不同層數的網路其訓練及測試誤差值。
+\fig[0.9][fig:fig-residual-learning-0][!hbt]{fig-residual-learning-0.png}[網路深度與訓練誤差關係~\cite{he_deep_2016}][網路深度與訓練誤差關係~\cite{he_deep_2016}]
 
 因此，He等人~\cite{he_deep_2016}
 提出使用深度殘差學習(\cref{fig:fig-residual-learning-1})的網路架構，
-其利用shortcut connection執行identity mapping，
+利用shortcut connection執行identity mapping，
 且不需要增加額外的參數，
-即不增加計算複雜度。
+亦即不增加計算複雜度。
 在此研究中，
 通過訓練ImageNet評估18層及34層之普通網路與殘差網路，
 由\cref{fig:fig-residual-learning-2}（左）可觀察到普通網路中34層卻比18層有更高的驗證誤差，
@@ -260,9 +260,9 @@ Bharati等人~\cite{bharati_efficient_2021}
 \cref{fig:fig-residual-learning-3}（左）為不同層數之普通網路其誤差曲線圖，
 \cref{fig:fig-residual-learning-3}（中）為使用殘差網路之不同層數其誤差曲線圖，
 \cref{fig:fig-residual-learning-3}（右）則為使用110層及1202層殘差網路之誤差曲線圖。
-\fig[0.8][fig:fig-residual-learning-1][!hbt]{fig-residual-learning-1.png}[殘差學習~\cite{he_deep_2016}][殘差學習]
-\fig[1][fig:fig-residual-learning-2][!hbt]{fig-residual-learning-2.png}[訓練ImageNet之訓練及驗證誤差曲線圖~\cite{he_deep_2016}][訓練ImageNet之訓練及驗證誤差曲線圖]
-\fig[1][fig:fig-residual-learning-3][!hbt]{fig-residual-learning-3.png}[訓練CIFAK-10之訓練及驗證誤差曲線圖~\cite{he_deep_2016}][訓練CIFAK-10之訓練及驗證誤差曲線圖]
+\fig[0.7][fig:fig-residual-learning-1][!hbt]{fig-residual-learning-1.png}[殘差學習~\cite{he_deep_2016}][殘差學習~\cite{he_deep_2016}]
+\fig[0.9][fig:fig-residual-learning-2][!hbt]{fig-residual-learning-2.png}[在ImageNet上訓練之誤差曲線圖~\cite{he_deep_2016}][在ImageNet上訓練之誤差曲線圖~\cite{he_deep_2016}]
+\fig[0.9][fig:fig-residual-learning-3][!hbt]{fig-residual-learning-3.png}[在CIFAK-10上訓練之誤差曲線圖~\cite{he_deep_2016}][在CIFAK-10上訓練之誤差曲線圖~\cite{he_deep_2016}]
 
 最終，
 本研究以152層之殘差網路在ILSVRC 2015中獲得第一名，
