@@ -5,34 +5,34 @@
 
 \section{系統流程介紹}
 本論文所開發之嬰兒危險監測系統，
-其針對嬰兒影像畫面進行識別，
-以判斷嬰兒是否處於危險狀態，
+針對嬰兒影像畫面進行辨識，
+以判斷其是否處於危險狀態，
 而須提醒照護者。
 
 系統之完整流程為：
-首先，輸入一段待觀測之嬰兒影片，
+首先，讀取一段待觀測之嬰兒影片，
 將影片切成數幀影像，
 並判斷影像存在與否，
 若不存在系統發出異常警告，
 反之則開始對該影像畫面進行危險偵測判斷。
 針對每幀嬰兒影像，
-系統針對其臉部遮擋及姿勢進行辨識，
+系統對其臉部遮擋及姿勢進行辨識，
 若透過模型分析為警示狀態，
 則再經後續步驟判斷是否提醒照護者；
 而若分析為安全狀態，
 則可接續下一幀之影像進行偵測。
-詳細之系統流程圖，請見\cref{fig:fig-flow-chart-system}。
+系統完整流程圖，請見\cref{fig:fig-flow-chart-system}。
 \fig[1][fig:fig-flow-chart-system][!hbt]{fig-flow-chart-system.png}[系統流程圖][系統流程圖]
 
 而本系統中，包含兩項危險辨識模型：
 (1) 嬰兒臉部遮擋辨識：
 先將嬰兒畫面擷取出僅含臉部範圍之影像，
-再透過臉部遮擋模型判斷嬰兒臉部是否遭非奶嘴之異物遮蔽，
+再透過此模型判斷嬰兒臉部是否遭非奶嘴之異物遮蔽，
 若是，則嬰兒為警示狀態；
 (2) 嬰兒危險動作辨識：
-將嬰兒影像透過嬰兒姿勢模型進行辨識，
-判斷嬰兒為安全狀態：正躺或坐姿，
-或為具危險性的狀態：趴躺或站立。
+將拍攝之嬰兒全身影像透過此模型進行辨識，
+判斷嬰兒為正躺或坐姿之安全狀態，
+或為需警示的趴躺及站立姿勢。
 而若兩模型結果皆為安全，
 則系統會判斷嬰兒狀態為安全，
 否則，嬰兒狀態則為警示。
@@ -43,9 +43,11 @@
 如前言所述，
 目前醫界對於嬰兒猝死症之相關因素研究中，
 注意嬰兒臉部是否遭遮蔽，
-將有助於降低此症的發生。
-此外，亦有研究發現嬰兒使用奶嘴，
+將有助於降低此症的發生；
+另亦有研究發現嬰兒使用奶嘴，
 對於預防嬰兒猝死症有幫助。
+因此，
+本文對於嬰兒臉部遮擋辨識將排除使用奶嘴之情境。
 
 起初，
 基於電腦視覺及影像處理技術，
@@ -55,53 +57,85 @@
 判斷嬰兒臉部是否出現非膚色之區塊，
 以進行臉部遮擋辨識，
 其效果如\cref{fig:fig-skin-detection}。
-\fig[0.8][fig:fig-skin-detection][!hbt]{fig-skin-detection.png}[臉部膚色偵測~\cite{walkonnet_python_nodate}][臉部膚色偵測]
+\fig[0.7][fig:fig-skin-detection][!hbt]{fig-skin-detection.png}[臉部膚色偵測~\cite{walkonnet_python_nodate}][臉部膚色偵測]
 
 而後考量能有較佳的推廣性，
 因此，
-本研究改為使用深度學習技術，
-針對嬰兒臉部影像收集資料，
-進行臉部遮擋辨識模型之訓練，
-並且將嬰兒使用奶嘴之情形排除，
-亦即嬰兒臉部狀態共分為三種類別：
-（1）面部無遮擋，為安全狀態、
-（2）嬰兒正在使用奶嘴，亦為安全狀態、及
-（3）嬰兒面部遭嘔吐物或毛巾等外物遮蔽，為危險狀態，而需警示照護者。
-
+本研究改為使用深度學習技術進行臉部遮擋辨識，
+針對嬰兒面部影像收集資料，
+以訓練可辨識三種嬰兒臉部狀態之模型。
 本部分之流程圖，請見\cref{fig:fig-flow-chart-face}。
-\fig[1][fig:fig-flow-chart-face][!hbt]{fig-flow-chart-face.png}[臉部遮擋辨識流程圖][臉部遮擋辨識流程圖]
+\fig[0.9][fig:fig-flow-chart-face][!hbt]{fig-flow-chart-face.png}[臉部遮擋辨識流程圖][臉部遮擋辨識流程圖]
 
 \subsection{嬰兒臉部偵測}
-嬰兒臉部遮擋辨識僅需關注嬰兒臉部畫面，
-故我們會先透過人臉偵測演算法進行前處理，
-以獲得只涵蓋嬰兒臉部範圍之影像。
-由於考量嬰兒臉部偵測之正確率及模型執行時間，
-因此，
-本研究選用RetinaFace~\cite{deng_retinaface_2020}
-及SSD~\cite{ye_face_2021}等演算法進行此部分之處理。
+嬰兒臉部遮擋辨識僅需關注臉部畫面，
+故本文會先透過人臉偵測演算法進行前處理，
+以獲得只涵蓋嬰兒面部範圍之影像。
+
+在現有人臉偵測演算法中，
+偵測嬰兒臉部多有失準，
+故我們在多方實驗後，
+同時考量偵測之正確率及執行時間，
+最終本研究選用RetinaFace~\cite{deng_retinaface_2020}
+及SSD~\cite{ye_face_2021}等演算法進行嬰兒臉部偵測，
+其效果如\cref{fig:fig-face-detection}。
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {原始影像
+        \label{fig:fig-face-detection-original}}
+        {\includegraphics[width=0.3\linewidth]{fig-face-detection-original}}
+    ~
+    \subcaptionbox
+        {使用RetinaFace~\cite{deng_retinaface_2020}
+        \label{fig:fig-face-detection-retinaface}}
+        {\includegraphics[width=0.3\linewidth]{fig-face-detection-retinaface}}
+    ~
+    \subcaptionbox
+        {使用SSD~\cite{ye_face_2021}
+        \label{fig:fig-face-detection-ssd}}
+        {\includegraphics[width=0.3\linewidth]{fig-face-detection-ssd}}
+    \caption{嬰兒臉部偵測結果}
+    \label{fig:fig-face-detection}
+\end{figure}
 
 \subsection{嬰兒臉部資料集}
-本論文將嬰兒臉部狀態影像分為三類：
-面部無遮擋、有遮擋但遮蔽物為奶嘴及有遮擋且遮蔽物非奶嘴，
-前兩類判斷為安全狀態，
-最後一類則為危險狀態。
-對於臉部遮擋資料集之三類範例如下：
+本論文將嬰兒臉部狀態分為三類，
+各類定義如下：
+\begin{enumerate}
+    \item 臉部無遮蔽：嬰兒五官皆未被遮擋，為安全狀態，如\cref{fig:fig-face-uncovered}。
+    \item 臉部遮蔽物為奶嘴：嬰兒正在使用奶嘴，為安全狀態，如\cref{fig:fig-face-covered-by-pacifier}。
+    \item 臉部遮蔽物非奶嘴：嬰兒臉部因溢奶遭嘔吐物遮蔽，或被毛巾等其他外物遮蓋，而可能造成窒息危險，為警示狀態，如\cref{fig:fig-face-covered-by-foreign-matter}。
+\end{enumerate}
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {臉部無遮蔽
+        \label{fig:fig-face-uncovered}}
+        {\includegraphics[width=0.3\linewidth]{fig-face-uncovered}}
+    ~
+    \subcaptionbox
+        {臉部遮蔽物為奶嘴
+        \label{fig:fig-face-covered-by-pacifier}}
+        {\includegraphics[width=0.3\linewidth]{fig-face-covered-by-pacifier}}
+    ~
+    \subcaptionbox
+        {臉部遭異物遮擋
+        \label{fig:fig-face-covered-by-foreign-matter}}
+        {\includegraphics[width=0.3\linewidth]{fig-face-covered-by-foreign-matter}}
+    \caption{嬰兒臉部資料集}
+    \label{fig:fig-face-dataset}
+\end{figure}
 
-（1）臉部無遮蔽：嬰兒五官皆未被遮擋為安全狀態，如\cref{fig:fig-face-uncovered}。
-
-（2）臉部遮蔽物為奶嘴：嬰兒正在使用奶嘴為安全狀態，如\cref{fig:fig-face-covered-by-pacifier}。
-
-（3）臉部遮蔽物非奶嘴：嬰兒臉部因溢奶遭嘔吐物遮蔽，或被毛巾等其他外物遮蓋，而可能造成窒息危險，如\cref{fig:fig-face-covered-by-foreign-matter}。
-
-\fig[0.6][fig:fig-face-uncovered][!hbt]{fig-face-uncovered.png}[嬰兒臉部無遮蔽][嬰兒臉部無遮蔽]
-\fig[0.6][fig:fig-face-covered-by-pacifier][!hbt]{fig-face-covered-by-pacifier.png}[嬰兒臉部遮蔽物為奶嘴][嬰兒臉部遮蔽物為奶嘴]
-\fig[0.6][fig:fig-face-covered-by-foreign-matter][!hbt]{fig-face-covered-by-foreign-matter.png}[嬰兒臉部遭異物遮擋][嬰兒臉部遭異物遮擋]
-
-此嬰兒臉部資料集包含嬰兒之正臉及側臉，
-共3475張照片。
+本資料集包含嬰兒之正臉及側臉共3475張照片。
 我們將所有影像分為訓練、測試及驗證集，
 各部分占比為70\%、20\%及10\%，
 即各有2436張、697張及342張影像。
+
+\subsection{模型訓練}
+本論文使用3.2.2節之嬰兒臉部資料集，
+以ResNet50~\cite{he_deep_2016}進行臉部遮擋辨識模型之訓練，
+最終達成辨識三種嬰兒臉部狀態：安全、使用奶嘴或警示。
 
 \section{危險動作辨識}
 承前言所述，
