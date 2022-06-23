@@ -64,46 +64,56 @@
 % 兩種方式的優缺點比較
 
 \subsection{感測器偵測}
-此種方式利用多種不同感測器進行生理訊號之偵測，
-包含利用呼吸感測器、濕度感測器、溫度感測器、非接觸式紅外溫度感測器、三軸加速度計、慣性感測器、一氧化碳感測器、二氧化碳感測器等，
-分別量測嬰兒之呼吸頻率、出汗狀況、體溫、心率、身體位置或方向、睡眠姿勢、嬰兒周圍的一氧化碳濃度、呼出的二氧化碳濃度的變化等，
-且多會透過物聯網技術開發出可穿戴式裝置之系統
-~\cite{klingeberg_mobile_2012, zhou_low_2015, bouwstra_smart_2009, malhi_zigbee-based_2012, gonzalez-valenzuela_mobility_2011, darwish_wearable_2011, ko_wireless_2010}。
+此種方式利用呼吸感測器、濕度感測器、溫度感測器、慣性感測器、三軸加速度計、一氧化碳感測器及二氧化碳感測器等多種不同設備，
+進行嬰兒呼吸頻率、出汗狀況、體溫、心率、身體位置或方向、睡眠姿勢、周圍一氧化碳濃度及呼出的二氧化碳濃度變化等訊號之偵測，
+且多會透過物聯網技術開發出可穿戴式裝置
+~\cite{klingeberg_mobile_2012, zhou_low_2015, bouwstra_smart_2009, malhi_zigbee-based_2012, gonzalez-valenzuela_mobility_2011, 
+darwish_wearable_2011, ko_wireless_2010, linti_sensory_2006, ferreira_smart_2016, lin_wireless_2014}，
+以下介紹幾項基於感測器式偵測嬰兒之研究。
 
-如：
-Linti等人~\cite{linti_sensory_2006}
-所開發的嬰兒感測背心（\cref{fig:fig-linti_sensory_2006-01}），
-其將多個感官元件融入紡織品中以用來量測嬰兒之呼吸、心率、溫度及濕度；
-\fig[0.8][fig:fig-linti_sensory_2006-01][!hbt]{fig-linti_sensory_2006-01.png}[嬰兒多感測器背心之穿脫示意圖~\cite{linti_sensory_2006}][嬰兒多感測器背心之穿脫示意圖]
-Ferreira等人~\cite{ferreira_smart_2016}
-開發了將心律感測器、3D加速度計~\cite{hung_estimation_2008, pitts_respiratory_2013, bates_respiratory_2010}、
-熱電堆感測器裝設於胸帶中（\cref{fig:fig-ferreira_smart_2016-01}），
-而得以量測嬰兒之體溫、心率、呼吸頻率及身體位置，
-並透過ZigBee技術將收集到的數據傳送至伺服器，
-用戶則可透過醫療網頁介面（\cref{fig:fig-ferreira_smart_2016-02}）進行查看及收到緊急訊息；
-\fig[0.8][fig:fig-ferreira_smart_2016-01][!hbt]{fig-ferreira_smart_2016-01.png}[嬰兒穿戴式感測器裝置圖~\cite{ferreira_smart_2016}][嬰兒穿戴式感測器裝置圖]
-\fig[0.8][fig:fig-ferreira_smart_2016-02][!hbt]{fig-ferreira_smart_2016-02.png}[醫療網頁介面~\cite{ferreira_smart_2016}][醫療網頁介面]
+Linti等人~\cite{linti_sensory_2006}將多個感官元件融入紡織品以開發嬰兒感測背心，
+此裝置可用來量測嬰兒之呼吸、心率、溫度及濕度，
+其示意圖見\cref{fig:fig-linti_sensory_2006}。
+\fig[0.8][fig:fig-linti_sensory_2006][!hbt]{fig-linti_sensory_2006.png}[嬰用感測背心之穿脫示意圖~\cite{linti_sensory_2006}][嬰用感測背心之穿脫示意圖]
+
+Ferreira等人~\cite{ferreira_smart_2016}將心律感測器、3D加速度計、熱電堆感測器裝設於胸帶中（\cref{fig:fig-ferreira_smart_2016}），
+以量測嬰兒之體溫、心率、呼吸頻率及身體位置，
+再透過ZigBee技術傳送數據至伺服器，
+並可由網頁查收訊息。
+\fig[0.8][fig:fig-ferreira_smart_2016][!hbt]{fig-ferreira_smart_2016.png}[嬰用感測胸帶~\cite{ferreira_smart_2016}][嬰用感測胸帶]
+
+Lin等人~\cite{lin_wireless_2014}於胸帶中嵌入三軸加速度計、溫度感測器及一氧化碳感測器，
+可用來量測嬰兒睡姿（面朝上、下、左或右）、體溫及其周圍一氧化碳濃度，
+且利用三軸加速度計z軸資訊可獲得嬰兒之呼吸頻率，
+最終驗證計算之呼吸頻率準確率達100\%。
+此系統圖見\cref{fig:fig-lin_wireless_2014}，
+\fig[0.8][fig:fig-lin_wireless_2014][!hbt]{fig-lin_wireless_2014.png}[嬰用感測胸帶系統圖~\cite{lin_wireless_2014}][嬰用感測胸帶系統圖]
+
 Ziganshin等人~\cite{ziganshin_uwb_2010}
-基於超寬頻技術~\cite{staderini_uwb_2002}開發出可監測嬰兒呼吸及心率之系統，
-其可檢測嬰兒之睡眠狀態（\cref{fig:fig-ziganshin_uwb_2010-01}）、
-清醒狀態及警示狀態（\cref{fig:fig-ziganshin_uwb_2010-02}）；
-\fig[0.8][fig:fig-ziganshin_uwb_2010-01][!hbt]{fig-ziganshin_uwb_2010-01.png}[嬰兒正常狀態之呼吸及心跳圖~\cite{ziganshin_uwb_2010}][嬰兒正常狀態之呼吸及心跳圖]
-\fig[0.8][fig:fig-ziganshin_uwb_2010-02][!hbt]{fig-ziganshin_uwb_2010-02.png}[嬰兒呼吸暫停狀態之呼吸及心跳圖~\cite{ziganshin_uwb_2010}][嬰兒呼吸暫停狀態之呼吸及心跳圖]
-Lin等人~\cite{lin_wireless_2014}
-開發出一套在嬰兒胸帶上嵌入了三種不同感測器的系統（\cref{fig:fig-lin_wireless_2014-01}），
-透過三軸加速度計可確定嬰兒睡姿（面朝上、下、左或右）與計算z軸資訊得出呼吸頻率（\cref{fig:fig-lin_wireless_2014-02}）、
-利用溫度感測器量測體溫以及使用一氧化碳感測器偵測嬰兒周圍之一氧化碳濃度，
-再藉由WiFi模組傳送收集之生理資料至伺服器，
-而其驗證所計算之呼吸頻率準確率達100\%。
-\fig[0.8][fig:fig-lin_wireless_2014-01][!hbt]{fig-lin_wireless_2014-01.png}[嬰兒監測系統架構圖~\cite{lin_wireless_2014}][嬰兒監測系統架構圖]
-\fig[0.8][fig:fig-lin_wireless_2014-02][!hbt]{fig-lin_wireless_2014-02.png}[z軸顯示吸氣及呼氣脈衝~\cite{lin_wireless_2014}][z軸顯示吸氣及呼氣脈衝]
+基於超寬頻技術~\cite{staderini_uwb_2002}開發出可監測呼吸及心率之系統（如\cref{fig:fig-ziganshin_uwb_2010}），
+以檢測嬰兒三種狀態：睡眠（無運動）、清醒（長期大幅度運動）及警示（偵測到呼吸頻率異常低或暫停）。
+\begin{figure}[!hbt]
+    %\captionsetup[subfigure]{labelformat=empty} % 完全隱藏圖號
+    \centering
+    \subcaptionbox
+        {正常狀態
+        \label{fig:fig-ziganshin_uwb_2010-01}}
+        {\includegraphics[width=0.45\linewidth]{fig-ziganshin_uwb_2010-01}}
+    ~
+    \subcaptionbox
+        {呼吸暫停狀態
+        \label{fig:fig-ziganshin_uwb_2010-02}}
+        {\includegraphics[width=0.45\linewidth]{fig-ziganshin_uwb_2010-02}}
+    \caption{嬰兒呼吸及心跳圖}
+    \label{fig:fig-ziganshin_uwb_2010}
+\end{figure}
 
 此種利用感測器監測嬰兒的方法，
-雖然可直接量測嬰兒之生理訊號以判斷狀態正常與否，
+雖然可直接量測其生理訊號以判斷狀態正常與否，
 但仍可能因硬體設備之缺陷無法準確量測，
 進而有失判斷準確性，
-亦或者因嬰兒需額外穿戴裝置而造成不適，
-進而影響嬰兒活動或導致更多危險的發生。
+亦或者因需額外穿戴裝置而造成嬰兒不適，
+進而影響活動或導致更多危險的發生。
 
 \subsection{影像式偵測}
 現有研究中，
