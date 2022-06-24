@@ -3,86 +3,37 @@
 
 \chapter{實驗設計與結果}
 
-\section{嬰兒臉部偵測實驗}
+\section{臉部偵測準確度實驗}
 \subsection{實驗目的與設計}
 在收集嬰兒臉部資料集時，
 需針對嬰兒影像擷取出臉部範圍，
 進而後續之臉部遮擋辨識階段。
 
-因此，本實驗使用3.3節之嬰兒姿勢資料集，
-就OpenCV~\cite{goyal_face_2017}
+因此，本實驗使用3.3.1節之嬰兒姿勢資料集，
+分析OpenCV~\cite{goyal_face_2017}
 、SSD~\cite{ye_face_2021}
 、MTCNN~\cite{zhang_joint_2016}
 及RetinaFace~\cite{deng_retinaface_2020}
-等臉部偵測演算法，
-分析其執行時間及臉部擷取準確度進行比較，
-以驗證適合本系統之演算法。
+等臉部偵測演算法其臉部擷取之準確度，
+以驗證可應用於本系統之演算法。
 
 \subsection{實驗評估方式}
-本實驗為驗證嬰兒臉部偵測演算法之實際可行性，
-將針對臉部偵測執行時間及偵測結果之準確度分別進行比較：
-透過計算演算法偵測所有資料集共15416張影像所花費之時間，
-得以算出各演算法平均每張需花費之時間；
-而準確度則將嬰兒臉部偵測之影像結果進行分類標註，
-分別計算出各演算法之accuracy、precision及recall。
+本實驗為驗證臉部偵測演算法應用於本系統之可行性，
+針對四項演算法之偵測準確度進行比較，
+將嬰兒臉部偵測結果影像進行分類標註，
+以計算出各演算法之accuracy、precision及recall。
 
 \subsection{實驗結果與分析}
-首先，針對演算法之執行時間進行比較，
-透過實驗結果可得出使用SSD演算法進行嬰兒臉部偵測，
-將可擁有較佳的偵測速度。
-而四項演算法偵測15416張影像之詳細實驗結果如下：
-
-（1）OpenCV演算法：
-共花費18分01.78秒，
-平均每張影像需花0.07秒；
-
-（2）SSD演算法：
-共花費9分17.26秒，
-平均每張影像需花0.04秒；
-
-（3）MTCNN演算法：
-共花費2小時8分22.05秒，
-平均每張影像需花0.50秒；
-
-（4）RetinaFace演算法：
-共花費5小時42分2.10秒，
-平均每張影像需花1.33秒。
-
-接著，就偵測之精確度進行比較，
-透過實驗結果可得出選用RetinaFace演算法進行嬰兒臉部偵測，
-可擁有較佳的偵測準確度。
-而四項演算法進行嬰兒臉部偵測之詳細實驗結果如下：
-
-（1）使用OpenCV演算法偵測結果如\cref{table:table-opencv}，
-由於偵測效果不佳，
-將多數影像皆誤判為False（無臉），
-故僅計算其precision為79.90\%；
-
-（2）使用SSD演算法偵測結果如\cref{table:table-ssd}，
-由於偵測效果不佳，
-將多數影像皆誤判為False（無臉），
-故僅計算其precision為99.90\%；
-
-（3）使用MTCNN演算法偵測結果如\cref{table:table-mtcnn}，
-其accuracy為90.20\%、precision為94.76\%以及recall為90.93\%；
-
-（4）使用RetinaFace演算法偵測結果如\cref{table:table-retinaface}，
-其accuracy為99.78\%、precision為99.75\%以及recall為99.91\%。
-
-綜觀上述兩部分實驗結果，
-若系統欲擁有較迅速的執行速度又兼具偵測準確度，
-可得出以下結論：
-先使用SSD演算法找尋嬰兒臉部範圍，
-雖然此方法在許多狀況未能如期找到嬰兒臉部範圍，
-但其準確度很高，
-故能利用此算法之時間優勢；
-而若SSD演算法找不到嬰兒臉部時，
-則接續使用RetinaFace演算法，
-利用其很高之正確率及準確率之特質進行嬰兒臉部偵測。
-
+根據實驗結果，
+OpenCV~\cite{goyal_face_2017}及SSD~\cite{ye_face_2021}將多數影像皆誤判為無臉（False），
+亦即影像中有嬰兒臉部畫面但演算法未偵測之，
+故此部分僅關注判斷為有臉（True）之數據統計，
+詳細實驗結果請見\cref{table:table-opencv}及\cref{table:table-ssd}。
+而MTCNN~\cite{zhang_joint_2016}及RetinaFace~\cite{deng_retinaface_2020}之實驗結果，
+請見\cref{table:table-mtcnn}及\cref{table:table-retinaface}。
 \begin{table}[h]
     \centering
-    \caption{OpenCV演算法偵測嬰兒臉部結果}
+    \caption{OpenCV~\cite{goyal_face_2017}偵測嬰兒臉部結果}
     \label{table:table-opencv}
     \begin{tabular}{ccc}
     \hline
@@ -98,7 +49,7 @@
 
 \begin{table}[h]
     \centering
-    \caption{SSD演算法偵測嬰兒臉部結果}
+    \caption{SSD~\cite{ye_face_2021}偵測嬰兒臉部結果}
     \label{table:table-ssd}
     \begin{tabular}{ccc}
     \hline
@@ -114,7 +65,7 @@
 
 \begin{table}[h]
     \centering
-    \caption{MTCNN演算法偵測嬰兒臉部結果}
+    \caption{MTCNN~\cite{zhang_joint_2016}偵測嬰兒臉部結果}
     \label{table:table-mtcnn}
     \begin{tabular}{ccc}
     \hline
@@ -132,7 +83,7 @@
 
 \begin{table}[h]
     \centering
-    \caption{RetinaFace演算法偵測嬰兒臉部結果}
+    \caption{RetinaFace~\cite{deng_retinaface_2020}偵測嬰兒臉部結果}
     \label{table:table-retinaface}
     \begin{tabular}{ccc}
     \hline
@@ -147,6 +98,67 @@
     \hline
     \end{tabular}
 \end{table}
+
+再經計算後，
+四項演算法之accuracy、precision及recall值如下：
+\begin{enumerate}
+    \item OpenCV~\cite{goyal_face_2017}：由於多數影像皆誤判為無臉（False），故僅計算其precision為79.90\%。
+    \item SSD~\cite{ye_face_2021}：由於多數影像皆誤判為無臉（False），故僅計算其precision為99.90\%。
+    \item MTCNN~\cite{zhang_joint_2016}：accuracy為90.20\%、precision為94.76\%以及recall為90.93\%。
+    \item RetinaFace~\cite{deng_retinaface_2020}：accuracy為99.78\%、precision為99.75\%以及recall為99.91\%。
+\end{enumerate}
+
+因此，
+透過本實驗結果可得出選用RetinaFace演算法~\cite{deng_retinaface_2020}進行嬰兒臉部偵測，
+可擁有較佳的偵測準確度。
+
+\section{臉部偵測執行時間實驗}
+\subsection{實驗目的與設計}
+本研究進行嬰兒臉部偵測除了考量準確度外，
+亦希望提升整體系統之執行速度。
+
+因此，本實驗使用3.3.1節之嬰兒姿勢資料集，
+分析OpenCV~\cite{goyal_face_2017}
+、SSD~\cite{ye_face_2021}
+、MTCNN~\cite{zhang_joint_2016}
+及RetinaFace~\cite{deng_retinaface_2020}
+等臉部偵測演算法之執行時間，
+以驗證適合本系統之演算法。
+
+\subsection{實驗評估方式}
+本實驗為驗證臉部偵測演算法應用於系統之可行性，
+將針對四項演算法之執行時間進行比較，
+透過計算演算法偵測共15416張影像之資料集所花費的時間，
+得以算出各演算法平均偵測一張影像之執行時間。
+
+\subsection{實驗結果與分析}
+OpenCV~\cite{goyal_face_2017}
+、SSD~\cite{ye_face_2021}
+、MTCNN~\cite{zhang_joint_2016}
+及RetinaFace~\cite{deng_retinaface_2020}
+四項演算法偵測15416張影像之詳細實驗結果如下：
+\begin{enumerate}
+    \item OpenCV~\cite{goyal_face_2017}：共18分01.78秒，平均每張影像需0.07秒。
+    \item SSD~\cite{ye_face_2021}：共9分17.26秒，平均每張影像需0.04秒。
+    \item MTCNN~\cite{zhang_joint_2016}：共2小時8分22.05秒，平均每張影像需0.50秒。
+    \item RetinaFace~\cite{deng_retinaface_2020}：共5小時42分2.10秒，平均每張影像需1.33秒。
+\end{enumerate}
+
+因此，
+透過本實驗結果可得出使用SSD演算法~\cite{ye_face_2021}進行嬰兒臉部偵測，
+將可擁有較佳的偵測速度。
+
+而綜觀4.1節及4.2節之實驗結果，
+若系統欲擁有較佳的執行速度又兼具偵測準確度，
+可得出以下結論：
+先使用SSD演算法~\cite{ye_face_2021}偵測嬰兒臉部，
+雖然此方法在許多狀況未能如期找到嬰兒臉部範圍，
+但其準確度很高，
+故能利用此算法之時間優勢；
+而為補足此方法召回率不足之缺失，
+若SSD演算法~\cite{ye_face_2021}找不到嬰兒臉部時，
+則接續使用RetinaFace演算法~\cite{deng_retinaface_2020}，
+利用其正確率及準確率皆高之優點進行嬰兒臉部偵測。
 
 \section{臉部遮擋辨識實驗}
 \subsection{實驗目的與設計}
