@@ -13,7 +13,7 @@
 首先，讀取一段待觀測之嬰兒影片，
 將影片切成數幀影像，
 並判斷影像存在與否，
-若不存在系統發出異常警告，
+若不存在將發出異常警告，
 反之則開始對該影像畫面進行危險偵測判斷。
 針對每幀嬰兒影像，
 系統對其臉部遮擋及姿勢進行辨識，
@@ -24,10 +24,10 @@
 系統完整流程圖，請見\cref{fig:fig-flow-chart-system}。
 \fig[1][fig:fig-flow-chart-system][!hbt]{fig-flow-chart-system.png}[系統流程圖][系統流程圖]
 
-而本系統中，包含兩項危險辨識模型：
+本系統中，包含兩項危險辨識模型：
 (1) 嬰兒臉部遮擋辨識：
 先將嬰兒畫面擷取出僅含臉部範圍之影像，
-再透過此模型判斷嬰兒臉部是否遭非奶嘴之異物遮蔽，
+再透過此模型判斷其臉部是否遭非奶嘴之異物遮蔽，
 若是，則嬰兒為警示狀態；
 (2) 嬰兒危險動作辨識：
 將拍攝之嬰兒全身影像透過此模型進行辨識，
@@ -41,7 +41,7 @@
 
 \section{臉部遮擋辨識}
 如前言所述，
-目前醫界對於嬰兒猝死症之相關因素研究中，
+目前醫界對於嬰兒猝死症之相關因素研究提出，
 注意嬰兒臉部是否遭遮蔽，
 將有助於降低此症的發生；
 另亦有研究發現嬰兒使用奶嘴，
@@ -71,11 +71,8 @@
 嬰兒臉部遮擋辨識僅需關注臉部畫面，
 故本文會先透過人臉偵測演算法進行前處理，
 以獲得只涵蓋嬰兒面部範圍之影像。
-
-在現有人臉偵測演算法中，
-偵測嬰兒臉部多有失準，
-故我們在多方實驗後，
-同時考量偵測之正確率及執行時間，
+經多方實驗現有人臉偵測演算法後，
+同時考量嬰兒臉部偵測之正確率及執行時間，
 最終本研究選用RetinaFace~\cite{deng_retinaface_2020}
 及SSD~\cite{ye_face_2021}等演算法進行嬰兒臉部偵測，
 其效果如\cref{fig:fig-face-detection}。
@@ -112,17 +109,17 @@
     \subcaptionbox
         {臉部無遮蔽
         \label{fig:fig-face-uncovered}}
-        {\includegraphics[width=0.3\linewidth]{fig-face-uncovered}}
+        {\includegraphics[width=0.45\linewidth]{fig-face-uncovered}}
     ~
     \subcaptionbox
         {臉部遮蔽物為奶嘴
         \label{fig:fig-face-covered-by-pacifier}}
-        {\includegraphics[width=0.3\linewidth]{fig-face-covered-by-pacifier}}
+        {\includegraphics[width=0.45\linewidth]{fig-face-covered-by-pacifier}}
     ~
     \subcaptionbox
         {臉部遭異物遮擋
         \label{fig:fig-face-covered-by-foreign-matter}}
-        {\includegraphics[width=0.3\linewidth]{fig-face-covered-by-foreign-matter}}
+        {\includegraphics[width=0.45\linewidth]{fig-face-covered-by-foreign-matter}}
     \caption{嬰兒臉部資料集}
     \label{fig:fig-face-dataset}
 \end{figure}
@@ -158,8 +155,8 @@
 可看到嬰兒平躺之偵測效果尚可，
 但趴躺等其他姿勢之效果則不如預期。
 又因本研究目標為能從非限定視角辨識嬰兒動作，
-嬰兒骨架圖在俯視角與平視角中多有相似之處（如\cref{fig:fig-posture-skeleton-detection-viewport}），
-而無法達到良好的辨識結果。
+然而嬰兒骨架圖在俯視角與平視角中多有相似之處（如\cref{fig:fig-posture-skeleton-detection-viewport}），
+而無法達到良好的應用結果。
 \begin{figure}[!hbt]
     \centering
     \subcaptionbox
@@ -230,18 +227,18 @@
 % 嬰兒的著地點有可能包含手掌、手肘、膝蓋或腳掌等。
 
 起初，
-將嬰兒姿勢分為五類：正躺、趴著、爬行、坐姿及站立，
-而趴躺及爬行二類時常發生互相誤判，
+將嬰兒姿勢分為五類：正躺、趴睡、爬行、坐姿及站立，
+而趴睡及爬行二類時常發生互相誤判，
 致使辨識錯誤率高。
 我們推測原因為此二類嬰兒皆呈現腹面朝下之姿，
-不同處在於手腳位置所致，
+不同處在於四肢及軀體是否貼地，
 如\cref{fig:fig-posture-sleep-on-stomack-detail}所示，
 但若接續細分姿勢，
 將導致動作分類過細。
 \begin{figure}[!hbt]
     \centering
     \subcaptionbox
-        {四肢及身體皆貼地
+        {四肢及軀體皆貼地
         \label{fig:fig-posture-sleep-on-stomack-detail-1}}
         {\includegraphics[width=0.3\linewidth]{fig-posture-sleep-on-stomack-detail-1}}
     ~
@@ -265,8 +262,8 @@
 對於此四類姿勢之詳細分類定義為：
 \begin{enumerate}
     \item 正躺：嬰兒腹部面朝上，背部貼於水平面，而頭部及四肢位置不限，如\cref{fig:fig-posture-sleep-on-back}。
-    \item 趴躺：嬰兒腹部面朝下，包含趴著或爬行等多動作，而頭部及四肢位置不限，如\cref{fig:fig-posture-sleep-on-stomach}。
-    \item 坐姿：嬰兒臀部貼於水平面，而背部未貼於同一平面，頭部及四肢位置不限，如\cref{fig:fig-posture-sit}。
+    \item 趴躺：嬰兒腹部面朝下，包含趴睡及爬行等多動作，而頭部及四肢位置不限，如\cref{fig:fig-posture-sleep-on-stomach}。
+    \item 坐姿：嬰兒臀部貼於水平面，且背部未貼於同一平面，而頭部及四肢位置不限，如\cref{fig:fig-posture-sit}。
     \item 站立：嬰兒腳掌貼於水平面，且腹部和背部皆未平行於此水平面，而頭部及上肢位置不限，如\cref{fig:fig-posture-stand}。
 \end{enumerate}
 \begin{figure}[!hbt]
@@ -294,7 +291,7 @@
     \label{fig:fig-face-dataset}
 \end{figure}
 
-而為了能有較廣泛的使用情境，
+本研究為了能有較廣泛的使用情境，
 所收集之嬰兒影像不限定拍攝視角，
 包含俯視及平視等，
 總共15416張照片。
@@ -310,13 +307,14 @@
 \section{危險情境判斷方法}
 在實際情境中，
 當嬰兒做出具危險性之行為時，
-需持續一段時間才會導致危險的發生，
-並不須判斷一張影像畫面為警示狀態，
+需持續一段時間才會導致危險發生，
+並不須判斷一幀畫面為警示狀態，
 就立即通知照護者。
 
-因此，本系統使用一變數累積結果為警示之幀數，
-當此變數超過一定值時，
-系統才會真正發出警示提醒照護者。
+因此，
+本系統使用一變數累積模型判斷嬰兒狀態為警示之幀數，
+當此變數超過設定閥值時，
+系統才會發出警示提醒照護者。
 此步驟不但更符合實際使用情境，
 同時亦可減少因模型辨識錯誤而誤判及誤發警報的情形。
 
