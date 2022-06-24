@@ -163,8 +163,7 @@ OpenCV~\cite{goyal_face_2017}
 \section{臉部遮擋辨識實驗}
 \subsection{實驗目的與設計}
 本系統為偵測嬰兒臉部是否遭非奶嘴之異物遮擋，
-使用3.2節之資料集以ResNet50~\cite{he_deep_2016}
-訓練模型，
+使用3.2.2節之嬰兒臉部資料集以ResNet50~\cite{he_deep_2016}訓練模型，
 並透過驗證集進行模型驗證。
 
 程式實作中，
@@ -173,24 +172,23 @@ OpenCV~\cite{goyal_face_2017}
 包含三個類別（臉部無遮擋之安全狀態、臉部遭奶嘴遮擋及臉部遭異物遮擋之危險狀態），
 且透過data augmentation技術生成訓練及測試資料，
 輸出層使用softmax作為激發函數，
-並使用Adam作為優化器且將學習率設為0.000001以進行微調。
+並使用Adam作為optimizer且將學習率設為0.000001以進行微調。
 
 \subsection{實驗結果分析}
 本實驗訓練之模型其最終訓練準確率達98.06\%，
 而測試準確率達99.43\%，
 詳細訓練結果請見\cref{fig:fig-result-face-occlusion}。
-\fig[1][fig:fig-result-face-occlusion][!hbt]{fig-result-face-occlusion.png}[臉部辨識訓練結果][臉部辨識訓練結果]
+\fig[0.9][fig:fig-result-face-occlusion][!hbt]{fig-result-face-occlusion.png}[臉部辨識訓練結果][臉部辨識訓練結果]
 
 接著，再使用342張之驗證集影像進行模型驗證，
 所有影像皆辨識正確，
 其混淆矩陣如\cref{fig:fig-confusion-matrix-face-occlusion}。
-\fig[0.6][fig:fig-confusion-matrix-face-occlusion][!hbt]{fig-confusion-matrix-face-occlusion.png}[臉部遮擋辨識模型之混淆矩陣]
+\fig[0.5][fig:fig-confusion-matrix-face-occlusion][!hbt]{fig-confusion-matrix-face-occlusion.png}[臉部遮擋辨識模型之混淆矩陣]
 
 \section{姿勢辨識實驗}
 \subsection{實驗目的與設計}
 本系統為辨識嬰兒姿勢是否處於危險狀態，
-使用3.3節之資料集以ResNet50~\cite{he_deep_2016}
-訓練模型，
+使用3.3.1節之資料集以ResNet50~\cite{he_deep_2016}訓練模型，
 並透過驗證集進行模型驗證。
 
 程式實作中，
@@ -199,13 +197,13 @@ OpenCV~\cite{goyal_face_2017}
 包含四個類別（正躺、趴躺、坐姿及站立），
 且透過data augmentation技術生成訓練及測試資料，
 輸出層使用softmax作為激發函數，
-並使用Adam作為優化器且將學習率設為0.000001以進行微調。
+並使用Adam作為optimizer且將學習率設為0.000001以進行微調。
 
 \subsection{實驗結果分析}
 本實驗訓練之模型其最終訓練準確率達99.45\%，
 而測試準確率達99.71\%，
 詳細訓練結果請見\cref{fig:fig-result-four-classes}。
-\fig[1][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
+\fig[0.9][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
 
 接著，再使用744張之驗證集影像進行模型驗證，
 包含了五張類別辨識錯誤的影像，
@@ -215,7 +213,7 @@ OpenCV~\cite{goyal_face_2017}
 推測原因為嬰兒雖呈現坐姿，
 但上半身貼近其腿部（如\cref{fig:fig-error-four-classes}
 ），而導致誤判。
-\fig[0.8][fig:fig-confusion-matrix-four-classes][!hbt]{fig-confusion-matrix-four-classes.png}[姿勢辨識模型之混淆矩陣]
+\fig[0.9][fig:fig-confusion-matrix-four-classes][!hbt]{fig-confusion-matrix-four-classes.png}[姿勢辨識模型之混淆矩陣]
 \fig[0.6][fig:fig-error-four-classes][!hbt]{fig-error-four-classes.jpg}[姿勢辨識錯誤之影像：坐姿誤判為趴躺]
 
 \section{影片危險偵測實驗}
@@ -245,7 +243,7 @@ OpenCV~\cite{goyal_face_2017}
 故造成姿勢辨識錯誤，
 其混淆矩陣如\cref{fig:fig-confusion-matrix-video-posture}。
 \fig[0.6][fig:fig-error-video-posture][!hbt]{fig-error-video-posture.jpg}[姿勢辨識錯誤之影像：正躺誤判為趴躺]
-\fig[0.8][fig:fig-confusion-matrix-video-posture][!hbt]{fig-confusion-matrix-video-posture.png}[實驗影片之姿勢辨識混淆矩陣]
+\fig[0.7][fig:fig-confusion-matrix-video-posture][!hbt]{fig-confusion-matrix-video-posture.png}[實驗影片之姿勢辨識混淆矩陣]
 
 其次，
 臉部遮擋辨識的部分，
@@ -257,6 +255,6 @@ OpenCV~\cite{goyal_face_2017}
 其混淆矩陣如\cref{fig:fig-confusion-matrix-video-face}。
 \fig[0.6][fig:fig-error-video-no-face][!hbt]{fig-error-video-no-face.jpg}[未偵測嬰兒臉部之影像]
 \fig[0.4][fig:fig-error-video-face][!hbt]{fig-error-video-face.jpg}[臉部遮擋誤判之為警示狀態]
-\fig[0.8][fig:fig-confusion-matrix-video-face][!hbt]{fig-confusion-matrix-video-face.png}[實驗影片之臉部遮擋辨識混淆矩陣]
+\fig[0.7][fig:fig-confusion-matrix-video-face][!hbt]{fig-confusion-matrix-video-face.png}[實驗影片之臉部遮擋辨識混淆矩陣]
 
 \end{document}
