@@ -127,7 +127,8 @@
     \label{fig:fig-face-dataset}
 \end{figure}
 
-本資料集包含嬰兒之正臉及側臉共3475張照片。
+本資料集包含嬰兒之正臉及側臉影像，
+總共3475張照片。
 我們將所有影像分為訓練、測試及驗證集，
 各部分占比為70\%、20\%及10\%，
 即各有2436張、697張及342張影像。
@@ -135,12 +136,12 @@
 \subsection{模型訓練}
 本論文使用3.2.2節之嬰兒臉部資料集，
 以ResNet50~\cite{he_deep_2016}進行臉部遮擋辨識模型之訓練，
-最終達成辨識三種嬰兒臉部狀態：安全、使用奶嘴或警示。
+最終達成辨識三種嬰兒臉部狀態：安全、使用奶嘴及警示。
 
-\section{危險動作辨識}
+\section{姿勢辨識}
 承前言所述，
 除了臉部遮蔽可能造成嬰兒猝死症外，
-嬰兒做出不適當的不適當也常為嬰兒逝世之原因。
+嬰兒做出不適當的動作也常為意外發生原因，
 例如：嬰兒側躺或趴睡時，
 因頸部肌肉較弱等原因，
 無力自行將臉移開，
@@ -149,8 +150,75 @@
 而有可能爬落嬰兒床等，
 亦可能使嬰兒處於危險情境中。
 
+在現有成人動作辨識的研究中，
+多會以骨架偵測開始著手。
+我們使用OpenPose~\cite{cao_openpose_2019}及MediaPipe Pose~\cite{noauthor_pose_nodate}等演算法進行嬰兒骨架之偵測，
+發現嬰兒需在特定情境下才能有較佳的偵測效果，
+結果如\cref{fig:fig-posture-skeleton-detection}及\cref{fig:fig-posture-skeleton-detection-wrong}，
+可看到嬰兒平躺之偵測效果尚可，
+但趴躺等其他姿勢之效果則不如預期。
+又因本研究目標為能從非限定視角辨識嬰兒動作，
+嬰兒骨架圖在俯視角與平視角中多有相似之處（如\cref{fig:fig-posture-skeleton-detection-viewport}），
+而無法達到良好的辨識結果。
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {原始影像
+        \label{fig:fig-posture-skeleton-detection-original}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-original}}
+    ~
+    \subcaptionbox
+        {使用OpenPose~\cite{cao_openpose_2019}
+        \label{fig:fig-posture-skeleton-detection-openpose}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-openpose}}
+    ~
+    \subcaptionbox
+        {使用MediaPipe Pose~\cite{noauthor_pose_nodate}
+        \label{fig:fig-posture-skeleton-detection-mediapipe}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-mediapipe}}
+    \caption{嬰兒平躺之骨架偵測結果}
+    \label{fig:fig-posture-skeleton-detection}
+\end{figure}
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {原始影像
+        \label{fig:fig-posture-skeleton-detection-wrong-original}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-wrong-original}}
+    ~
+    \subcaptionbox
+        {使用OpenPose~\cite{cao_openpose_2019}
+        \label{fig:fig-posture-skeleton-detection-wrong-openpose}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-wrong-openpose}}
+    ~
+    \subcaptionbox
+        {使用MediaPipe Pose~\cite{noauthor_pose_nodate}
+        \label{fig:fig-posture-skeleton-detection-wrong-mediapipe}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-wrong-mediapipe}}
+    \caption{嬰兒趴躺之骨架偵測結果}
+    \label{fig:fig-posture-skeleton-detection-wrong}
+\end{figure}
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {俯視嬰兒躺姿
+        \label{fig:fig-posture-skeleton-detection-viewport-lying}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-viewport-lying}}
+    ~
+    \subcaptionbox
+        {平視嬰兒坐姿
+        \label{fig:fig-posture-skeleton-detection-viewport-sit}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-viewport-sit}}
+    \caption{不同視角之嬰兒骨架偵測結果~\cite{noauthor_pose_nodate}}
+    \label{fig:fig-posture-skeleton-detection-viewport}
+\end{figure}
+
+因此，
+本文最終使用深度學習技術進行嬰兒動作辨識，
+使用自行收集之嬰兒影像資料集（於3.3.1節進行詳細介紹），
+訓練可辨識四種嬰兒基礎姿勢之模型。
 本部分之流程圖，請見\cref{fig:fig-flow-chart-posture}。
-\fig[1][fig:fig-flow-chart-posture][!hbt]{fig-flow-chart-posture.png}[危險動作辨識流程圖][危險動作辨識流程圖]
+\fig[0.9][fig:fig-flow-chart-posture][!hbt]{fig-flow-chart-posture.png}[危險動作辨識流程圖][危險動作辨識流程圖]
 
 \subsection{嬰兒姿勢資料集}
 % 在實際情況下，
@@ -166,52 +234,86 @@
 而趴躺及爬行二類時常發生互相誤判，
 致使辨識錯誤率高。
 我們推測原因為此二類嬰兒皆呈現腹面朝下之姿，
-而手腳位置亦有相同或相異之處，
-若接續細分姿勢，
+不同處在於手腳位置所致，
+如\cref{fig:fig-posture-sleep-on-stomack-detail}所示，
+但若接續細分姿勢，
 將導致動作分類過細。
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {四肢及身體皆貼地
+        \label{fig:fig-posture-sleep-on-stomack-detail-1}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-sleep-on-stomack-detail-1}}
+    ~
+    \subcaptionbox
+        {僅手掌與小腿貼地
+        \label{fig:fig-posture-sleep-on-stomack-detail-2}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-sleep-on-stomack-detail-2}}
+    ~
+    \subcaptionbox
+        {僅手掌與腳掌貼地
+        \label{fig:fig-posture-sleep-on-stomack-detail-3}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-sleep-on-stomack-detail-3}}
+    \caption{嬰兒腹面朝下之姿}
+    \label{fig:fig-posture-sleep-on-stomack-detail}
+\end{figure}
 
-因此，最終本論文將嬰兒姿勢分成基礎四類，
+因此，
+最終本論文將嬰兒姿勢分成基礎四類，
 包含正躺（腹面朝上）、趴躺（腹面朝下）、坐姿及站立，
 以供辨識嬰兒大部分之姿。
 對於此四類姿勢之詳細分類定義為：
-
-（1）正躺：嬰兒腹部面朝上，背部貼於水平面，而頭部及四肢位置不限，如
-\cref{fig:fig-posture-lie-down-on-back}。
-
-（2）趴躺：嬰兒腹部面朝下，包含趴著或爬行等多動作，而頭部及四肢位置不限，如
-\cref{fig:fig-posture-lie-down-on-stomach}。
-
-（3）坐姿：嬰兒臀部貼於水平面，而背部未貼於同一平面，頭部及四肢位置不限，如
-\cref{fig:fig-posture-sit}。
-
-（4）站立：嬰兒腳掌貼於水平面，且腹部和背部皆未平行於此水平面，而頭部及上肢位置不限，如
-\cref{fig:fig-posture-stand}。
-
-\fig[0.8][fig:fig-posture-lie-down-on-back][!hbt]{fig-posture-lie-down-on-back.png}[嬰兒正躺姿勢][嬰兒正躺姿勢]
-\fig[0.8][fig:fig-posture-lie-down-on-stomach][!hbt]{fig-posture-lie-down-on-stomach.png}[嬰兒趴躺姿勢][嬰兒趴躺姿勢]
-\fig[0.8][fig:fig-posture-sit][!hbt]{fig-posture-sit.png}[嬰兒坐姿姿勢][嬰兒坐姿姿勢]
-\fig[0.8][fig:fig-posture-stand][!hbt]{fig-posture-stand.png}[嬰兒站立姿勢][嬰兒站立姿勢]
+\begin{enumerate}
+    \item 正躺：嬰兒腹部面朝上，背部貼於水平面，而頭部及四肢位置不限，如\cref{fig:fig-posture-sleep-on-back}。
+    \item 趴躺：嬰兒腹部面朝下，包含趴著或爬行等多動作，而頭部及四肢位置不限，如\cref{fig:fig-posture-sleep-on-stomach}。
+    \item 坐姿：嬰兒臀部貼於水平面，而背部未貼於同一平面，頭部及四肢位置不限，如\cref{fig:fig-posture-sit}。
+    \item 站立：嬰兒腳掌貼於水平面，且腹部和背部皆未平行於此水平面，而頭部及上肢位置不限，如\cref{fig:fig-posture-stand}。
+\end{enumerate}
+\begin{figure}[!hbt]
+    \centering
+    \subcaptionbox
+        {正躺
+        \label{fig:fig-posture-sleep-on-back}}
+        {\includegraphics[width=0.45\linewidth]{fig-posture-sleep-on-back}}
+    ~
+    \subcaptionbox
+        {趴躺
+        \label{fig:fig-posture-sleep-on-stomach}}
+        {\includegraphics[width=0.45\linewidth]{fig-posture-sleep-on-stomach}}
+    ~
+    \subcaptionbox
+        {坐姿
+        \label{fig:fig-posture-sit}}
+        {\includegraphics[width=0.45\linewidth]{fig-posture-sit}}
+    ~
+    \subcaptionbox
+        {站立
+        \label{fig:fig-posture-stand}}
+        {\includegraphics[width=0.45\linewidth]{fig-posture-stand}}
+    \caption{嬰兒姿勢資料集}
+    \label{fig:fig-face-dataset}
+\end{figure}
 
 而為了能有較廣泛的使用情境，
 所收集之嬰兒影像不限定拍攝視角，
-包含俯視、平視等，
-共15416張照片。
+包含俯視及平視等，
+總共15416張照片。
 我們將所有影像分為訓練、測試及驗證集，
 各部分占比為70\%、25\%及5\%，
 即各有10815張、3857張及744張影像。
 
-\subsection{危險動作判斷方法}
-由於嬰兒做出趴躺及站立時，
-較容易發生危險，
-故當系統藉由模型辨識出嬰兒為上述兩種姿勢時，
-將警示照護者須關注嬰兒狀態。
+\subsection{模型訓練}
+本論文使用3.3.1節之嬰兒姿勢資料集，
+以ResNet50~\cite{he_deep_2016}進行姿勢辨識模型之訓練，
+最終達成辨識四種嬰兒姿勢：正躺、趴躺、坐姿及站立。
 
-然而，
+\section{危險情境判斷方法}
 在實際情境中，
 當嬰兒做出具危險性之行為時，
 需持續一段時間才會導致危險的發生，
-故我們不須判斷一張影像畫面為警示狀態，
+並不須判斷一張影像畫面為警示狀態，
 就立即通知照護者。
+
 因此，本系統使用一變數累積結果為警示之幀數，
 當此變數超過一定值時，
 系統才會真正發出警示提醒照護者。
