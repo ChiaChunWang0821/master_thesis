@@ -2,6 +2,10 @@
 \begin{document}
 
 \chapter{相關研究}
+本章節中，
+將說明有關本研究之背景知識與文獻回顧，
+透過以下四章子節進行分述：
+嬰兒猝死症、嬰兒監測系統、殘差神經網路及人臉偵測演算法。
 
 \section{嬰兒猝死症}
 嬰兒猝死症（The Sudden Infant Death Syndrome, 簡稱SIDS）~\cite{kinney_sudden_2009}
@@ -222,7 +226,7 @@ Bharati等人~\cite{bharati_efficient_2021}
 而未有辨識嬰兒常見動作之研究，
 故我們提出一可偵測嬰兒基礎姿勢及面部遮擋之危險監測系統。
 
-\section{ResNet}
+\section{殘差神經網路}
 既有研究中~\cite{simonyan_very_2015, szegedy_going_2015, ioffe_batch_2015}，
 可知卷積神經網路其深度至關重要，
 在ImageNet資料集中結果表現良好的網路皆為十六至三十層之深層網路。
@@ -262,6 +266,10 @@ Bharati等人~\cite{bharati_efficient_2021}
 卻仍擁有較低的複雜度。
 
 \section{人臉偵測演算法}
+本節將探討近年著名之兩項人臉偵測演算法：
+MTCNN及RetinaFace，
+以應用在本研究中嬰兒臉部偵測部分。
+
 \subsection{MTCNN}
 MTCNN~\cite{zhang_joint_2016}是由Zhang等人於2016年提出的一種多任務級聯卷積神經網路，
 可以同時處理人臉偵測及對齊任務，
@@ -284,7 +292,7 @@ MTCNN~\cite{zhang_joint_2016}是由Zhang等人於2016年提出的一種多任務
 由\cref{fig:fig-mtcnn-pipeline}，
 可清楚看出此網路是以粗到細的方式預測人臉及座標位置。
 \fig[0.9][fig:fig-mtcnn-framework][!hbt]{fig-mtcnn-framework.PNG}[MTCNN架構圖~\cite{zhang_joint_2016}][MTCNN架構圖~\cite{zhang_joint_2016}]
-\fig[0.7][fig:fig-mtcnn-pipeline][!hbt]{fig-mtcnn-pipeline.PNG}[MTCNN pipline~\cite{zhang_joint_2016}][MTCNN pipline~\cite{zhang_joint_2016}]
+\fig[0.6][fig:fig-mtcnn-pipeline][!hbt]{fig-mtcnn-pipeline.PNG}[MTCNN pipline~\cite{zhang_joint_2016}][MTCNN pipline~\cite{zhang_joint_2016}]
 
 為了評估人臉偵測效果，
 此網路與FDDB及WIDER FACE中的其他方法進行比較，
