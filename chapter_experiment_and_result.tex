@@ -4,10 +4,11 @@
 \begin{document}
 
 \chapter{實驗設計與結果}
-本章節根據第三章之研究方法，
-設計以下五項實驗以驗證本系統之設計：
-臉部偵測準確度、臉部偵測執行時間、臉部遮擋辨識、姿勢辨識及影片危險偵測等，
-並於此章各節詳盡介紹實驗之目的與設計、評估方式以及結果與分析。
+本章節中，
+根據第三章之研究方法以各項實驗驗證系統之設計，
+並介紹各實驗之目的與設計、評估方式以及結果與分析，
+透過以下五章子節進行說明：
+臉部偵測準確度實驗、臉部偵測執行時間實驗、臉部遮擋辨識實驗、姿勢辨識實驗及影片危險偵測實驗。
 
 另外，
 本章各項實驗皆於相同硬體環境操作，詳細資訊如下：
@@ -19,7 +20,6 @@
 \end{itemize}
 
 \section{臉部偵測準確度實驗}
-\subsection{實驗目的與設計}
 在收集嬰兒臉部資料集時，
 需針對嬰兒影像擷取出臉部範圍，
 進而後續之臉部遮擋辨識階段。
@@ -27,28 +27,27 @@
 為了使本系統擁有較佳的臉部偵測準確性且兼具執行效能，
 本文透過4.1節及4.2節之實驗，
 分別進行臉部偵測演算法準確度與執行時間之比較，
-以驗證以下設計：
+進而驗證以下設計：
 先使用SSD演算法偵測嬰兒臉部，
-此方法雖常未能如期找到嬰兒臉部範圍，
+此方法之召回率雖低，
 但其準確度很高，
 故能利用此算法之時間優勢；
-而為補足SSD演算法召回率不足之缺失，
-若其找不到嬰兒臉部時，
+而若SSD演算法找不到嬰兒面部時，
 則接續使用RetinaFace演算法，
 利用其正確率及準確率皆高之優點進行嬰兒臉部偵測。
 
-故本實驗使用3.3.1節之嬰兒姿勢資料集，
+\subsection{實驗目的與設計}
+本實驗為計算人臉偵測演算法之嬰兒面部擷取準確度，
+使用3.3.1節的嬰兒姿勢資料集共15416張影像，
 分析OpenCV~\cite{goyal_face_2017}
 、SSD~\cite{ye_face_2021}
 、MTCNN~\cite{zhang_joint_2016}
 及RetinaFace~\cite{deng_retinaface_2020}
-等臉部偵測演算法，
-計算其臉部擷取之準確度。
+等演算法之偵測結果。
 
 \subsection{實驗評估方式}
-本實驗針對四項演算法之準確度進行比較，
-將嬰兒臉部偵測結果影像進行分類標註，
-以計算出各演算法之accuracy、precision及recall。
+透過分類標註四項演算法偵測嬰兒臉部之結果影像，
+計算出各演算法的accuracy、precision及recall。
 
 \subsection{實驗結果與分析}
 由\cref{table:table-mtcnn}及\cref{table:table-retinaface}
@@ -129,8 +128,8 @@
 再經計算後，
 四項演算法之accuracy、precision及recall值如下：
 \begin{enumerate}
-    \item OpenCV：由於多數影像皆誤判為無臉（False），故僅計算其precision為79.90\%。
-    \item SSD：由於多數影像皆誤判為無臉（False），故僅計算其precision為99.90\%。
+    \item OpenCV：僅關注判斷為有臉（True）之數據，其precision為79.90\%。
+    \item SSD：僅關注判斷為有臉（True）之數據，其precision為99.90\%。
     \item MTCNN：accuracy為90.20\%、precision為94.76\%以及recall為90.93\%。
     \item RetinaFace：accuracy為99.78\%、precision為99.75\%以及recall為99.91\%。
 \end{enumerate}
@@ -140,21 +139,20 @@
 可擁有較佳的偵測準確度。
 
 \section{臉部偵測執行時間實驗}
-\subsection{實驗目的與設計}
 本研究進行嬰兒臉部偵測除了考量準確度外，
 亦希望提升整體系統之執行效率。
 
-故本實驗使用3.3.1節之嬰兒姿勢資料集，
+\subsection{實驗目的與設計}
+本實驗為計算人臉偵測演算法之執行時間，
+使用3.3.1節的嬰兒姿勢資料集共15416張影像，
 分析OpenCV~\cite{goyal_face_2017}
 、SSD~\cite{ye_face_2021}
 、MTCNN~\cite{zhang_joint_2016}
 及RetinaFace~\cite{deng_retinaface_2020}
-等臉部偵測演算法之執行時間，
-以驗證適合本系統之演算法。
+等演算法之偵測結果。
 
 \subsection{實驗評估方式}
-本實驗針對四項演算法之執行速度進行比較，
-透過計算演算法偵測15416張影像資料集所花費之時間，
+透過計算四項演算法偵測完整資料集所花費之時間，
 計算各演算法平均偵測一張影像之執行時間。
 
 \subsection{實驗結果與分析}
@@ -177,9 +175,13 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 達成兼具準確性及執行效率之系統目標。
 
 \section{臉部遮擋辨識實驗}
+本研究中，
+利用深度學習技術辨識嬰兒臉部是否遭非奶嘴之異物遮蔽，
+進而判斷嬰兒是否處於危險情境中。
+
 \subsection{實驗目的與設計}
-本系統為偵測嬰兒臉部是否遭非奶嘴之異物遮擋，
-使用3.2.2節之嬰兒臉部資料集以ResNet50~\cite{he_deep_2016}訓練模型，
+本實驗為訓練針對嬰兒臉部遮擋辨識之模型，
+以ResNet50~\cite{he_deep_2016}訓練3.2.2節的嬰兒臉部資料集，
 並透過驗證集進行模型驗證。
 
 程式實作中，
@@ -191,14 +193,14 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 並使用Adam作為optimizer且將學習率設為0.000001以進行微調。
 
 \subsection{實驗結果分析}
-本實驗訓練之模型其最終訓練準確率達98.06\%，
+模型最終訓練準確率達98.06\%，
 而測試準確率達99.43\%，
 詳細訓練結果請見\cref{fig:fig-result-face-occlusion}。
 \fig[0.9][fig:fig-result-face-occlusion][!hbt]{fig-result-face-occlusion.png}[臉部辨識訓練結果][臉部辨識訓練結果]
 
-接著，再使用342張之驗證集影像進行模型驗證，
-所有影像皆辨識正確，
-其混淆矩陣如\cref{table:table-confusion-matrix-face-occlusion}，
+我們使用342張之驗證集影像進行模型驗證，
+所有影像皆辨識正確。
+此模型之混淆矩陣如\cref{table:table-confusion-matrix-face-occlusion}，
 表中數字為各類影像之張數及占比。
 \begin{table}[h]
     \centering
@@ -215,9 +217,13 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 \end{table}
 
 \section{姿勢辨識實驗}
+本研究中，
+利用深度學習技術辨識嬰兒基礎姿勢，
+進而判斷嬰兒是否處於危險情境中。
+
 \subsection{實驗目的與設計}
-本系統為辨識嬰兒姿勢是否處於危險狀態，
-使用3.3.1節之資料集以ResNet50~\cite{he_deep_2016}訓練模型，
+本實驗為訓練針對嬰兒姿勢辨識之模型，
+以ResNet50~\cite{he_deep_2016}訓練3.3.1節的嬰兒姿勢資料集，
 並透過驗證集進行模型驗證。
 
 程式實作中，
@@ -229,12 +235,12 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 並使用Adam作為optimizer且將學習率設為0.000001以進行微調。
 
 \subsection{實驗結果分析}
-本實驗訓練之模型其最終訓練準確率達99.45\%，
+模型最終訓練準確率達99.45\%，
 而測試準確率達99.71\%，
 詳細訓練結果請見\cref{fig:fig-result-four-classes}。
 \fig[0.9][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
 
-接著，再使用744張之驗證集進行模型驗證，
+我們使用744張之驗證集進行模型驗證，
 包含了五張類別辨識錯誤的影像，
 其中三張將坐姿誤判為趴躺姿勢，
 推測原因為嬰兒雖呈現坐姿，
@@ -260,6 +266,9 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 \end{table}
 
 \section{影片危險偵測實驗}
+本研究基於嬰兒影像進行臉部遮擋及姿勢辨識，
+透過讀取嬰兒影片達成危險監測之目標。
+
 \subsection{實驗目的與設計}
 本實驗為驗證此系統能基於嬰兒影像進行危險監測，
 利用網路之真實嬰兒影片，
@@ -267,7 +276,7 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 實驗臉部遮擋辨識模型與姿勢辨識模型之準確性。
 
 \subsection{實驗評估方式}
-本實驗透過輸出每幀影像之臉部遮擋及姿勢辨識結果，
+透過輸出每幀影像之臉部遮擋及姿勢辨識結果，
 計算其accuracy、precision及recall，
 以驗證此二模型得以應用在監測嬰兒危險情境。
 
