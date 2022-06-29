@@ -1,4 +1,6 @@
 \documentclass[class=NCU_thesis, crop=false]{standalone}
+\usepackage{multirow}
+
 \begin{document}
 
 \chapter{實驗設計與結果}
@@ -183,8 +185,21 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 
 接著，再使用342張之驗證集影像進行模型驗證，
 所有影像皆辨識正確，
-其混淆矩陣如\cref{fig:fig-confusion-matrix-face-occlusion}。
-\fig[0.5][fig:fig-confusion-matrix-face-occlusion][!hbt]{fig-confusion-matrix-face-occlusion.png}[臉部遮擋辨識模型之混淆矩陣]
+其混淆矩陣如\cref{table:table-confusion-matrix-face-occlusion}，
+表中數字為各類影像之張數及占比。
+\begin{table}[h]
+    \centering
+    \caption{臉部遮擋辨識模型之混淆矩陣}
+    \label{table:table-confusion-matrix-face-occlusion}
+    \begin{tabular}{|cc|ccc|}
+        \hline
+        \multicolumn{2}{|l|}{} & \multicolumn{3}{c|}{\textbf{預測分類}} \\ \cline{3-5} 
+        \multicolumn{2}{|l|}{\multirow{-2}{*}{}} & \multicolumn{1}{c|}{\textbf{無遮蔽}} & \multicolumn{1}{c|}{\textbf{使用奶嘴}} & \textbf{有異物} \\ \hline
+        \multicolumn{1}{|c|}{} & \textbf{無遮蔽}  & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}120\\ (1.00)\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular} \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{實際分類}}} & \textbf{使用奶嘴} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}115\\ (1.00)\end{tabular}}} & \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular} \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{} & \textbf{有異物} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & {\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}107\\ (1.00)\end{tabular}} \\ \hline
+    \end{tabular}
+\end{table}
 
 \section{姿勢辨識實驗}
 \subsection{實驗目的與設計}
@@ -206,16 +221,30 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 詳細訓練結果請見\cref{fig:fig-result-four-classes}。
 \fig[0.9][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
 
-接著，再使用744張之驗證集影像進行模型驗證，
+接著，再使用744張之驗證集進行模型驗證，
 包含了五張類別辨識錯誤的影像，
-其混淆矩陣如\cref{fig:fig-confusion-matrix-four-classes}。
-辨識錯誤之五張影像中，
-有三張將坐姿誤判為趴躺姿勢，
+其中三張將坐姿誤判為趴躺姿勢，
 推測原因為嬰兒雖呈現坐姿，
-但上半身貼近其腿部（如\cref{fig:fig-error-four-classes}
-），而導致誤判。
-\fig[0.9][fig:fig-confusion-matrix-four-classes][!hbt]{fig-confusion-matrix-four-classes.png}[姿勢辨識模型之混淆矩陣]
-\fig[0.5][fig:fig-error-four-classes][!hbt]{fig-error-four-classes.jpg}[姿勢辨識錯誤之影像：坐姿誤判為趴躺]
+但上半身貼近其腿部（如\cref{fig:fig-error-four-classes}），
+而導致誤判。
+此模型之混淆矩陣如\cref{table:table-confusion-matrix-four-classes}，
+表中數字為各類影像之張數及占比。
+\fig[0.6][fig:fig-error-four-classes][!hbt]{fig-error-four-classes.jpg}[姿勢辨識錯誤之影像：坐姿誤判為趴躺]
+
+\begin{table}[h]
+    \centering
+    \caption{姿勢辨識模型之混淆矩陣}
+    \label{table:table-confusion-matrix-four-classes}
+    \begin{tabular}{|cc|cccc|}
+        \hline
+        \multicolumn{2}{|l|}{} & \multicolumn{4}{c|}{\textbf{預測分類}} \\ \cline{3-6} 
+        \multicolumn{2}{|l|}{\multirow{-2}{*}{}} & \multicolumn{1}{c|}{\textbf{正躺}} & \multicolumn{1}{c|}{\textbf{趴躺}} & \multicolumn{1}{c|}{\textbf{坐姿}} & \multicolumn{1}{l|}{\textbf{站立}} \\ \hline
+        \multicolumn{1}{|c|}{} & \textbf{正躺} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}164\\ (1.00)\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular} \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{} & \textbf{趴躺} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}1\\ (0.01)\end{tabular}} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}191\\ (0.99)\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular} \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{} & \textbf{坐姿} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}3\\ (0.02)\end{tabular}} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}196\\ (0.98)\end{tabular}}} & \begin{tabular}[c]{@{}c@{}}1\\ (0.01)\end{tabular} \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{實際分類}}} & \multicolumn{1}{l|}{\textbf{站立}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & {\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}192\\ (1.00)\end{tabular}} \\ \hline
+    \end{tabular}
+\end{table}
 
 \section{影片危險偵測實驗}
 \subsection{實驗目的與設計}
@@ -241,21 +270,49 @@ OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實
 包含了278張誤判為趴躺姿勢的影像，
 推測原因為嬰兒身體遭棉被遮擋（如\cref{fig:fig-error-video-posture}），
 而只拍攝到露出的嬰兒臉部，
-故造成姿勢辨識錯誤，
-其混淆矩陣如\cref{fig:fig-confusion-matrix-video-posture}。
+故造成姿勢辨識錯誤。
+此部分之混淆矩陣如\cref{table:table-confusion-matrix-video-posture}，
+表中數字為各類影像之張數及占比。
 \fig[0.5][fig:fig-error-video-posture][!hbt]{fig-error-video-posture.jpg}[姿勢辨識錯誤之影像：正躺誤判為趴躺]
-\fig[0.6][fig:fig-confusion-matrix-video-posture][!hbt]{fig-confusion-matrix-video-posture.png}[實驗影片之姿勢辨識混淆矩陣]
+
+\begin{table}[h]
+    \centering
+    \caption{實驗影片之姿勢辨識混淆矩陣}
+    \label{table:table-confusion-matrix-video-posture}
+    \begin{tabular}{|cc|cccc|}
+        \hline
+        \multicolumn{2}{|l|}{} & \multicolumn{4}{c|}{\textbf{預測分類}} \\ \cline{3-6} 
+        \multicolumn{2}{|l|}{\multirow{-2}{*}{}} & \multicolumn{1}{c|}{\textbf{正躺}} & \multicolumn{1}{c|}{\textbf{趴躺}} & \multicolumn{1}{c|}{\textbf{坐姿}} & \multicolumn{1}{l|}{\textbf{站立}} \\ \hline
+        \multicolumn{1}{|c|}{} & \textbf{正躺} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}3029\\ (0.92)\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}278\\ (0.08)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular} \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{} & \textbf{趴躺} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular} \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{} & \textbf{坐姿} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}}} & \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular} \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{實際分類}}} & \multicolumn{1}{l|}{\textbf{站立}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & {\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} \\ \hline
+    \end{tabular}
+\end{table}
 
 其次，
 臉部遮擋辨識的部分，
-包含36張嬰兒臉部未被偵測之影像（如\cref{fig:fig-error-video-no-face}），
-其中多張影像類別應為嬰兒正在使用奶嘴或安全狀態，
+包含36張未拍攝至嬰兒臉部而未被偵測之影像。
+而其中多張影像類別應為嬰兒正在使用奶嘴或安全狀態，
 但誤判為遭異物遮蔽之警示狀態，
 推測原因為影像中之奶嘴或嬰兒臉部遭手部等遮擋（如\cref{fig:fig-error-video-face}），
 而誤判為類別，
-其混淆矩陣如\cref{fig:fig-confusion-matrix-video-face}。
-\fig[0.5][fig:fig-error-video-no-face][!hbt]{fig-error-video-no-face.jpg}[未偵測嬰兒臉部之影像]
-\fig[0.3][fig:fig-error-video-face][!hbt]{fig-error-video-face.jpg}[臉部遮擋誤判之為警示狀態]
-\fig[0.6][fig:fig-confusion-matrix-video-face][!hbt]{fig-confusion-matrix-video-face.png}[實驗影片之臉部遮擋辨識混淆矩陣]
+此部分之混淆矩陣如\cref{table:table-confusion-matrix-video-face}，
+表中數字為各類影像之張數及占比。
+\fig[0.4][fig:fig-error-video-face][!hbt]{fig-error-video-face.jpg}[臉部遮擋誤判之為警示狀態]
+
+\begin{table}[h]
+    \centering
+    \caption{實驗影片之臉部遮擋辨識混淆矩陣}
+    \label{table:table-confusion-matrix-video-face}
+    \begin{tabular}{|cc|ccc|}
+        \hline
+        \multicolumn{2}{|l|}{} & \multicolumn{3}{c|}{\textbf{預測分類}} \\ \cline{3-5} 
+        \multicolumn{2}{|l|}{\multirow{-2}{*}{}} & \multicolumn{1}{c|}{\textbf{無遮蔽}} & \multicolumn{1}{c|}{\textbf{使用奶嘴}} & \textbf{有異物} \\ \hline
+        \multicolumn{1}{|c|}{} & \textbf{無遮蔽}  & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}1223\\ (0.84)\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}52\\ (0.04)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}184\\ (0.13)\end{tabular} \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{} & \textbf{使用奶嘴} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}17\\ (0.01)\end{tabular}} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}1308\\ (0.78)\end{tabular}}} & \begin{tabular}[c]{@{}c@{}}358\\ (0.21)\end{tabular} \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{實際分類}}} & \textbf{有異物} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}0\\ (0.00)\end{tabular}} & {\color[HTML]{FE0000} \begin{tabular}[c]{@{}c@{}}129\\ (1.00)\end{tabular}} \\ \hline
+    \end{tabular}
+\end{table}
 
 \end{document}
