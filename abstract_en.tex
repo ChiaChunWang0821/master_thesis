@@ -2,25 +2,27 @@
 \begin{document}
 
 \chapter{Abstract}
-When taking care of the infant, the baby caregiver may not be able to pay attention to the status of the baby at any time, 
-which may cause the infant to suffer from unpleasant breathing due to overflowing milk, turning over, sleeping on the stomach, etc.
+The babysitter may not focus on the status of the infant at any time.
+When unpredictable things happen to the baby, such as spitting up, rolling over, or sleeping on his stomach, 
+the babysitter won't notice immediately. 
+Most of the existing products are sensor-based infant detection systems, 
+which are single-function and may disturb the movement of the baby.
+However, the existing vision-based infant detection studies only focus on breathing rate, facial features, and individual movements.
 
-In addition, the existing products use multiple sensors to detect the state of the infant, 
-which has a single function and many restrictions on use, resulting in poor convenience.
+Therefore, this paper proposes a danger monitoring system based on deep learning technology.
+The system focuses on baby images and includes two major functions:
+(1) Facial Occlusion Recognition: Determine whether the infant's face is occluded by foreign objects, which may cause suffocation.
+(2) Posture Recognition: The four basic postures of infants are analyzed: lying on the back, lying on the stomach, sitting and standing.
+If the baby is lying on his stomach or standing, he may be at risk of breathing difficulties or falling off the bed.
+In summary, while monitoring the baby's video, the system can alert the babysitter when the infant is in an alarm state.
 
-Therefore, this paper proposes a danger detection system based on deep learning technology, 
-focusing on face occlusion and gesture recognition of baby images:
-The ResNet50 network is used to train the model to analyze whether the infant's face is obscured by foreign objects 
-and recognize four basic postures: lying, lying on the stomach, sitting and standing. 
-
-The recognition accuracy of both parts is 98\%.
-
-Therefore, when the system inputs a infant video, 
-the model can recognize that the infant's posture may be in a dangerous state or the face is covered by a foreign object, 
-and the caregiver can be immediately alerted.
-
-Since there is currently no public infant data set, 
-the infant photos used in this article are all captured and pre-processed from online pictures and videos.
+In this study, infant face detection uses the faster execution time SSD algorithm and the higher performance RetinaFace algorithm.
+With these algorithms, the system strikes a balance between execution speed and accuracy.
+There is currently no open source infant dataset.
+Therefore, this paper collects real baby images and videos from different perspectives from the Internet to create an infant face dataset with 3475 images and an infant posture dataset with 15416 images.
+Then, two models of face occlusion recognition and posture recognition are trained using ResNet50, 
+and the training and testing accuracy are 99\%.
+This proves that this study has good utility and uniqueness for infant danger monitoring system.
 
 \vspace{2em}
 \noindent \textbf{Keywords:} \keywordsEn{} % Set keywords in config.tex

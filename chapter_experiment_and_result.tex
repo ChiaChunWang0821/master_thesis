@@ -1,86 +1,338 @@
 \documentclass[class=NCU_thesis, crop=false]{standalone}
+\usepackage{multirow}
+
 \begin{document}
 
 \chapter{實驗設計與結果}
+本章節中，
+根據第三章之研究方法以各項實驗驗證系統之設計，
+並介紹各實驗之目的與設計、評估方式以及結果與分析，
+透過以下五章子節進行說明：
+臉部偵測準確度實驗、臉部偵測執行時間實驗、臉部遮擋辨識實驗、姿勢辨識實驗及影片危險偵測實驗。
 
-\section{臉部辨識實驗}
-\subsection{模型訓練結果}
-準確率達98\%，
-詳細訓練結果請見\cref{fig:fig-result-face}。
-\fig[0.8][fig:fig-result-face][!hbt]{fig-result-face.png}[臉部辨識訓練結果][臉部辨識訓練結果]
+另外，
+本章各項實驗皆於相同硬體環境操作，詳細資訊如下：
+\begin{itemize}
+    \item 作業系統：Windows 10
+    \item CPU：Intel(R) Core(TM) i7-10700KF CPU @ 3.80GHz
+    \item 記憶體：128GB
+    \item GPU：NVIDIA GeForce GTX 1660
+\end{itemize}
+
+\section{臉部偵測準確度實驗}
+在收集嬰兒臉部資料集時，
+需針對嬰兒影像擷取出臉部範圍，
+進而後續之臉部遮擋辨識階段。
+
+為了使本系統擁有較佳的臉部偵測準確性且兼具執行效能，
+本文透過4.1節及4.2節之實驗，
+分別進行臉部偵測演算法準確度與執行時間之比較，
+進而驗證以下設計：
+先使用SSD演算法偵測嬰兒臉部，
+此方法之召回率雖低，
+但其準確度很高，
+故能利用此算法之時間優勢；
+而若SSD演算法找不到嬰兒面部時，
+則接續使用RetinaFace演算法，
+利用其正確率及準確率皆高之優點進行嬰兒臉部偵測。
+
+\subsection{實驗目的與設計}
+本實驗為計算人臉偵測演算法之嬰兒面部擷取準確度，
+使用3.3.1節的嬰兒姿勢資料集共15416張影像，
+分析OpenCV~\cite{goyal_face_2017}
+、SSD~\cite{ye_face_2021}
+、MTCNN~\cite{zhang_joint_2016}
+及RetinaFace~\cite{deng_retinaface_2020}
+等演算法之偵測結果。
 
 \subsection{實驗評估方式}
-臉部辨識實驗評估方式 臉部辨識實驗評估方式
+透過分類標註四項演算法偵測嬰兒臉部之結果影像，
+計算出各演算法的accuracy、precision及recall。
 
-\subsection{實驗結果分析}
-臉部辨識實驗結果分析 臉部辨識實驗結果分析
+\subsection{實驗結果與分析}
+由\cref{table:table-mtcnn}及\cref{table:table-retinaface}
+可見MTCNN與RetinaFace之實驗結果。
+而\cref{table:table-opencv}及\cref{table:table-ssd}
+為OpenCV與SSD之實驗結果，
+可發現其將多數影像皆誤判為無臉（False），
+亦即影像中有嬰兒臉部畫面但演算法未偵測之，
+故此部分僅關注判斷為有臉（True）之數據統計。
+\begin{table}[h]
+    \centering
+    \caption{MTCNN~\cite{zhang_joint_2016}偵測嬰兒臉部結果}
+    \label{table:table-mtcnn}
+    \begin{tabular}{ccc}
+    \hline
+     & True（預測有臉）& False（預測無臉）\\
+    \hline
+    True & \multirow{2}{*}{9361} & \multirow{2}{*}{994} \\
+    （實際有臉）& & \\
+    False & \multirow{2}{*}{517} & \multirow{2}{*}{4544} \\
+    （實際無臉）&  & \\
+    \hline
+    Total & \textbf{9878} & \textbf{5538} \\
+    \hline
+    \end{tabular}
+\end{table}
 
-\section{奶嘴辨識實驗}
-\subsection{模型訓練結果}
-準確率達98\%，
-詳細訓練結果請見\cref{fig:fig-result-pacifier}。
-\fig[0.8][fig:fig-result-pacifier][!hbt]{fig-result-pacifier.png}[奶嘴辨識訓練結果][奶嘴辨識訓練結果]
+\begin{table}[h]
+    \centering
+    \caption{RetinaFace~\cite{deng_retinaface_2020}偵測嬰兒臉部結果}
+    \label{table:table-retinaface}
+    \begin{tabular}{ccc}
+    \hline
+     & True（預測有臉）& False（預測無臉）\\
+    \hline
+    True & \multirow{2}{*}{12925} & \multirow{2}{*}{11} \\
+    （實際有臉）& & \\
+    False & \multirow{2}{*}{33} & \multirow{2}{*}{2447} \\
+    （實際無臉）&  & \\
+    \hline
+    Total & \textbf{12958} & \textbf{2458} \\
+    \hline
+    \end{tabular}
+\end{table}
 
-\subsection{實驗設計}
-奶嘴辨識實驗實驗設計 奶嘴辨識實驗實驗設計
+\begin{table}[h]
+    \centering
+    \caption{OpenCV~\cite{goyal_face_2017}偵測嬰兒臉部結果}
+    \label{table:table-opencv}
+    \begin{tabular}{ccc}
+    \hline
+     & True（預測有臉）& False（預測無臉）\\
+    \hline
+    True & \multirow{2}{*}{2882} & \multirow{4}{*}{11809} \\
+    （實際有臉）& & \\
+    False & \multirow{2}{*}{725} & \\
+    （實際無臉）&  & \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \caption{SSD~\cite{ye_face_2021}偵測嬰兒臉部結果}
+    \label{table:table-ssd}
+    \begin{tabular}{ccc}
+    \hline
+     & True（預測有臉）& False（預測無臉）\\
+    \hline
+    True & \multirow{2}{*}{4830} & \multirow{4}{*}{10581} \\
+    （實際有臉）& & \\
+    False & \multirow{2}{*}{5} & \\
+    （實際無臉）&  & \\
+    \hline
+    \end{tabular}
+\end{table}
+
+再經計算後，
+四項演算法之accuracy、precision及recall值如下：
+\begin{enumerate}
+    \item OpenCV：僅關注判斷為有臉（True）之數據，其precision為79.90\%。
+    \item SSD：僅關注判斷為有臉（True）之數據，其precision為99.90\%。
+    \item MTCNN：accuracy為90.20\%、precision為94.76\%以及recall為90.93\%。
+    \item RetinaFace：accuracy為99.78\%、precision為99.75\%以及recall為99.91\%。
+\end{enumerate}
+
+因此，
+透過本實驗結果可得出選用RetinaFace演算法行嬰兒臉部偵測，
+可擁有較佳的偵測準確度。
+
+\section{臉部偵測執行時間實驗}
+本研究進行嬰兒臉部偵測除了考量準確度外，
+亦希望提升整體系統之執行效率。
+
+\subsection{實驗目的與設計}
+本實驗為計算人臉偵測演算法之執行時間，
+使用3.3.1節的嬰兒姿勢資料集共15416張影像，
+分析OpenCV~\cite{goyal_face_2017}
+、SSD~\cite{ye_face_2021}
+、MTCNN~\cite{zhang_joint_2016}
+及RetinaFace~\cite{deng_retinaface_2020}
+等演算法之偵測結果。
 
 \subsection{實驗評估方式}
-奶嘴辨識實驗實驗評估方式 奶嘴辨識實驗實驗評估方式
+透過計算四項演算法偵測完整資料集所花費之時間，
+計算各演算法平均偵測一張影像之執行時間。
 
-\subsection{實驗結果分析}
-奶嘴辨識實驗實驗結果分析 奶嘴辨識實驗實驗結果分析
+\subsection{實驗結果與分析}
+OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實驗結果如下：
+\begin{enumerate}
+    \item OpenCV：共18分01.78秒，平均每張影像需0.07秒。
+    \item SSD：共9分17.26秒，平均每張影像需0.04秒。
+    \item MTCNN：共2小時8分22.05秒，平均每張影像需0.50秒。
+    \item RetinaFace：共5小時42分2.10秒，平均每張影像需1.33秒。
+\end{enumerate}
+
+因此，
+透過本實驗結果可得出使用SSD演算法進行嬰兒臉部偵測，
+將可擁有較佳的偵測速度。
+
+總結4.1節與4.2節之實驗結果，
+驗證本系統先使用SSD演算法偵測嬰兒臉部，
+未如期找到目標時，
+則改以RetinaFace演算法偵測，
+達成兼具準確性及執行效率之系統目標。
 
 \section{臉部遮擋辨識實驗}
-\subsection{實驗設計}
-奶嘴辨識實驗實驗設計 奶嘴辨識實驗實驗設計
+本研究中，
+利用深度學習技術辨識嬰兒臉部是否遭非奶嘴之異物遮蔽，
+進而判斷嬰兒是否處於危險情境中。
 
-\subsection{實驗評估方式}
-奶嘴辨識實驗實驗評估方式 奶嘴辨識實驗實驗評估方式
+\subsection{實驗目的與設計}
+本實驗為訓練針對嬰兒臉部遮擋辨識之模型，
+以ResNet50~\cite{he_deep_2016}訓練3.2.2節的嬰兒臉部資料集，
+並透過驗證集進行模型驗證。
+
+程式實作中，
+網路訓練回合數為20，
+設定影像資料大小為224x224，
+包含三個類別（臉部無遮擋之安全狀態、使用奶嘴及面部遭異物遮蔽之警示狀態），
+且透過data augmentation技術生成訓練及測試資料，
+輸出層使用softmax作為激發函數，
+並使用Adam作為optimizer且將學習率設為0.000001以進行微調。
 
 \subsection{實驗結果分析}
-首先，使用503張影像測試臉部遮擋辨識，
-其中僅一張影像（
-\cref{fig:fig-face-pacifier-error}。
-\fig[0.4][fig:fig-face-pacifier-error][!hbt]{fig-face-pacifier-error.jpg}[誤判影像：真實類別為安全，但預測為警示][誤判影像：真實類別為安全，但預測為警示]
-）類別判斷錯誤，
-誤將安全狀態辨識為警示狀態。
-推測原因為該張影像畫質較差，面部影像不清而導致誤判。
+模型最終訓練準確率達98.06\%，
+而測試準確率達99.43\%，
+詳細訓練結果請見\cref{fig:fig-result-face-occlusion}。
+\fig[0.9][fig:fig-result-face-occlusion][!hbt]{fig-result-face-occlusion.png}[臉部辨識訓練結果][臉部辨識訓練結果]
 
-再者，我們使用232張影像測試奶嘴辨識，
-所有測試集皆辨識正確。
+我們使用342張之驗證集影像進行模型驗證，
+所有影像皆辨識正確。
+此模型之混淆矩陣如\cref{table:table-confusion-matrix-face-occlusion}，
+表中數字為各類影像之張數及比例。
+\begin{table}[h]
+    \centering
+    \caption{臉部遮擋辨識模型之混淆矩陣（單位：張 / 百分比）}
+    \label{table:table-confusion-matrix-face-occlusion}
+    \begin{tabular}{|cc|ccc|}
+        \hline
+        \multicolumn{2}{|l|}{}                                                                                                      & \multicolumn{3}{c|}{\textbf{Predicted Class}}                                                                                                             \\ \cline{3-5} 
+        \multicolumn{2}{|l|}{\multirow{-2}{*}{}}                                                                                    & \multicolumn{1}{c|}{\textbf{Safe}}                       & \multicolumn{1}{c|}{\textbf{Pacifier}}                   & \textbf{Warn}                       \\ \hline
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{Safe}     & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 120 (100.00)}} & \multicolumn{1}{c|}{0 (0.00)}                            & 0 (0.00)                            \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{Pacifier} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 115 (100.00)}} & 0 (0.00)                            \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Actual\\ Class\end{tabular}}}} & \textbf{Warn}     & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                            & {\color[HTML]{FE0000} 107 (100.00)} \\ \hline
+    \end{tabular}
+\end{table}
 
-由於此二模型測試正確率高，故本文中不放入其混淆矩陣。
+\section{姿勢辨識實驗}
+本研究中，
+利用深度學習技術辨識嬰兒基礎姿勢，
+進而判斷嬰兒是否處於危險情境中。
 
-\section{姿勢分類實驗}
-\subsection{模型訓練結果}
-準確率達99\%，
+\subsection{實驗目的與設計}
+本實驗為訓練針對嬰兒姿勢辨識之模型，
+以ResNet50~\cite{he_deep_2016}訓練3.3.1節的嬰兒姿勢資料集，
+並透過驗證集進行模型驗證。
+
+程式實作中，
+網路訓練回合數為20，
+設定影像資料大小為224x224，
+包含四個類別（正躺、趴躺、坐姿及站立），
+且透過data augmentation技術生成訓練及測試資料，
+輸出層使用softmax作為激發函數，
+並使用Adam作為optimizer且將學習率設為0.000001以進行微調。
+
+\subsection{實驗結果分析}
+模型最終訓練準確率達99.45\%，
+而測試準確率達99.71\%，
 詳細訓練結果請見\cref{fig:fig-result-four-classes}。
-\fig[0.8][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
+\fig[0.9][fig:fig-result-four-classes][!hbt]{fig-result-four-classes.png}[姿勢辨識訓練結果][姿勢辨識訓練結果]
 
-\subsection{實驗設計}
-姿勢分類實驗設計 姿勢分類實驗設計
-
-\subsection{實驗評估方式}
-姿勢分類實驗評估方式 姿勢分類實驗評估方式
-
-\subsection{實驗結果分析}
-我們使用744張影像針對此模型進行測試，
+我們使用744張之驗證集進行模型驗證，
 包含了五張類別辨識錯誤的影像，
-其中有三張將坐姿誤判為趴躺姿勢，
+其中三張將坐姿誤判為趴躺姿勢，
 推測原因為嬰兒雖呈現坐姿，
-但上半身貼近其腿部，而導致誤判。
-
-此模型之混淆矩陣，請見\cref{fig:fig-confusion-matrix-four-classes}。
-\fig[1.1][fig:fig-confusion-matrix-four-classes][!hbt]{fig-confusion-matrix-four-classes.png}[嬰兒姿勢辨識之混淆矩陣][嬰兒姿勢辨識之混淆矩陣]
+但上半身貼近其腿部（如\cref{fig:fig-error-four-classes}），
+而導致誤判。
+此模型之混淆矩陣如\cref{table:table-confusion-matrix-four-classes}，
+表中數字為各類影像之張數及比例。
+\fig[0.55][fig:fig-error-four-classes][!hbt]{fig-error-four-classes.jpg}[姿勢辨識錯誤之影像：坐姿誤判為趴躺]
+\begin{table}[h]
+    \centering
+    \caption{姿勢辨識模型之混淆矩陣（單位：張 / 百分比）}
+    \label{table:table-confusion-matrix-four-classes}
+    \begin{tabular}{|cc|cccc|}
+        \hline
+        \multicolumn{2}{|c|}{}                                                                                                              & \multicolumn{4}{c|}{\textbf{Predicted Class}}                                                                                                                                                                      \\ \cline{3-6} 
+        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                                            & \multicolumn{1}{c|}{\textbf{lying on back}}              & \multicolumn{1}{c|}{\textbf{lying on stomach}}          & \multicolumn{1}{c|}{\textbf{sit}}                       & \textbf{stand}                      \\ \hline
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{lying on back}    & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 164 (100.00)}} & \multicolumn{1}{c|}{0 (0.00)}                           & \multicolumn{1}{c|}{0 (0.00)}                           & 0 (0.00)                            \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{lying on stomach} & \multicolumn{1}{c|}{1 (0.52)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 191 (99.48)}} & \multicolumn{1}{c|}{0 (0.00)}                           & 0 (0.00)                            \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{sit}              & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{3 (1.50)}                           & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 196 (98.00)}} & 1 (0.50)                            \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Actual\\ Class\end{tabular}}}} & \textbf{stand}            & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                           & \multicolumn{1}{c|}{0 (0.00)}                           & {\color[HTML]{FE0000} 192 (100.00)} \\ \hline
+    \end{tabular}
+\end{table}
 
 \section{影片危險偵測實驗}
-\subsection{實驗設計}
-影片危險偵測實驗 影片危險偵測實驗
+本研究基於嬰兒影像進行臉部遮擋及姿勢辨識，
+透過讀取嬰兒影片達成危險監測之目標。
+
+\subsection{實驗目的與設計}
+本實驗為驗證此系統能基於嬰兒影像進行危險監測，
+利用網路之真實嬰兒影片，
+包含不同之拍攝視角、嬰兒樣貌及狀態等，
+實驗臉部遮擋辨識模型與姿勢辨識模型之準確性。
 
 \subsection{實驗評估方式}
-影片危險偵測實驗 影片危險偵測實驗
+透過輸出每幀影像之臉部遮擋及姿勢辨識結果，
+計算其accuracy、precision及recall，
+以驗證此二模型得以應用在監測嬰兒危險情境。
 
 \subsection{實驗結果分析}
-影片危險偵測實驗 影片危險偵測實驗
+本實驗影片為嬰兒正躺於畫面中，
+並包含使用奶嘴及未使用奶嘴之情境，
+共切成3374幀影像，
+將未拍攝到嬰兒畫面之影像刪除後，
+剩餘3307張嬰兒影像進行辨識。
+
+首先，
+姿勢辨識的部分，
+包含了278張誤判為趴躺姿勢的影像，
+推測原因為嬰兒身體遭棉被遮擋（如\cref{fig:fig-error-video-posture}），
+而只拍攝到露出的嬰兒臉部，
+故造成姿勢辨識錯誤。
+\fig[0.55][fig:fig-error-video-posture][!hbt]{fig-error-video-posture.jpg}[姿勢辨識錯誤之影像：正躺誤判為趴躺]
+
+其次，
+臉部遮擋辨識的部分，
+包含36張嬰兒臉部為被偵測之影像（如\cref{fig:fig-error-video-no-face}），
+另有多張影像類別應為嬰兒正在使用奶嘴或安全狀態，
+但誤判為遭異物遮蔽之警示狀態，
+推測原因為影像中之奶嘴或嬰兒臉部遭手部等遮擋（如\cref{fig:fig-error-video-face}），
+而誤判為類別。
+\fig[0.55][fig:fig-error-video-no-face][!hbt]{fig-error-video-no-face.jpg}[未偵測嬰兒臉部之影像]
+\fig[0.4][fig:fig-error-video-face][!hbt]{fig-error-video-face.jpg}[臉部遮擋誤判之為警示狀態]
+
+兩部分之混淆矩陣如\cref{table:table-confusion-matrix-video-posture}及\cref{table:table-confusion-matrix-video-face}，
+表中數字為各類影像之張數及比例。
+\begin{table}[h]
+    \centering
+    \caption{實驗影片姿勢辨識之混淆矩陣（單位：張 / 百分比）}
+    \label{table:table-confusion-matrix-video-posture}
+    \begin{tabular}{|cc|cccc|}
+        \hline
+        \multicolumn{2}{|c|}{}                                                                                                              & \multicolumn{4}{c|}{\textbf{Predicted Class}}                                                                                                                                                            \\ \cline{3-6} 
+        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                                            & \multicolumn{1}{c|}{\textbf{lying on back}}              & \multicolumn{1}{c|}{\textbf{lying on stomach}}       & \multicolumn{1}{c|}{\textbf{sit}}                    & \textbf{stand}                  \\ \hline
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{lying on back}    & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 3029 (91.59)}} & \multicolumn{1}{c|}{278 (8.41)}                      & \multicolumn{1}{c|}{0 (0.00)}                        & 0 (0.00)                        \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{lying on stomach} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 0 (0.00)}} & \multicolumn{1}{c|}{0 (0.00)}                        & 0 (0.00)                        \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{sit}              & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                        & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 0 (0.00)}} & 0 (0.00)                        \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Actual\\ Class\end{tabular}}}} & \textbf{stand}            & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                        & \multicolumn{1}{c|}{0 (0.00)}                        & {\color[HTML]{FE0000} 0 (0.00)} \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \caption{實驗影片臉部遮擋辨識之混淆矩陣（單位：張 / 百分比）}
+    \label{table:table-confusion-matrix-video-face}
+    \begin{tabular}{|cc|ccc|}
+        \hline
+        \multicolumn{2}{|c|}{}                                                                                                      & \multicolumn{3}{c|}{\textbf{Predicted Class}}                                                                                                             \\ \cline{3-5} 
+        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                                    & \multicolumn{1}{c|}{\textbf{Safe}}                       & \multicolumn{1}{c|}{\textbf{Pacifier}}                   & \textbf{Warn}                       \\ \hline
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{Safe}     & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 1223 (83.82)}} & \multicolumn{1}{c|}{52 (3.56)}                           & 184 (12.61)                         \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{}                                                                                  & \textbf{Pacifier} & \multicolumn{1}{c|}{17 (1.01)}                           & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 1308 (77.72)}} & 358 (21.27)                         \\ \cline{2-5} 
+        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Actual\\ Class\end{tabular}}}} & \textbf{Warn}     & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                            & {\color[HTML]{FE0000} 129 (100.00)} \\ \hline
+    \end{tabular}
+\end{table}
 
 \end{document}
