@@ -32,7 +32,7 @@
 \fig[1][fig:fig-flow-chart-system][!hbt]{fig-flow-chart-system.png}[系統流程圖][系統流程圖]
 
 而系統包含之兩項辨識功能及危險情境判斷，
-將分別於3.2節至3.4節進行詳細的介紹。
+將分別於\ref{sec:chapter_method_face}節、\ref{sec:chapter_method_posture}節及\ref{sec:chapter_method_danger}節進行詳細的介紹。
 
 % (1) 嬰兒臉部遮擋辨識：
 % 先將嬰兒影像擷取出臉部畫面，
@@ -61,6 +61,7 @@
 則能有較佳的辨識結果。
 
 \section{臉部遮擋辨識}
+\label{sec:chapter_method_face}
 如前言所述，
 目前醫界對於嬰兒猝死症之相關因素研究提出，
 注意嬰兒臉部是否遭遮蔽，
@@ -86,7 +87,7 @@
 本研究改為使用深度學習技術進行臉部遮擋辨識，
 針對嬰兒面部影像自製資料集，
 以訓練可辨識三種嬰兒臉部狀態之模型。
-而資料集之詳細內容將於3.2.2節進行介紹。
+而資料集之詳細內容將於\ref{sec:chapter_method_face_dataset}節進行介紹。
 
 本部分之流程如\cref{fig:fig-flow-chart-face}：
 首先，
@@ -135,6 +136,7 @@
 \end{figure}
 
 \subsection{嬰兒臉部資料集}
+\label{sec:chapter_method_face_dataset}
 本論文將嬰兒臉部狀態分為三類，
 各類定義如下：
 \begin{enumerate}
@@ -170,11 +172,12 @@
 即各有2436張、697張及342張影像。
 
 \subsection{模型訓練}
-本論文使用3.2.2節之嬰兒臉部資料集，
+本論文使用\ref{sec:chapter_method_face_dataset}節之嬰兒臉部資料集，
 以ResNet50~\cite{he_deep_2016}進行臉部遮擋辨識模型之訓練，
 最終達成辨識三種嬰兒臉部狀態：安全、使用奶嘴及警示。
 
 \section{姿勢辨識}
+\label{sec:chapter_method_posture}
 承前言所述，
 除了臉部遮蔽可能造成嬰兒猝死症外，
 嬰兒做出不適當的動作也常為意外發生原因，
@@ -254,7 +257,7 @@
 而改為基於深度學習技術進行嬰兒動作辨識，
 使用自行收集之嬰兒影像資料集，
 訓練可辨識四種嬰兒基礎姿勢之模型。
-而資料集之詳細內容將於3.3.1節進行介紹。
+而資料集之詳細內容將於\ref{sec:chapter_method_posture_dataset}節進行介紹。
 
 本部分流程如\cref{fig:fig-flow-chart-posture}：
 讀取嬰兒影像後，
@@ -267,6 +270,7 @@
 \fig[1][fig:fig-flow-chart-posture][!hbt]{fig-flow-chart-posture.png}[姿勢辨識流程圖][姿勢辨識流程圖]
 
 \subsection{嬰兒姿勢資料集}
+\label{sec:chapter_method_posture_dataset}
 起初，
 本研究將嬰兒姿勢分為五類：正躺、趴睡、爬行、坐姿及站立，
 而趴睡及爬行二類時常發生互相誤判，
@@ -342,11 +346,12 @@
 即各有10815張、3857張及744張影像。
 
 \subsection{模型訓練}
-本論文使用3.3.1節之嬰兒姿勢資料集，
+本論文使用\ref{sec:chapter_method_posture_dataset}節之嬰兒姿勢資料集，
 以ResNet50~\cite{he_deep_2016}進行姿勢辨識模型之訓練，
 最終達成辨識四種嬰兒姿勢：正躺、趴躺、坐姿及站立。
 
 \section{危險情境判斷}
+\label{sec:chapter_method_danger}
 在實際情境中，
 當嬰兒做出具危險性之行為時，
 需持續一段時間才會導致危險發生，
