@@ -40,42 +40,21 @@
 \subsection{實驗目的與設計}
 本實驗為計算人臉偵測演算法之嬰兒面部擷取準確度，
 使用\ref{sec:chapter_method_posture_dataset}節的嬰兒姿勢資料集共15416張影像，
-分析OpenCV~\cite{goyal_face_2017}
-、SSD~\cite{ye_face_2021}
-、MTCNN~\cite{zhang_joint_2016}
-及RetinaFace~\cite{deng_retinaface_2020}
-等演算法之偵測結果。
+分析RetinaFace~\cite{deng_retinaface_2020}、MTCNN~\cite{zhang_joint_2016}、
+SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法之偵測結果。
 
 \subsection{實驗評估方式}
 透過分類標註四項演算法偵測嬰兒臉部之結果影像，
 計算出各演算法的accuracy、precision及recall。
 
 \subsection{實驗結果與分析}
-由\cref{table:table-mtcnn}及\cref{table:table-retinaface}
-可見MTCNN與RetinaFace之實驗結果。
-而\cref{table:table-opencv}及\cref{table:table-ssd}
-為OpenCV與SSD之實驗結果，
+由\cref{table:table-retinaface}及\cref{table:table-mtcnn}
+可見RetinaFace與MTCNN之實驗結果。
+而\cref{table:table-ssd}及\cref{table:table-opencv}
+為SSD與Haar cascade之實驗結果，
 可發現其將多數影像皆誤判為無臉（False），
 亦即影像中有嬰兒臉部畫面但演算法未偵測之，
 故此部分僅關注判斷為有臉（True）之數據統計。
-\begin{table}[h]
-    \centering
-    \caption{MTCNN~\cite{zhang_joint_2016}偵測嬰兒臉部結果}
-    \label{table:table-mtcnn}
-    \begin{tabular}{ccc}
-    \hline
-     & True（預測有臉）& False（預測無臉）\\
-    \hline
-    True & \multirow{2}{*}{9361} & \multirow{2}{*}{994} \\
-    （實際有臉）& & \\
-    False & \multirow{2}{*}{517} & \multirow{2}{*}{4544} \\
-    （實際無臉）&  & \\
-    \hline
-    Total & \textbf{9878} & \textbf{5538} \\
-    \hline
-    \end{tabular}
-\end{table}
-
 \begin{table}[h]
     \centering
     \caption{RetinaFace~\cite{deng_retinaface_2020}偵測嬰兒臉部結果}
@@ -96,16 +75,18 @@
 
 \begin{table}[h]
     \centering
-    \caption{OpenCV~\cite{goyal_face_2017}偵測嬰兒臉部結果}
-    \label{table:table-opencv}
+    \caption{MTCNN~\cite{zhang_joint_2016}偵測嬰兒臉部結果}
+    \label{table:table-mtcnn}
     \begin{tabular}{ccc}
     \hline
      & True（預測有臉）& False（預測無臉）\\
     \hline
-    True & \multirow{2}{*}{2882} & \multirow{4}{*}{11809} \\
+    True & \multirow{2}{*}{9361} & \multirow{2}{*}{3399} \\
     （實際有臉）& & \\
-    False & \multirow{2}{*}{725} & \\
+    False & \multirow{2}{*}{517} & \multirow{2}{*}{2140} \\
     （實際無臉）&  & \\
+    \hline
+    Total & \textbf{9877} & \textbf{5539} \\
     \hline
     \end{tabular}
 \end{table}
@@ -118,10 +99,30 @@
     \hline
      & True（預測有臉）& False（預測無臉）\\
     \hline
-    True & \multirow{2}{*}{4830} & \multirow{4}{*}{10581} \\
+    True & \multirow{2}{*}{4830} & \multirow{2}{*}{8141} \\
     （實際有臉）& & \\
-    False & \multirow{2}{*}{5} & \\
+    False & \multirow{2}{*}{5} & \multirow{2}{*}{2440} \\
     （實際無臉）&  & \\
+    \hline
+    Total & \textbf{4835} & \textbf{10581} \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \caption{Haar cascade~\cite{goyal_face_2017}偵測嬰兒臉部結果}
+    \label{table:table-opencv}
+    \begin{tabular}{ccc}
+    \hline
+     & True（預測有臉）& False（預測無臉）\\
+    \hline
+    True & \multirow{2}{*}{2882} & \multirow{2}{*}{9546} \\
+    （實際有臉）& & \\
+    False & \multirow{2}{*}{725} & \multirow{2}{*}{2263} \\
+    （實際無臉）&  & \\
+    \hline
+    Total & \textbf{3607} & \textbf{11809} \\
     \hline
     \end{tabular}
 \end{table}
@@ -129,10 +130,10 @@
 再經計算後，
 四項演算法之accuracy、precision及recall值如下：
 \begin{enumerate}
-    \item OpenCV：僅關注判斷為有臉（True）之數據，其precision為79.90\%。
-    \item SSD：僅關注判斷為有臉（True）之數據，其precision為99.90\%。
-    \item MTCNN：accuracy為90.20\%、precision為94.76\%以及recall為90.93\%。
     \item RetinaFace：accuracy為99.78\%、precision為99.75\%以及recall為99.91\%。
+    \item MTCNN：accuracy為74.60\%、precision為94.78\%以及recall為73.36\%。
+    \item SSD：僅關注判斷為有臉（True）之數據，其precision為99.90\%。
+    \item Haar cascade：僅關注判斷為有臉（True）之數據，其precision為79.90\%。
 \end{enumerate}
 
 因此，
@@ -147,23 +148,20 @@
 \subsection{實驗目的與設計}
 本實驗為計算人臉偵測演算法之執行時間，
 使用\ref{sec:chapter_method_posture_dataset}節的嬰兒姿勢資料集共15416張影像，
-分析OpenCV~\cite{goyal_face_2017}
-、SSD~\cite{ye_face_2021}
-、MTCNN~\cite{zhang_joint_2016}
-及RetinaFace~\cite{deng_retinaface_2020}
-等演算法之偵測結果。
+分析RetinaFace~\cite{deng_retinaface_2020}、MTCNN~\cite{zhang_joint_2016}、
+SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法之偵測結果。
 
 \subsection{實驗評估方式}
 透過計算四項演算法偵測完整資料集所花費之時間，
 計算各演算法平均偵測一張影像之執行時間。
 
 \subsection{實驗結果與分析}
-OpenCV、SSD、MTCNN及RetinaFace四項演算法偵測15416張影像之詳細實驗結果如下：
+RetinaFace、MTCNN、SSD及Haar cascade四項演算法偵測15416張影像之詳細實驗結果如下：
 \begin{enumerate}
-    \item OpenCV：共18分01.78秒，平均每張影像需0.07秒。
-    \item SSD：共9分17.26秒，平均每張影像需0.04秒。
-    \item MTCNN：共2小時8分22.05秒，平均每張影像需0.50秒。
     \item RetinaFace：共5小時42分2.10秒，平均每張影像需1.33秒。
+    \item MTCNN：共2小時8分22.05秒，平均每張影像需0.50秒。
+    \item SSD：共9分17.26秒，平均每張影像需0.04秒。
+    \item Haar cascade：共18分01.78秒，平均每張影像需0.07秒。
 \end{enumerate}
 
 因此，
