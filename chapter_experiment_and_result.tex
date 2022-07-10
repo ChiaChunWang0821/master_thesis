@@ -48,13 +48,9 @@ SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法之偵�
 計算出各演算法的accuracy、precision及recall。
 
 \subsection{實驗結果與分析}
-由\cref{table:table-retinaface}及\cref{table:table-mtcnn}
-可見RetinaFace與MTCNN之實驗結果。
-而\cref{table:table-ssd}及\cref{table:table-opencv}
-為SSD與Haar cascade之實驗結果，
-可發現其將多數影像皆誤判為無臉（False），
-亦即影像中有嬰兒臉部畫面但演算法未偵測之，
-故此部分僅關注判斷為有臉（True）之數據統計。
+由\cref{table:table-retinaface}、\cref{table:table-mtcnn}、\cref{table:table-ssd}及\cref{table:table-opencv}
+分別為RetinaFace、MTCNN、SSD及Haar cascade之詳細實驗結果。
+
 \begin{table}[h]
     \centering
     \caption{RetinaFace~\cite{deng_retinaface_2020}偵測嬰兒臉部結果}
@@ -127,18 +123,37 @@ SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法之偵�
     \end{tabular}
 \end{table}
 
-再經計算後，
-四項演算法之accuracy、precision及recall值如下：
-\begin{enumerate}
-    \item RetinaFace：accuracy為99.78\%、precision為99.75\%以及recall為99.91\%。
-    \item MTCNN：accuracy為74.60\%、precision為94.78\%以及recall為73.36\%。
-    \item SSD：僅關注判斷為有臉（True）之數據，其precision為99.90\%。
-    \item Haar cascade：僅關注判斷為有臉（True）之數據，其precision為79.90\%。
-\end{enumerate}
+而再經計算後，
+四項演算法之accuracy、precision及recall值如\cref{table:table-face-detection-accuracy}。
+
+\begin{table}[h]
+    \centering
+    \caption{人臉偵測準確度結果}
+    \label{table:table-face-detection-accuracy}
+    \begin{tabular}{cccc}
+    \hline
+    演算法 & Accuracy & Precision & Recall \\
+    \hline
+    RetinaFace & 99.71\% & 99.75\% & 99.91\% \\
+    MTCNN & 74.60\% & 94.78\% & 73.36\% \\
+    SSD & 47.16\% & 99.90\% & 37.24\% \\
+    Haar cascade & 33.37\% & 79.90\% & 23.19\% \\
+    \hline
+    \end{tabular}
+\end{table}
+
+故透過本實驗結果可得出選用RetinaFace演算法行嬰兒臉部偵測，
+可擁有較佳的偵測準確度。
+另外，
+值得注意的是，
+雖然SSD的accuracy及recall很低，
+但其precision達99.90\%，
+也就是說其將多數影像誤判為無臉，
+但判斷為有臉的結果幾乎正確。
 
 因此，
-透過本實驗結果可得出選用RetinaFace演算法行嬰兒臉部偵測，
-可擁有較佳的偵測準確度。
+本研究接續進行\ref{sec:chapter_experiment_face_time}節的實驗，
+希望利用SSD這樣的特質。
 
 \section{臉部偵測執行時間實驗}
 \label{sec:chapter_experiment_face_time}
@@ -156,18 +171,31 @@ SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法之偵�
 計算各演算法平均偵測一張影像之執行時間。
 
 \subsection{實驗結果與分析}
-RetinaFace、MTCNN、SSD及Haar cascade四項演算法偵測15416張影像之詳細實驗結果如下：
-\begin{enumerate}
-    \item RetinaFace：共5小時42分2.10秒，平均每張影像需1.33秒。
-    \item MTCNN：共2小時8分22.05秒，平均每張影像需0.50秒。
-    \item SSD：共9分17.26秒，平均每張影像需0.04秒。
-    \item Haar cascade：共18分01.78秒，平均每張影像需0.07秒。
-\end{enumerate}
+RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
+請見\cref{table:table-face-detection-time}。
+\begin{table}[h]
+    \centering
+    \caption{人臉偵測執行時間結果}
+    \label{table:table-face-detection-time}
+    \begin{tabular}{ccc}
+    \hline
+    演算法 & 總花費時間（15416張影像） & 每張影像平均時間 \\
+    \hline
+    RetinaFace & 5小時42分2.10秒 & 1.33秒 \\
+    MTCNN & 2小時8分22.05秒 & 0.50秒 \\
+    SSD & 9分17.26秒 & 0.04秒 \\
+    Haar cascade & 18分01.78秒 & 0.07秒 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+故透過本實驗結果可得出使用SSD演算法進行嬰兒臉部偵測，
+將可擁有較佳的偵測速度。
+而\ref{sec:chapter_experiment_face_accuracy}節實驗中，
+準確度最高的RetinaFace其平均偵測一張影像需1.33秒，
+為SSD的33.25倍。
 
 因此，
-透過本實驗結果可得出使用SSD演算法進行嬰兒臉部偵測，
-將可擁有較佳的偵測速度。
-
 總結\ref{sec:chapter_experiment_face_accuracy}節與\ref{sec:chapter_experiment_face_time}節之實驗結果，
 驗證本系統先使用SSD演算法偵測嬰兒臉部，
 未如期找到目標時，
