@@ -229,18 +229,19 @@ RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
 我們使用342張之驗證集影像進行模型驗證，
 所有影像皆辨識正確。
 此模型之混淆矩陣如\cref{table:table-confusion-matrix-face-occlusion}，
-表中數字為各類影像之張數及比例。
+表中數字為各類影像之張數及比例，
+並於最右行展示各類別召回率。
 \begin{table}[h]
     \centering
     \caption{臉部遮擋辨識模型之混淆矩陣（單位：張 / 百分比）}
     \label{table:table-confusion-matrix-face-occlusion}
-    \begin{tabular}{|cc|ccc|}
+    \begin{tabular}{|cc|ccc|c|}
         \hline
-        \multicolumn{2}{|l|}{}                                                                                               & \multicolumn{3}{c|}{\textbf{預測類別}}                                                                                                                    \\ \cline{3-5} 
-        \multicolumn{2}{|l|}{\multirow{-2}{*}{}}                                                                             & \multicolumn{1}{c|}{\textbf{安全}}                       & \multicolumn{1}{c|}{\textbf{奶嘴}}                       & \textbf{警示}                       \\ \hline
-        \multicolumn{1}{|c|}{}                                                                               & \textbf{安全} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 120 (100.00)}} & \multicolumn{1}{c|}{0 (0.00)}                            & 0 (0.00)                            \\ \cline{2-5} 
-        \multicolumn{1}{|c|}{}                                                                               & \textbf{奶嘴} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 115 (100.00)}} & 0 (0.00)                            \\ \cline{2-5} 
-        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{警示} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                            & {\color[HTML]{FE0000} 107 (100.00)} \\ \hline
+        \multicolumn{2}{|l|}{}                                                                                              & \multicolumn{3}{c|}{\textbf{預測類別}}                                                                                                                    & \multicolumn{1}{c|}{\textbf{召回率}} \\ \cline{3-5} 
+        \multicolumn{2}{|l|}{\multirow{-2}{*}{}}                                                                            & \multicolumn{1}{c|}{\textbf{安全}}                       & \multicolumn{1}{c|}{\textbf{奶嘴}}                       & \textbf{警示}                       & \multicolumn{1}{c|}{}                \\ \hline
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{安全} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 120 (100.00)}} & \multicolumn{1}{c|}{0 (0.00)}                            & 0 (0.00)                            & 100.00\%                             \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{奶嘴} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 115 (100.00)}} & 0 (0.00)                            & 100.00\%                             \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{警示} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                            & {\color[HTML]{FE0000} 107 (100.00)} & 100.00\%                             \\ \hline
     \end{tabular}
 \end{table}
 
@@ -275,20 +276,21 @@ RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
 但上半身貼近其腿部（如\cref{fig:fig-error-four-classes}），
 而導致誤判。
 此模型之混淆矩陣如\cref{table:table-confusion-matrix-four-classes}，
-表中數字為各類影像之張數及比例。
+表中數字為各類影像之張數及比例，
+並於最右行展示各類別召回率。
 \fig[0.55][fig:fig-error-four-classes][!hbt]{fig-error-four-classes.jpg}[姿勢辨識錯誤之影像：坐姿誤判為趴躺]
 \begin{table}[h]
     \centering
     \caption{姿勢辨識模型之混淆矩陣（單位：張 / 百分比）}
     \label{table:table-confusion-matrix-four-classes}
-    \begin{tabular}{|cc|cccc|}
+    \begin{tabular}{|cc|cccc|c|}
         \hline
-        \multicolumn{2}{|c|}{}                                                                                              & \multicolumn{4}{c|}{\textbf{預測類別}}                                                                                                                                                                             \\ \cline{3-6} 
-        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                            & \multicolumn{1}{c|}{\textbf{正躺}}                       & \multicolumn{1}{c|}{\textbf{趴躺}}                      & \multicolumn{1}{c|}{\textbf{坐姿}}                      & \textbf{站立}                       \\ \hline
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{正躺} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 164 (100.00)}} & \multicolumn{1}{c|}{0 (0.00)}                           & \multicolumn{1}{c|}{0 (0.00)}                           & 0 (0.00)                            \\ \cline{2-6} 
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{趴躺} & \multicolumn{1}{c|}{1 (0.52)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 191 (99.48)}} & \multicolumn{1}{c|}{0 (0.00)}                           & 0 (0.00)                            \\ \cline{2-6} 
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{坐姿} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{3 (1.50)}                           & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 196 (98.00)}} & 1 (0.50)                            \\ \cline{2-6} 
-        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{站立} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                           & \multicolumn{1}{c|}{0 (0.00)}                           & {\color[HTML]{FE0000} 192 (100.00)} \\ \hline
+        \multicolumn{2}{|c|}{}                                                                                              & \multicolumn{4}{c|}{\textbf{預測類別}}                                                                                                                                                                             & \multicolumn{1}{c|}{\textbf{召回率}} \\ \cline{3-6} 
+        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                            & \multicolumn{1}{c|}{\textbf{正躺}}                       & \multicolumn{1}{c|}{\textbf{趴躺}}                      & \multicolumn{1}{c|}{\textbf{坐姿}}                      & \textbf{站立}                       & \multicolumn{1}{c|}{}                \\ \hline
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{正躺} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 164 (100.00)}} & \multicolumn{1}{c|}{0 (0.00)}                           & \multicolumn{1}{c|}{0 (0.00)}                           & 0 (0.00)                            & 100.00\%                             \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{趴躺} & \multicolumn{1}{c|}{1 (0.52)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 191 (99.48)}} & \multicolumn{1}{c|}{0 (0.00)}                           & 0 (0.00)                            & 99.48\%                              \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{坐姿} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{3 (1.50)}                           & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 196 (98.00)}} & 1 (0.50)                            & 98.00\%                              \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{站立} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                           & \multicolumn{1}{c|}{0 (0.00)}                           & {\color[HTML]{FE0000} 192 (100.00)} & 100.00\%                             \\ \hline
     \end{tabular}
 \end{table}
 
@@ -308,15 +310,14 @@ RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
 以驗證此二模型得以應用在監測嬰兒危險情境。
 
 \subsection{實驗結果分析}
-本實驗影片為嬰兒正躺於畫面中，
-並包含使用奶嘴及未使用奶嘴之情境，
-共切成3374幀影像，
-將未拍攝到嬰兒畫面之影像刪除後，
-剩餘3307張嬰兒影像進行辨識。
+本實驗使用之影片，
+包含嬰兒許多的不同情境，
+如：清醒與否、不同衣著、穿戴帽子與否及相異背景環境等，
+進行其臉部遮擋（無遮蔽、使用奶嘴及遭異物遮擋）與姿勢（正躺、趴躺、坐姿及站立）之危險辨識。
 
 首先，
 姿勢辨識的部分，
-包含了278張誤判為趴躺姿勢的影像，
+包含了多張誤判為趴躺姿勢的影像，
 推測原因為嬰兒身體遭棉被遮擋（如\cref{fig:fig-error-video-posture}），
 而只拍攝到露出的嬰兒臉部，
 故造成姿勢辨識錯誤。
@@ -324,8 +325,8 @@ RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
 
 其次，
 臉部遮擋辨識的部分，
-包含36張嬰兒臉部為被偵測之影像（如\cref{fig:fig-error-video-no-face}），
-另有多張影像類別應為嬰兒正在使用奶嘴或安全狀態，
+會先刪去嬰兒臉部未被偵測之影像（如\cref{fig:fig-error-video-no-face}），
+而後判斷有多張影像類別應為嬰兒正在使用奶嘴或安全狀態，
 但誤判為遭異物遮蔽之警示狀態，
 推測原因為影像中之奶嘴或嬰兒臉部遭手部等遮擋（如\cref{fig:fig-error-video-face}），
 而誤判類別。
@@ -333,19 +334,20 @@ RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
 \fig[0.4][fig:fig-error-video-face][!hbt]{fig-error-video-face.jpg}[臉部遮擋誤判之為警示狀態]
 
 兩部分之混淆矩陣如\cref{table:table-confusion-matrix-video-posture}及\cref{table:table-confusion-matrix-video-face}，
-表中數字為各類影像之張數及比例。
+表中數字為各類影像之張數及比例，
+並於最右行展示各類別召回率。
 \begin{table}[h]
     \centering
     \caption{實驗影片姿勢辨識之混淆矩陣（單位：張 / 百分比）}
     \label{table:table-confusion-matrix-video-posture}
-    \begin{tabular}{|cc|cccc|}
+    \begin{tabular}{|cc|cccc|c|}
         \hline
-        \multicolumn{2}{|c|}{}                                                                                              & \multicolumn{4}{c|}{\textbf{預測類別}}                                                                                                                                                                   \\ \cline{3-6} 
-        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                            & \multicolumn{1}{c|}{\textbf{正躺}}                       & \multicolumn{1}{c|}{\textbf{趴躺}}                   & \multicolumn{1}{c|}{\textbf{坐姿}}                   & \textbf{站立}                   \\ \hline
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{正躺} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 3029 (91.59)}} & \multicolumn{1}{c|}{278 (8.41)}                      & \multicolumn{1}{c|}{0 (0.00)}                        & 0 (0.00)                        \\ \cline{2-6} 
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{趴躺} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 0 (0.00)}} & \multicolumn{1}{c|}{0 (0.00)}                        & 0 (0.00)                        \\ \cline{2-6} 
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{坐姿} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                        & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 0 (0.00)}} & 0 (0.00)                        \\ \cline{2-6} 
-        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{站立} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                        & \multicolumn{1}{c|}{0 (0.00)}                        & {\color[HTML]{FE0000} 0 (0.00)} \\ \hline
+        \multicolumn{2}{|c|}{}                                                                                              & \multicolumn{4}{c|}{\textbf{預測類別}}                                                                                                                                                                              & \multicolumn{1}{c|}{\textbf{召回率}} \\ \cline{3-6} 
+        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                            & \multicolumn{1}{c|}{\textbf{正躺}}                       & \multicolumn{1}{c|}{\textbf{趴躺}}                       & \multicolumn{1}{c|}{\textbf{坐姿}}                       & \textbf{站立}                      & \multicolumn{1}{c|}{}                \\ \hline
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{正躺} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 3223 (90.87)}} & \multicolumn{1}{c|}{324 (9.13)}                          & \multicolumn{1}{c|}{0 (0.00)}                            & 0 (0.00)                           & 90.87\%                              \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{趴躺} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 161 (100.00)}} & \multicolumn{1}{c|}{0 (0.00)}                            & 0 (0.00)                           & 100.00\%                             \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{坐姿} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 214 (100.00)}} & 0 (0.00)                           & 100.00\%                             \\ \cline{2-7} 
+        \multicolumn{1}{|c|}{\multirow{-4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{站立} & \multicolumn{1}{c|}{4 (1.87)}                            & \multicolumn{1}{c|}{1 (0.47)}                            & \multicolumn{1}{c|}{0 (0.00)}                            & {\color[HTML]{FE0000} 209 (97.66)} & 97.66\%                              \\ \hline
     \end{tabular}
 \end{table}
 
@@ -353,13 +355,13 @@ RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
     \centering
     \caption{實驗影片臉部遮擋辨識之混淆矩陣（單位：張 / 百分比）}
     \label{table:table-confusion-matrix-video-face}
-    \begin{tabular}{|cc|ccc|}
+    \begin{tabular}{|cc|ccc|c|}
         \hline
-        \multicolumn{2}{|c|}{}                                                                                              & \multicolumn{3}{c|}{\textbf{預測類別}}                                                                                                                    \\ \cline{3-5} 
-        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                            & \multicolumn{1}{c|}{\textbf{安全}}                       & \multicolumn{1}{c|}{\textbf{奶嘴}}                       & \textbf{警示}                       \\ \hline
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{安全} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 1223 (83.82)}} & \multicolumn{1}{c|}{52 (3.56)}                           & 184 (12.61)                         \\ \cline{2-5} 
-        \multicolumn{1}{|c|}{}                                                                              & \textbf{奶嘴} & \multicolumn{1}{c|}{17 (1.01)}                           & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 1308 (77.72)}} & 358 (21.27)                         \\ \cline{2-5} 
-        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{警示} & \multicolumn{1}{c|}{0 (0.00)}                            & \multicolumn{1}{c|}{0 (0.00)}                            & {\color[HTML]{FE0000} 129 (100.00)} \\ \hline
+        \multicolumn{2}{|c|}{}                                                                                              & \multicolumn{3}{c|}{\textbf{預測類別}}                                                                                                                    & \multicolumn{1}{c|}{\textbf{召回率}} \\ \cline{3-5} 
+        \multicolumn{2}{|c|}{\multirow{-2}{*}{}}                                                                            & \multicolumn{1}{c|}{\textbf{安全}}                       & \multicolumn{1}{c|}{\textbf{奶嘴}}                       & \textbf{警示}                       & \multicolumn{1}{c|}{}                \\ \hline
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{安全} & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 1429 (85.83)}} & \multicolumn{1}{c|}{52 (3.12)}                           & 184 (11.05)                         & 85.83\%                              \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{}                                                                              & \textbf{奶嘴} & \multicolumn{1}{c|}{17 (0.84)}                           & \multicolumn{1}{c|}{{\color[HTML]{FE0000} 1615 (80.23)}} & 381 (18.93)                         & 80.23\%                              \\ \cline{2-6} 
+        \multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}實際\\類別\end{tabular}}}} & \textbf{警示} & \multicolumn{1}{c|}{40 (11.90)}                          & \multicolumn{1}{c|}{0 (0.00)}                            & {\color[HTML]{FE0000} 296 (88.10)}  & 88.10\%                              \\ \hline
     \end{tabular}
 \end{table}
 
