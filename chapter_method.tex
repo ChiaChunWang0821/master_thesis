@@ -185,7 +185,7 @@
 \label{sec:chapter_method_posture}
 承前言所述，
 除了臉部遮蔽可能造成嬰兒猝死症外，
-嬰兒做出不適當的動作也常為意外發生原因，
+嬰兒做出不適當的姿勢或動作也常為意外發生原因，
 例如：嬰兒側躺或趴睡時，
 因頸部肌肉較弱等原因，
 無力自行將臉移開，
@@ -194,18 +194,14 @@
 而有可能爬落嬰兒床等，
 亦可能使嬰兒處於危險情境中。
 
-在現有成人動作辨識的研究中，
-多會以骨架偵測開始著手。
-本文使用OpenPose~\cite{cao_openpose_2019}及MediaPipe Pose~\cite{noauthor_pose_nodate}等演算法進行嬰兒骨架之偵測，
-發現嬰兒需在特定情境下才能有較佳的偵測效果，
-結果如\cref{fig:fig-posture-skeleton-detection}及\cref{fig:fig-posture-skeleton-detection-wrong}，
-可看到嬰兒平躺之偵測效果尚可，
-但趴躺等其他姿勢之效果則不如預期。
-又因本研究目標為能從非限定視角辨識嬰兒動作，
-然而嬰兒骨架圖在俯視角與平視角中多有相似之處（如\cref{fig:fig-posture-skeleton-detection-viewport}），
-而無法達到良好的應用結果，
-因此，
-最終本文並不使用骨架圖進行姿勢辨識。
+起初，
+本文使用OpenPose~\cite{cao_openpose_2019}及MediaPipe Pose~\cite{noauthor_pose_nodate}等演算法，
+進行嬰兒骨架之偵測，
+結果如\cref{fig:fig-posture-skeleton-detection}及\cref{fig:fig-posture-skeleton-detection-2}；
+且由\cref{fig:fig-posture-skeleton-detection-viewport}可看出，
+嬰兒骨架圖在俯視角與平視角中多有相似之處，
+若欲達到從非限定視角辨識嬰兒動作之目標，
+則無法僅透過骨架圖進行辨識。
 \begin{figure}[!hbt]
     \centering
     \subcaptionbox
@@ -222,27 +218,27 @@
         {使用MediaPipe Pose~\cite{noauthor_pose_nodate}
         \label{fig:fig-posture-skeleton-detection-mediapipe}}
         {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-mediapipe}}
-    \caption{嬰兒平躺之骨架偵測結果}
+    \caption{嬰兒正躺之骨架偵測結果}
     \label{fig:fig-posture-skeleton-detection}
 \end{figure}
 \begin{figure}[!hbt]
     \centering
     \subcaptionbox
         {原始影像
-        \label{fig:fig-posture-skeleton-detection-wrong-original}}
-        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-wrong-original}}
+        \label{fig:fig-posture-skeleton-detection-2-original}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-2-original}}
     ~
     \subcaptionbox
         {使用OpenPose~\cite{cao_openpose_2019}
-        \label{fig:fig-posture-skeleton-detection-wrong-openpose}}
-        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-wrong-openpose}}
+        \label{fig:fig-posture-skeleton-detection-2-openpose}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-2-openpose}}
     ~
     \subcaptionbox
         {使用MediaPipe Pose~\cite{noauthor_pose_nodate}
-        \label{fig:fig-posture-skeleton-detection-wrong-mediapipe}}
-        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-wrong-mediapipe}}
-    \caption{嬰兒趴躺之骨架偵測結果}
-    \label{fig:fig-posture-skeleton-detection-wrong}
+        \label{fig:fig-posture-skeleton-detection-2-mediapipe}}
+        {\includegraphics[width=0.3\linewidth]{fig-posture-skeleton-detection-2-mediapipe}}
+    \caption{嬰兒站姿之骨架偵測結果}
+    \label{fig:fig-posture-skeleton-detection-2}
 \end{figure}
 \begin{figure}[!hbt]
     \centering
@@ -259,7 +255,8 @@
     \label{fig:fig-posture-skeleton-detection-viewport}
 \end{figure}
 
-而改為基於深度學習技術進行嬰兒動作辨識，
+因此，
+本研究改為基於深度學習技術進行嬰兒動作辨識，
 使用自行收集之嬰兒影像資料集，
 訓練可辨識四種嬰兒基礎姿勢之模型。
 而資料集之詳細內容將於\ref{sec:chapter_method_posture_dataset}節進行介紹。
