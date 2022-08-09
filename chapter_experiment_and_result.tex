@@ -164,11 +164,15 @@ SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法之偵�
 本實驗為計算人臉偵測演算法之執行時間，
 使用\ref{sec:chapter_method_posture_dataset}節的嬰兒姿勢資料集共15416張影像，
 分析RetinaFace~\cite{deng_retinaface_2020}、MTCNN~\cite{zhang_joint_2016}、
-SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法之偵測結果。
+SSD~\cite{ye_face_2021}及Haar cascade~\cite{goyal_face_2017}等演算法，
+其臉部偵測時間之結果；
+再以嬰兒影片進行實驗，
+比較本文所設計的兩步驟流程及僅使用RetinaFace演算法之偵測時間。
 
 \subsection{實驗評估方式}
 透過計算四項演算法偵測完整資料集所花費之時間，
-計算各演算法平均偵測一張影像之執行時間。
+分析各演算法平均偵測一張影像之執行時間；
+並比較有無使用本文方法之臉部偵測時間。
 
 \subsection{實驗結果與分析}
 RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
@@ -194,6 +198,22 @@ RetinaFace、MTCNN、SSD及Haar cascade四項演算法之詳細實驗結果，
 而\ref{sec:chapter_experiment_face_accuracy}節實驗中，
 準確度最高的RetinaFace其平均偵測一張影像需1.33秒，
 為SSD的33.25倍。
+
+而使用本文設計之兩步驟偵測流程及僅使用RetinaFace演算法之詳細實驗結果，
+請見\cref{table:table-face-detection-time-2}。
+\begin{table}[h]
+    \centering
+    \caption{使用本文方法之人臉偵測執行時間結果}
+    \label{table:table-face-detection-time-2}
+    \begin{tabular}{ccc}
+    \hline
+    方法 & 總花費時間（1594張影像） & 每張影像平均時間 \\
+    \hline
+    本文方法 & 17分51.21秒 & 0.67秒 \\
+    僅使用RetinaFace & 32分2.69秒 & 1.21秒 \\
+    \hline
+    \end{tabular}
+\end{table}
 
 因此，
 總結\ref{sec:chapter_experiment_face_accuracy}節與\ref{sec:chapter_experiment_face_time}節之實驗結果，
